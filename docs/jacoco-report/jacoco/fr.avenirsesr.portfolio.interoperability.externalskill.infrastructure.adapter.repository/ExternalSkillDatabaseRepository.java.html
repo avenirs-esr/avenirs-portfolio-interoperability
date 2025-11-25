@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ExternalSkillDatabaseRepository.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">avenirs-portfolio-interoperability</a> &gt; <a href="index.source.html" class="el_package">fr.avenirsesr.portfolio.interoperability.externalskill.infrastructure.adapter.repository</a> &gt; <span class="el_source">ExternalSkillDatabaseRepository.java</span></div><h1>ExternalSkillDatabaseRepository.java</h1><pre class="source lang-java linenums">package fr.avenirsesr.portfolio.interoperability.externalskill.infrastructure.adapter.repository;
+
+import fr.avenirsesr.portfolio.common.data.infrastructure.adapter.repository.GenericJpaRepositoryAdapter;
+import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillType;
+import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkill;
+import fr.avenirsesr.portfolio.interoperability.externalskill.domain.port.output.repository.ExternalSkillRepository;
+import fr.avenirsesr.portfolio.interoperability.externalskill.infrastructure.adapter.mapper.ExternalSkillMapper;
+import fr.avenirsesr.portfolio.interoperability.externalskill.infrastructure.adapter.model.ExternalSkillEntity;
+import fr.avenirsesr.portfolio.interoperability.externalskill.infrastructure.adapter.specification.ExternalSkillSpecification;
+import java.util.List;
+import org.springframework.stereotype.Component;
+
+@Component
+public class ExternalSkillDatabaseRepository
+    extends GenericJpaRepositoryAdapter&lt;ExternalSkill, ExternalSkillEntity&gt;
+    implements ExternalSkillRepository {
+  private final ExternalSkillJpaRepository jpaRepository;
+
+  public ExternalSkillDatabaseRepository(ExternalSkillJpaRepository jpaRepository) {
+<span class="nc" id="L20">    super(</span>
+        jpaRepository,
+        jpaRepository,
+        ExternalSkillMapper::fromDomain,
+        ExternalSkillMapper::toDomain);
+<span class="nc" id="L25">    this.jpaRepository = jpaRepository;</span>
+<span class="nc" id="L26">  }</span>
+
+  @Override
+  public List&lt;ExternalSkill&gt; findAllByExternalId(List&lt;String&gt; skillCodes) {
+<span class="nc" id="L30">    return jpaRepository.findAll(ExternalSkillSpecification.hasExternalId(skillCodes)).stream()</span>
+<span class="nc" id="L31">        .map(ExternalSkillMapper::toDomain)</span>
+<span class="nc" id="L32">        .toList();</span>
+  }
+
+  @Override
+  public int countAll(EExternalSkillType type) {
+<span class="nc" id="L37">    return jpaRepository.findAll(ExternalSkillSpecification.hasType(type)).size();</span>
+  }
+
+  @Override
+  public List&lt;ExternalSkill&gt; findAll() {
+<span class="nc" id="L42">    return jpaRepository.findAll().stream().map(ExternalSkillMapper::toDomain).toList();</span>
+  }
+
+  // Used for seeding in api
+  @Override
+  public List&lt;ExternalSkill&gt; findRandom(int limit) {
+<span class="nc" id="L48">    return jpaRepository.findRandom(limit).stream().map(ExternalSkillMapper::toDomain).toList();</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

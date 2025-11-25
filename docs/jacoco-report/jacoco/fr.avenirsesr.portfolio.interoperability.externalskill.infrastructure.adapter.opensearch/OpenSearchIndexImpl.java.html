@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>OpenSearchIndexImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">avenirs-portfolio-interoperability</a> &gt; <a href="index.source.html" class="el_package">fr.avenirsesr.portfolio.interoperability.externalskill.infrastructure.adapter.opensearch</a> &gt; <span class="el_source">OpenSearchIndexImpl.java</span></div><h1>OpenSearchIndexImpl.java</h1><pre class="source lang-java linenums">package fr.avenirsesr.portfolio.interoperability.externalskill.infrastructure.adapter.opensearch;
+
+import fr.avenirsesr.portfolio.common.data.domain.model.PageCriteria;
+import fr.avenirsesr.portfolio.common.data.domain.model.PageInfo;
+import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillCategoryType;
+import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillType;
+import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkill;
+import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkillCategory;
+import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkillPagedResult;
+import fr.avenirsesr.portfolio.interoperability.externalskill.domain.port.output.OpenSearchIndex;
+import java.io.IOException;
+import java.time.Instant;
+import java.util.*;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.opensearch.action.admin.indices.delete.DeleteIndexRequest;
+import org.opensearch.action.bulk.BulkRequest;
+import org.opensearch.action.bulk.BulkResponse;
+import org.opensearch.action.index.IndexRequest;
+import org.opensearch.action.search.SearchRequest;
+import org.opensearch.action.search.SearchResponse;
+import org.opensearch.client.RequestOptions;
+import org.opensearch.client.RestHighLevelClient;
+import org.opensearch.client.indices.CreateIndexRequest;
+import org.opensearch.client.indices.GetIndexRequest;
+import org.opensearch.index.query.QueryBuilders;
+import org.opensearch.search.builder.SearchSourceBuilder;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.context.annotation.Profile;
+import org.springframework.stereotype.Component;
+
+<span class="nc" id="L33">@Slf4j</span>
+@RequiredArgsConstructor
+@Component
+@Profile(&quot;!test&quot;)
+public class OpenSearchIndexImpl implements OpenSearchIndex {
+  private final RestHighLevelClient client;
+
+  @Override
+  @CacheEvict(value = ExternalSkillConstants.INDEX)
+  public void cleanAndCreateExternalSkillIndex() {
+    try {
+<span class="nc" id="L44">      if (client</span>
+<span class="nc" id="L45">          .indices()</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">          .exists(new GetIndexRequest(ExternalSkillConstants.INDEX), RequestOptions.DEFAULT)) {</span>
+<span class="nc" id="L47">        client</span>
+<span class="nc" id="L48">            .indices()</span>
+<span class="nc" id="L49">            .delete(new DeleteIndexRequest(ExternalSkillConstants.INDEX), RequestOptions.DEFAULT);</span>
+<span class="nc" id="L50">        log.info(&quot;Index '{}' deleted.&quot;, ExternalSkillConstants.INDEX);</span>
+      }
+
+<span class="nc" id="L53">      client</span>
+<span class="nc" id="L54">          .indices()</span>
+<span class="nc" id="L55">          .create(new CreateIndexRequest(ExternalSkillConstants.INDEX), RequestOptions.DEFAULT);</span>
+<span class="nc" id="L56">      log.info(&quot;Index '{}' created.&quot;, ExternalSkillConstants.INDEX);</span>
+<span class="nc" id="L57">    } catch (IOException e) {</span>
+<span class="nc" id="L58">      throw new RuntimeException(&quot;Failed to recreate index: &quot; + ExternalSkillConstants.INDEX, e);</span>
+<span class="nc" id="L59">    }</span>
+<span class="nc" id="L60">  }</span>
+
+  @Override
+  public void indexAll(List&lt;ExternalSkill&gt; externalSkillList) {
+<span class="nc" id="L64">    BulkRequest bulkRequest = new BulkRequest();</span>
+
+<span class="nc bnc" id="L66" title="All 2 branches missed.">    for (ExternalSkill externalSkill : externalSkillList) {</span>
+      try {
+<span class="nc" id="L68">        Map&lt;String, Object&gt; source = getExternalSkillSourceMap(externalSkill);</span>
+<span class="nc" id="L69">        bulkRequest.add(</span>
+            new IndexRequest(ExternalSkillConstants.INDEX)
+<span class="nc" id="L71">                .id(externalSkill.getId().toString())</span>
+<span class="nc" id="L72">                .source(source));</span>
+<span class="nc" id="L73">      } catch (Exception e) {</span>
+<span class="nc" id="L74">        throw new RuntimeException(&quot;Failed externalSkill: &quot; + externalSkill.getId(), e);</span>
+<span class="nc" id="L75">      }</span>
+<span class="nc" id="L76">    }</span>
+
+    try {
+<span class="nc" id="L79">      BulkResponse response = client.bulk(bulkRequest, RequestOptions.DEFAULT);</span>
+<span class="nc bnc" id="L80" title="All 2 branches missed.">      if (response.hasFailures()) {</span>
+<span class="nc" id="L81">        log.error(&quot;Bulk indexing errors: {}&quot;, response.buildFailureMessage());</span>
+      }
+<span class="nc" id="L83">    } catch (IOException e) {</span>
+<span class="nc" id="L84">      throw new RuntimeException(&quot;OpenSearchIndex bulk indexing failed&quot;, e);</span>
+    } finally {
+<span class="nc" id="L86">      log.info(&quot;Bulk indexing succeeded for {} documents&quot;, externalSkillList.size());</span>
+    }
+<span class="nc" id="L88">  }</span>
+
+  @Override
+  @Cacheable(
+      value = ExternalSkillConstants.INDEX,
+      key = &quot;#keyword + '_' + #pageCriteria.page() + '_' + #pageCriteria.pageSize()&quot;)
+  public ExternalSkillPagedResult search(String keyword, PageCriteria pageCriteria) {
+<span class="nc" id="L95">    SearchRequest searchRequest = new SearchRequest(ExternalSkillConstants.INDEX);</span>
+
+<span class="nc" id="L97">    SearchSourceBuilder sourceBuilder =</span>
+        new SearchSourceBuilder()
+<span class="nc" id="L99">            .query(</span>
+<span class="nc" id="L100">                QueryBuilders.matchPhrasePrefixQuery(</span>
+                    ExternalSkillConstants.FIELD_SKILL_LIBELLE, keyword))
+<span class="nc" id="L102">            .from(pageCriteria.page() * pageCriteria.pageSize())</span>
+<span class="nc" id="L103">            .size(pageCriteria.pageSize())</span>
+<span class="nc" id="L104">            .trackTotalHits(true);</span>
+
+<span class="nc" id="L106">    searchRequest.source(sourceBuilder);</span>
+
+    try {
+<span class="nc" id="L109">      SearchResponse response = client.search(searchRequest, RequestOptions.DEFAULT);</span>
+<span class="nc" id="L110">      long totalHits = response.getHits().getTotalHits().value;</span>
+
+<span class="nc" id="L112">      List&lt;ExternalSkill&gt; externalSkillList = getExternalSkillList(response);</span>
+
+<span class="nc" id="L114">      return new ExternalSkillPagedResult(</span>
+<span class="nc" id="L115">          externalSkillList, new PageInfo(pageCriteria.page(), pageCriteria.pageSize(), totalHits));</span>
+<span class="nc" id="L116">    } catch (IOException e) {</span>
+<span class="nc" id="L117">      throw new RuntimeException(</span>
+          &quot;OpenSearchIndex search failed with param keyword=&quot;
+              + keyword
+              + &quot;, page=&quot;
+<span class="nc" id="L121">              + pageCriteria.page()</span>
+              + &quot;, size=&quot;
+<span class="nc" id="L123">              + pageCriteria.pageSize(),</span>
+          e);
+    }
+  }
+
+  private Map&lt;String, Object&gt; getExternalSkillSourceMap(ExternalSkill externalSkill) {
+<span class="nc" id="L129">    var map = new HashMap&lt;String, Object&gt;();</span>
+<span class="nc" id="L130">    map.put(ExternalSkillConstants.FIELD_ID, externalSkill.getId().toString());</span>
+<span class="nc" id="L131">    map.put(ExternalSkillConstants.FIELD_SKILL_LIBELLE, externalSkill.getLibelle());</span>
+<span class="nc" id="L132">    map.put(ExternalSkillConstants.FIELD_TYPE, externalSkill.getType());</span>
+<span class="nc" id="L133">    map.put(</span>
+        ExternalSkillConstants.FIELD_SKILL_CATEGORIES,
+<span class="nc" id="L135">        externalSkill.getExternalSkillCategory().map(this::getCategorySource).orElse(null));</span>
+
+<span class="nc" id="L137">    return map;</span>
+  }
+
+  private List&lt;ExternalSkill&gt; getExternalSkillList(SearchResponse response) {
+<span class="nc" id="L141">    return Arrays.stream(response.getHits().getHits())</span>
+<span class="nc" id="L142">        .map(</span>
+            hit -&gt; {
+<span class="nc" id="L144">              Map&lt;String, Object&gt; src = hit.getSourceAsMap();</span>
+<span class="nc" id="L145">              return ExternalSkill.toDomain(</span>
+<span class="nc" id="L146">                  UUID.fromString((String) src.get(ExternalSkillConstants.FIELD_ID)),</span>
+<span class="nc" id="L147">                  (String) src.get(ExternalSkillConstants.FIELD_SKILL_LIBELLE),</span>
+<span class="nc" id="L148">                  (String) src.get(ExternalSkillConstants.FIELD_SKILL_CODE),</span>
+<span class="nc" id="L149">                  getCategoryFromSource(src.get(ExternalSkillConstants.FIELD_SKILL_CATEGORIES)),</span>
+<span class="nc" id="L150">                  EExternalSkillType.valueOf((String) src.get(ExternalSkillConstants.FIELD_TYPE)),</span>
+<span class="nc" id="L151">                  Instant.now(),</span>
+<span class="nc" id="L152">                  Instant.now());</span>
+            })
+<span class="nc" id="L154">        .toList();</span>
+  }
+
+  private Map&lt;String, Object&gt; getCategorySource(ExternalSkillCategory externalSkillCategory) {
+<span class="nc bnc" id="L158" title="All 2 branches missed.">    if (externalSkillCategory == null) return null;</span>
+
+<span class="nc" id="L160">    Map&lt;String, Object&gt; map = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L161">    map.put(&quot;id&quot;, externalSkillCategory.getId().toString());</span>
+<span class="nc" id="L162">    map.put(&quot;libelle&quot;, externalSkillCategory.getLibelle());</span>
+<span class="nc" id="L163">    map.put(&quot;type&quot;, externalSkillCategory.getType());</span>
+<span class="nc bnc" id="L164" title="All 2 branches missed.">    if (externalSkillCategory.getParent().isPresent()) {</span>
+<span class="nc" id="L165">      map.put(&quot;parent&quot;, getCategorySource(externalSkillCategory.getParent().get()));</span>
+    }
+<span class="nc" id="L167">    return map;</span>
+  }
+
+  @SuppressWarnings(&quot;unchecked&quot;)
+  private ExternalSkillCategory getCategoryFromSource(Object source) {
+<span class="nc bnc" id="L172" title="All 2 branches missed.">    if (source == null) return null;</span>
+
+<span class="nc" id="L174">    Map&lt;String, Object&gt; map = (Map&lt;String, Object&gt;) source;</span>
+<span class="nc bnc" id="L175" title="All 2 branches missed.">    UUID id = map.containsKey(&quot;id&quot;) ? UUID.fromString((String) map.get(&quot;id&quot;)) : null;</span>
+<span class="nc" id="L176">    String libelle = (String) map.get(&quot;libelle&quot;);</span>
+<span class="nc" id="L177">    EExternalSkillCategoryType type =</span>
+<span class="nc" id="L178">        EExternalSkillCategoryType.valueOf(map.get(&quot;type&quot;).toString());</span>
+
+<span class="nc" id="L180">    ExternalSkillCategory parent = null;</span>
+<span class="nc bnc" id="L181" title="All 2 branches missed.">    if (map.containsKey(&quot;parent&quot;)) {</span>
+<span class="nc" id="L182">      parent = getCategoryFromSource(map.get(&quot;parent&quot;));</span>
+    }
+
+<span class="nc" id="L185">    return ExternalSkillCategory.toDomain(id, libelle, parent, type, null, null);</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

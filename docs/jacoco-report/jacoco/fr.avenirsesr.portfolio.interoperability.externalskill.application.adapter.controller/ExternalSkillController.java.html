@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ExternalSkillController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">avenirs-portfolio-interoperability</a> &gt; <a href="index.source.html" class="el_package">fr.avenirsesr.portfolio.interoperability.externalskill.application.adapter.controller</a> &gt; <span class="el_source">ExternalSkillController.java</span></div><h1>ExternalSkillController.java</h1><pre class="source lang-java linenums">package fr.avenirsesr.portfolio.interoperability.externalskill.application.adapter.controller;
+
+import fr.avenirsesr.portfolio.common.data.application.adapter.dto.PageInfoDTO;
+import fr.avenirsesr.portfolio.common.data.application.adapter.response.PagedResponse;
+import fr.avenirsesr.portfolio.common.data.domain.model.PageCriteria;
+import fr.avenirsesr.portfolio.common.externalskill.application.adapter.dto.ExternalSkillDTO;
+import fr.avenirsesr.portfolio.common.externalskill.application.adapter.dto.ExternalSkillDetailsDTO;
+import fr.avenirsesr.portfolio.interoperability.externalskill.application.adapter.mapper.ExternalSkillMapper;
+import fr.avenirsesr.portfolio.interoperability.externalskill.domain.port.output.OpenSearchIndex;
+import fr.avenirsesr.portfolio.interoperability.externalskill.domain.port.output.repository.ExternalSkillRepository;
+import java.util.List;
+import java.util.UUID;
+import lombok.AllArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+<span class="nc" id="L18">@Slf4j</span>
+@AllArgsConstructor
+@RestController
+@RequestMapping({&quot;interoperability/external-skills&quot;, &quot;interoperability/additional-skills&quot;})
+public class ExternalSkillController {
+  private final OpenSearchIndex openSearchIndex;
+  private final ExternalSkillRepository externalSkillRepository;
+
+  @GetMapping(path = &quot;/search&quot;)
+  public ResponseEntity&lt;PagedResponse&lt;ExternalSkillDTO&gt;&gt; searchExternalSkills(
+      @RequestParam String keyword,
+      @RequestParam(required = false) Integer page,
+      @RequestParam(required = false) Integer pageSize) {
+<span class="nc" id="L31">    var result = openSearchIndex.search(keyword, new PageCriteria(page, pageSize));</span>
+<span class="nc" id="L32">    return ResponseEntity.ok(</span>
+        new PagedResponse&lt;&gt;(
+<span class="nc" id="L34">            result.content().stream().map(ExternalSkillMapper::toExternalSkillDTO).toList(),</span>
+<span class="nc" id="L35">            PageInfoDTO.fromDomain(result.pageInfo())));</span>
+  }
+
+  @GetMapping(path = &quot;/random&quot;)
+  public ResponseEntity&lt;List&lt;ExternalSkillDTO&gt;&gt; getRandomSkills(
+      @RequestParam(defaultValue = &quot;200&quot;) int count) {
+<span class="nc" id="L41">    log.debug(&quot;Getting {} random external skills&quot;, count);</span>
+<span class="nc" id="L42">    var skills = externalSkillRepository.findRandom(count);</span>
+<span class="nc" id="L43">    return ResponseEntity.ok(skills.stream().map(ExternalSkillMapper::toExternalSkillDTO).toList());</span>
+  }
+
+  @GetMapping(path = &quot;/{id}&quot;)
+  public ResponseEntity&lt;ExternalSkillDetailsDTO&gt; getExternalSkillById(@PathVariable UUID id) {
+<span class="nc" id="L48">    log.debug(&quot;Getting external skill details for id: {}&quot;, id);</span>
+<span class="nc" id="L49">    return externalSkillRepository</span>
+<span class="nc" id="L50">        .findById(id)</span>
+<span class="nc" id="L51">        .map(ExternalSkillMapper::toExternalSkillDetailsDTO)</span>
+<span class="nc" id="L52">        .map(ResponseEntity::ok)</span>
+<span class="nc" id="L53">        .orElse(ResponseEntity.notFound().build());</span>
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
