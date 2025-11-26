@@ -18,7 +18,7 @@ import org.springframework.web.bind.annotation.*;
 @Slf4j
 @AllArgsConstructor
 @RestController
-@RequestMapping({"interoperability/external-skills", "interoperability/additional-skills"})
+@RequestMapping({"interoperability/external-skills"})
 public class ExternalSkillController {
   private final OpenSearchIndex openSearchIndex;
   private final ExternalSkillRepository externalSkillRepository;
