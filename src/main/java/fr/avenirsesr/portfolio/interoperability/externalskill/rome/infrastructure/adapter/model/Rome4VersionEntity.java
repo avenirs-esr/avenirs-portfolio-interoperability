@@ -3,6 +3,7 @@ package fr.avenirsesr.portfolio.interoperability.externalskill.rome.infrastructu
 import fr.avenirsesr.portfolio.common.data.infrastructure.adapter.model.AvenirsBaseEntity;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.Index;
 import jakarta.persistence.Table;
 import java.time.Instant;
 import java.util.UUID;
@@ -11,7 +12,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "rome_4_version")
+@Table(
+    name = "rome_4_version",
+    indexes = {@Index(name = "idx_rome4_version_version", columnList = "version")})
 @NoArgsConstructor
 @Getter
 @Setter

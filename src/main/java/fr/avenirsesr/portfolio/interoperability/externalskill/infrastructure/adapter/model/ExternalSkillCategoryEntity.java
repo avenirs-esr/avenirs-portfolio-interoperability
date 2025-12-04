@@ -3,6 +3,7 @@ package fr.avenirsesr.portfolio.interoperability.externalskill.infrastructure.ad
 import fr.avenirsesr.portfolio.common.data.infrastructure.adapter.model.AvenirsBaseEntity;
 import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillCategoryType;
 import jakarta.persistence.*;
+import jakarta.persistence.Index;
 import java.util.Optional;
 import java.util.UUID;
 import lombok.AccessLevel;
@@ -14,7 +15,9 @@ import lombok.Setter;
 @Getter
 @Setter
 @Entity
-@Table(name = "external_skill_category")
+@Table(
+    name = "external_skill_category",
+    indexes = {@Index(name = "idx_external_skill_category_parent_id", columnList = "parent_id")})
 public class ExternalSkillCategoryEntity extends AvenirsBaseEntity {
   @Column(nullable = false)
   private String libelle;

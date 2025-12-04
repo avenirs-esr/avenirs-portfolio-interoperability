@@ -3,6 +3,7 @@ package fr.avenirsesr.portfolio.interoperability.externalskill.infrastructure.ad
 import fr.avenirsesr.portfolio.common.data.infrastructure.adapter.model.AvenirsBaseEntity;
 import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillType;
 import jakarta.persistence.*;
+import jakarta.persistence.Index;
 import java.util.Optional;
 import java.util.UUID;
 import lombok.AccessLevel;
@@ -11,7 +12,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 @Entity
-@Table(name = "external_skill")
+@Table(
+    name = "external_skill",
+    indexes = {
+      @Index(name = "idx_external_skill_external_id", columnList = "external_id"),
+      @Index(name = "idx_external_skill_category_id", columnList = "external_skill_category_id")
+    })
 @NoArgsConstructor
 @Getter
 @Setter

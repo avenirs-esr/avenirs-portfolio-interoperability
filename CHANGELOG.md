@@ -9,3 +9,4 @@ and [Conventional Commits](https://www.conventionalcommits.org/) standard.
 ## [v1.0.0] - 2025-10-30
 
 - Initial version, repository initialization.
+- Add database missing indexes on external_skill, external_skill_category and rome_4_version.
