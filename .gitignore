@@ -73,3 +73,4 @@ yarn-error.log*
 
 # Commitlint config (use .sample as template)
 commitlint.config.js
+env.properties

@@ -1,0 +1,87 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="ardem (generated)" id="1765189441420-1">
+        <createTable tableName="external_skill">
+            <column name="id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="external_skillPK"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_at" type="TIMESTAMP WITH TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="updated_at" type="TIMESTAMP WITH TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="external_id" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="libelle" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(255)"/>
+            <column name="external_skill_category_id" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ardem (generated)" id="1765189441420-2">
+        <createTable tableName="external_skill_category">
+            <column name="id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="external_skill_categoryPK"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_at" type="TIMESTAMP WITH TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="updated_at" type="TIMESTAMP WITH TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="libelle" type="VARCHAR(255)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="type" type="VARCHAR(255)"/>
+            <column name="parent_id" type="UUID"/>
+        </createTable>
+    </changeSet>
+    <changeSet author="ardem (generated)" id="1765189441420-3">
+        <createTable tableName="rome_4_version">
+            <column name="id" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="rome_4_versionPK"/>
+            </column>
+            <column defaultValueComputed="now()" name="created_at" type="TIMESTAMP WITH TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column defaultValueComputed="now()" name="updated_at" type="TIMESTAMP WITH TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="last_modified_date" type="TIMESTAMP WITHOUT TIME ZONE">
+                <constraints nullable="false"/>
+            </column>
+            <column name="version" type="INTEGER">
+                <constraints nullable="false"/>
+            </column>
+        </createTable>
+    </changeSet>
+    <changeSet author="ardem (generated)" id="1765189441420-4">
+        <createIndex indexName="idx_external_skill_category_id" tableName="external_skill">
+            <column name="external_skill_category_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="ardem (generated)" id="1765189441420-5">
+        <createIndex indexName="idx_external_skill_external_id" tableName="external_skill">
+            <column name="external_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="ardem (generated)" id="1765189441420-6">
+        <createIndex indexName="idx_external_skill_category_parent_id" tableName="external_skill_category">
+            <column name="parent_id"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="ardem (generated)" id="1765189441420-7">
+        <createIndex indexName="idx_rome4_version_version" tableName="rome_4_version">
+            <column name="version"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="ardem (generated)" id="1765189441420-8">
+        <addForeignKeyConstraint baseColumnNames="external_skill_category_id" baseTableName="external_skill" constraintName="FKdhbj67a2i1xigj8kwa2qga7j8" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="external_skill_category" validate="true"/>
+    </changeSet>
+    <changeSet author="ardem (generated)" id="1765189441420-9">
+        <addForeignKeyConstraint baseColumnNames="parent_id" baseTableName="external_skill_category" constraintName="FKmiwv1a1kuwnpw38lp2yctxojq" deferrable="false" initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION" referencedColumnNames="id" referencedTableName="external_skill_category" validate="true"/>
+    </changeSet>
+</databaseChangeLog>
