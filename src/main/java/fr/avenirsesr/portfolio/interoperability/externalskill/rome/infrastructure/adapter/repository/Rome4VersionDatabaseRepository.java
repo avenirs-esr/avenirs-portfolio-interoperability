@@ -15,8 +15,7 @@ public class Rome4VersionDatabaseRepository
   private final Rome4VersionJpaRepository jpaRepository;
 
   public Rome4VersionDatabaseRepository(Rome4VersionJpaRepository jpaRepository) {
-    super(
-        jpaRepository, jpaRepository, Rome4VersionMapper::fromDomain, Rome4VersionMapper::toDomain);
+    super(jpaRepository, jpaRepository, Rome4VersionEntity.class, Rome4VersionMapper.INSTANCE);
     this.jpaRepository = jpaRepository;
   }
 

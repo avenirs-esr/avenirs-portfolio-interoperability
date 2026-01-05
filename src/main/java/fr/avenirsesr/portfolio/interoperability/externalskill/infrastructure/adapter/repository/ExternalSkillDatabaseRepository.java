@@ -17,18 +17,14 @@ public class ExternalSkillDatabaseRepository
   private final ExternalSkillJpaRepository jpaRepository;
 
   public ExternalSkillDatabaseRepository(ExternalSkillJpaRepository jpaRepository) {
-    super(
-        jpaRepository,
-        jpaRepository,
-        ExternalSkillMapper::fromDomain,
-        ExternalSkillMapper::toDomain);
+    super(jpaRepository, jpaRepository, ExternalSkillEntity.class, ExternalSkillMapper.INSTANCE);
     this.jpaRepository = jpaRepository;
   }
 
   @Override
   public List<ExternalSkill> findAllByExternalId(List<String> skillCodes) {
     return jpaRepository.findAll(ExternalSkillSpecification.hasExternalId(skillCodes)).stream()
-        .map(ExternalSkillMapper::toDomain)
+        .map(ExternalSkillMapper.INSTANCE::toDomain)
         .toList();
   }
 
@@ -39,12 +35,14 @@ public class ExternalSkillDatabaseRepository
 
   @Override
   public List<ExternalSkill> findAll() {
-    return jpaRepository.findAll().stream().map(ExternalSkillMapper::toDomain).toList();
+    return jpaRepository.findAll().stream().map(ExternalSkillMapper.INSTANCE::toDomain).toList();
   }
 
   // Used for seeding in api
   @Override
   public List<ExternalSkill> findRandom(int limit) {
-    return jpaRepository.findRandom(limit).stream().map(ExternalSkillMapper::toDomain).toList();
+    return jpaRepository.findRandom(limit).stream()
+        .map(ExternalSkillMapper.INSTANCE::toDomain)
+        .toList();
   }
 }

@@ -33,7 +33,7 @@ public class ExternalSkillSeeder {
     var externalSkills =
         Stream.of(xxi, casoc, casol)
             .flatMap(Collection::stream)
-            .map(ExternalSkillMapper::fromDomain)
+            .map(ExternalSkillMapper.INSTANCE::fromDomain)
             .collect(Collectors.toList());
 
     log.info("✔ {} external skills synced", externalSkills.size());
