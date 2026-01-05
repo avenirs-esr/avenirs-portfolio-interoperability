@@ -15,14 +15,13 @@ public class Rome4VersionDatabaseRepository
   private final Rome4VersionJpaRepository jpaRepository;
 
   public Rome4VersionDatabaseRepository(Rome4VersionJpaRepository jpaRepository) {
-<span class="nc" id="L18">    super(</span>
-        jpaRepository, jpaRepository, Rome4VersionMapper::fromDomain, Rome4VersionMapper::toDomain);
-<span class="nc" id="L20">    this.jpaRepository = jpaRepository;</span>
-<span class="nc" id="L21">  }</span>
+<span class="nc" id="L18">    super(jpaRepository, jpaRepository, Rome4VersionEntity.class, Rome4VersionMapper.INSTANCE);</span>
+<span class="nc" id="L19">    this.jpaRepository = jpaRepository;</span>
+<span class="nc" id="L20">  }</span>
 
   @Override
   public Optional&lt;Rome4Version&gt; findFirstByOrderByVersionDesc() {
-<span class="nc" id="L25">    return jpaRepository.findFirstByOrderByVersionDesc();</span>
+<span class="nc" id="L24">    return jpaRepository.findFirstByOrderByVersionDesc();</span>
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

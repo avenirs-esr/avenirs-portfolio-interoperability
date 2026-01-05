@@ -29,10 +29,16 @@ public interface TranslationUtil {
 <span class="nc" id="L29">    return translations.stream()</span>
 <span class="nc" id="L30">        .filter(t -&gt; t.getLanguage().equals(selectedLanguage))</span>
 <span class="nc" id="L31">        .findFirst()</span>
-<span class="nc" id="L32">        .orElseThrow(</span>
+<span class="nc" id="L32">        .orElseGet(</span>
             () -&gt;
-<span class="nc" id="L34">                new LanguageException(</span>
-<span class="nc" id="L35">                    String.format(&quot;Fallback language [%s] not setup&quot;, ELanguage.FALLBACK)));</span>
+<span class="nc" id="L34">                translations.stream()</span>
+<span class="nc" id="L35">                    .filter(t -&gt; t.getLanguage().equals(ELanguage.FALLBACK))</span>
+<span class="nc" id="L36">                    .findFirst()</span>
+<span class="nc" id="L37">                    .orElseThrow(</span>
+                        () -&gt;
+<span class="nc" id="L39">                            new LanguageException(</span>
+<span class="nc" id="L40">                                String.format(</span>
+                                    &quot;Fallback language [%s] not setup&quot;, ELanguage.FALLBACK))));
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

@@ -17,35 +17,33 @@ public class ExternalSkillDatabaseRepository
   private final ExternalSkillJpaRepository jpaRepository;
 
   public ExternalSkillDatabaseRepository(ExternalSkillJpaRepository jpaRepository) {
-<span class="nc" id="L20">    super(</span>
-        jpaRepository,
-        jpaRepository,
-        ExternalSkillMapper::fromDomain,
-        ExternalSkillMapper::toDomain);
-<span class="nc" id="L25">    this.jpaRepository = jpaRepository;</span>
-<span class="nc" id="L26">  }</span>
+<span class="nc" id="L20">    super(jpaRepository, jpaRepository, ExternalSkillEntity.class, ExternalSkillMapper.INSTANCE);</span>
+<span class="nc" id="L21">    this.jpaRepository = jpaRepository;</span>
+<span class="nc" id="L22">  }</span>
 
   @Override
   public List&lt;ExternalSkill&gt; findAllByExternalId(List&lt;String&gt; skillCodes) {
-<span class="nc" id="L30">    return jpaRepository.findAll(ExternalSkillSpecification.hasExternalId(skillCodes)).stream()</span>
-<span class="nc" id="L31">        .map(ExternalSkillMapper::toDomain)</span>
-<span class="nc" id="L32">        .toList();</span>
+<span class="nc" id="L26">    return jpaRepository.findAll(ExternalSkillSpecification.hasExternalId(skillCodes)).stream()</span>
+<span class="nc" id="L27">        .map(ExternalSkillMapper.INSTANCE::toDomain)</span>
+<span class="nc" id="L28">        .toList();</span>
   }
 
   @Override
   public int countAll(EExternalSkillType type) {
-<span class="nc" id="L37">    return jpaRepository.findAll(ExternalSkillSpecification.hasType(type)).size();</span>
+<span class="nc" id="L33">    return jpaRepository.findAll(ExternalSkillSpecification.hasType(type)).size();</span>
   }
 
   @Override
   public List&lt;ExternalSkill&gt; findAll() {
-<span class="nc" id="L42">    return jpaRepository.findAll().stream().map(ExternalSkillMapper::toDomain).toList();</span>
+<span class="nc" id="L38">    return jpaRepository.findAll().stream().map(ExternalSkillMapper.INSTANCE::toDomain).toList();</span>
   }
 
   // Used for seeding in api
   @Override
   public List&lt;ExternalSkill&gt; findRandom(int limit) {
-<span class="nc" id="L48">    return jpaRepository.findRandom(limit).stream().map(ExternalSkillMapper::toDomain).toList();</span>
+<span class="nc" id="L44">    return jpaRepository.findRandom(limit).stream()</span>
+<span class="nc" id="L45">        .map(ExternalSkillMapper.INSTANCE::toDomain)</span>
+<span class="nc" id="L46">        .toList();</span>
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
