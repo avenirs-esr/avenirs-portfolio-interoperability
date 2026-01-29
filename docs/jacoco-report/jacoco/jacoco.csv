@@ -23,7 +23,7 @@ avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.exte
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.validation.infrastructure.adapter.utils,ValidationUtils,14,0,4,0,4,0,4,0,2,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externalskill.infrastructure.adapter.opensearch,OpenSearchIndexImpl,373,0,16,0,87,0,17,0,9,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externalskill.infrastructure.adapter.opensearch,ExternalSkillConstants,3,0,0,0,1,0,1,0,1,0
-avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.language.infrastructure.adapter.utils,TranslationUtil,62,0,0,0,17,0,7,0,7,0
+avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.language.infrastructure.adapter.utils,TranslationUtil,113,0,4,0,28,0,12,0,10,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externalskill.rome.domain.service,RomeExternalSkillServiceImpl,7,148,0,8,3,41,0,10,0,6
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externalskill.rome.infrastructure.batch,ExternalSkillBatchScheduler,40,0,0,0,13,0,3,0,3,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externalskill.rome.infrastructure.batch,ExternalSkillBatchLoader.new JobExecutionListener() {...},73,0,16,0,17,0,12,0,4,0
@@ -42,6 +42,7 @@ avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.exte
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externalskill.rome.infrastructure.adapter.rest,RomeAdditionalSkillApiRest,158,0,2,0,43,0,10,0,9,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.user.infrastructure.service,NoOpUserService,5,0,0,0,2,0,2,0,2,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.data.infrastructure.adapter.repository,GenericJpaRepositoryAdapter,504,0,20,0,85,0,30,0,20,0
+avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.data.infrastructure.adapter.repository,GenericTranslatableJpaRepositoryAdapter,69,0,2,0,13,0,3,0,2,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.data.infrastructure.adapter.repository,GenericDeletableJpaRepositoryAdapter,25,0,0,0,7,0,2,0,2,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.shared.infrastructure.utils,FileReader,54,0,4,0,16,0,4,0,2,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externalskill.rome.infrastructure.adapter.repository,Rome4VersionDatabaseRepository,14,0,0,0,4,0,2,0,2,0
@@ -51,4 +52,4 @@ avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.exte
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externalskill.infrastructure.adapter.repository,ExternalSkillDatabaseRepository,56,0,0,0,11,0,5,0,5,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.data.domain,FetchGraph,97,0,6,0,23,0,10,0,7,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.data.infrastructure.adapter,EntityGrapher,259,0,19,0,53,0,21,0,10,0
-avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.validation.domain.utils,FieldValidationUtils,67,0,18,0,20,0,13,0,4,0
+avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.validation.domain.utils,FieldValidationUtils,100,0,24,0,29,0,17,0,5,0
