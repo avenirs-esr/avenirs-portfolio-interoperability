@@ -11,8 +11,8 @@ public class ExternalSkillMapper implements Mapper<ExternalSkillEntity, External
   public ExternalSkill toDomain(ExternalSkillEntity entity) {
     return ExternalSkill.toDomain(
         entity.getId(),
-        entity.getExternalId(),
         entity.getLibelle(),
+        entity.getExternalId(),
         entity.getExternalSkillCategory().map(ExternalSkillCategoryMapper::toDomain).orElse(null),
         entity.getType(),
         entity.getCreatedAt(),
@@ -23,8 +23,8 @@ public class ExternalSkillMapper implements Mapper<ExternalSkillEntity, External
   public ExternalSkillEntity fromDomain(ExternalSkill domain) {
     return ExternalSkillEntity.of(
         domain.getId(),
-        domain.getLibelle(),
         domain.getExternalId(),
+        domain.getLibelle(),
         domain.getType(),
         domain
             .getExternalSkillCategory()
