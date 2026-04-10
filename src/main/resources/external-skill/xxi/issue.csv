@@ -1,16 +1,16 @@
 id;category;parent
-762a7aa6-6248-4a93-877e-cf2c46ed3fea;intelligence émotionnelle;a516df13-60b5-48f8-84c4-79e476d17518
-fc0391b9-9aa5-43c2-8d5e-a71a4282ed52;engagement personnel;a516df13-60b5-48f8-84c4-79e476d17518
-8ff0a8b4-a07d-4dbd-b205-bda776e7e993;apprentissage individuel;a516df13-60b5-48f8-84c4-79e476d17518
-52c644af-d1d0-4c8c-a055-f2c3825321c7;vie en société;c972a6fd-b8ba-4f00-8126-66b6cbf38466
-3faade93-4c28-4ef5-9ca3-83708ff0caa0;apprentissage collectif;c972a6fd-b8ba-4f00-8126-66b6cbf38466
-4e8e47b5-bc59-49d0-9797-7a1c355678ed;maîtrise de différents moyens et outils de communication;ee456f26-d50f-4cb4-bef9-95a54666e436
-cff7a44c-1e86-4888-88f7-55f2f3a35676;communication efficace;ee456f26-d50f-4cb4-bef9-95a54666e436
-8c7da768-c693-4d4a-a2c0-93b1dc17acf0;présence et écoute active;ee456f26-d50f-4cb4-bef9-95a54666e436
-b85ceb07-c5b2-4ca0-8a1b-185a944aa5bd;recherche et traitement de l'information;6d4cde83-2c18-4946-8078-52f2e3b3019c
-12c7c86d-8c12-4725-8cf1-f7300ae3460e;organisation, anticipation et prise de décisions;6d4cde83-2c18-4946-8078-52f2e3b3019c
-c217d581-5c00-4eb7-ac35-d9754e37b060;résolution de problèmes complexes;6d4cde83-2c18-4946-8078-52f2e3b3019c
-460a678c-3b13-48a8-8d83-49b8511ed9f7;action et travail en équipe;87565a4b-0c5a-4015-bda3-6f353b4cf88a
-ee63bfba-d8c1-40e6-96d3-9a41cef65283;repérage et positionnement;87565a4b-0c5a-4015-bda3-6f353b4cf88a
-6e4441a6-1154-4b83-92fb-9c724a611efe;résolution de problèmes grâce à des solutions nouvelles;60d559a4-bc9a-436d-b31d-6f386b60bfb3
-ae760884-bb3e-498c-b4ac-9ffa653f3c2a;développement de ses idées et de son mode de pensée;60d559a4-bc9a-436d-b31d-6f386b60bfb3
+1;intelligence émotionnelle;3
+2;engagement personnel;3
+3;apprentissage individuel;3
+4;vie en société;1
+5;apprentissage collectif;1
+6;maîtrise de différents moyens et outils de communication;4
+7;communication efficace;4
+8;présence et écoute active;4
+9;recherche et traitement de l'information;5
+10;organisation, anticipation et prise de décisions;5
+11;résolution de problèmes complexes;5
+12;action et travail en équipe;6
+13;repérage et positionnement;6
+14;résolution de problèmes grâce à des solutions nouvelles;2
+15;développement de ses idées et de son mode de pensée;2

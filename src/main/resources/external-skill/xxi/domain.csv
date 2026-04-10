@@ -1,7 +1,7 @@
 id,category,parent
-c972a6fd-b8ba-4f00-8126-66b6cbf38466,citoyenneté mondiale,
-60d559a4-bc9a-436d-b31d-6f386b60bfb3,créativité,
-a516df13-60b5-48f8-84c4-79e476d17518,connaissance de soi,
-ee456f26-d50f-4cb4-bef9-95a54666e436,communication,
-6d4cde83-2c18-4946-8078-52f2e3b3019c,pensée critique,
-87565a4b-0c5a-4015-bda3-6f353b4cf88a,collaboration,
+1,citoyenneté mondiale,
+2,créativité,
+3,connaissance de soi,
+4,communication,
+5,pensée critique,
+6,collaboration,
