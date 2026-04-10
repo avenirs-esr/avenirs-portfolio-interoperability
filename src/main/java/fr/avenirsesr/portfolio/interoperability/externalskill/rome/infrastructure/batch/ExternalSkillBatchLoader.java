@@ -189,6 +189,7 @@ public class ExternalSkillBatchLoader {
       return ExternalSkill.create(
           dataGenerator.with("externalSkillId").uuid(),
           competence.getLibelle(),
+          competence.getCode(),
           CompetenceMapper.toCategoryDomain(competence, categories),
           EExternalSkillType.ROME4);
     };

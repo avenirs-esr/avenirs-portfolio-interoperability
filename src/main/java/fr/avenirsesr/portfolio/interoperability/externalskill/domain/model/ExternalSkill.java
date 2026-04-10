@@ -15,6 +15,7 @@ public class ExternalSkill extends AvenirsBaseModel {
   private ExternalSkillCategory externalSkillCategory;
 
   private String libelle;
+  private String externalId;
   private EExternalSkillType type;
 
   private ExternalSkill(
@@ -23,30 +24,35 @@ public class ExternalSkill extends AvenirsBaseModel {
       Instant updatedAt,
       ExternalSkillCategory externalSkillCategory,
       EExternalSkillType type,
-      String libelle) {
+      String libelle,
+      String externalId) {
     super(id, createdAt, updatedAt);
     this.externalSkillCategory = externalSkillCategory;
     this.type = type;
     this.libelle = libelle;
+    this.externalId = externalId;
   }
 
   public static ExternalSkill create(
       UUID id,
       String libelle,
+      String externalId,
       ExternalSkillCategory externalSkillCategory,
       EExternalSkillType type) {
     Instant now = Instant.now();
-    return new ExternalSkill(id, now, now, externalSkillCategory, type, libelle);
+    return new ExternalSkill(id, now, now, externalSkillCategory, type, libelle, externalId);
   }
 
   public static ExternalSkill toDomain(
       UUID id,
       String libelle,
+      String externalId,
       ExternalSkillCategory externalSkillCategory,
       EExternalSkillType type,
       Instant createdAt,
       Instant updatedAt) {
-    return new ExternalSkill(id, createdAt, updatedAt, externalSkillCategory, type, libelle);
+    return new ExternalSkill(
+        id, createdAt, updatedAt, externalSkillCategory, type, libelle, externalId);
   }
 
   public Optional<ExternalSkillCategory> getExternalSkillCategory() {

@@ -3,7 +3,6 @@ package fr.avenirsesr.portfolio.interoperability.externalskill.infrastructure.ad
 import fr.avenirsesr.portfolio.common.data.infrastructure.adapter.model.AvenirsBaseEntity;
 import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillType;
 import jakarta.persistence.*;
-import jakarta.persistence.Index;
 import java.util.Optional;
 import java.util.UUID;
 import lombok.AccessLevel;
@@ -23,6 +22,9 @@ import lombok.Setter;
 @Setter
 public class ExternalSkillEntity extends AvenirsBaseEntity {
 
+  @Column(nullable = false, name = "external_id")
+  private String externalId;
+
   @Column(nullable = false)
   private String libelle;
 
@@ -38,26 +40,33 @@ public class ExternalSkillEntity extends AvenirsBaseEntity {
 
   private ExternalSkillEntity(
       UUID id,
+      String externalId,
       String libelle,
       EExternalSkillType type,
       ExternalSkillCategoryEntity externalSkillCategory) {
     setId(id);
     this.type = type;
     this.externalSkillCategory = externalSkillCategory;
+    this.externalId = externalId;
     this.libelle = libelle;
   }
 
   public static ExternalSkillEntity of(
       UUID id,
+      String externalId,
       String libelle,
       EExternalSkillType type,
       ExternalSkillCategoryEntity externalSkillCategory) {
-    return new ExternalSkillEntity(id, libelle, type, externalSkillCategory);
+    return new ExternalSkillEntity(id, externalId, libelle, type, externalSkillCategory);
   }
 
   public static ExternalSkillEntity create(
-      String libelle, EExternalSkillType type, ExternalSkillCategoryEntity externalSkillCategory) {
-    return new ExternalSkillEntity(UUID.randomUUID(), libelle, type, externalSkillCategory);
+      String externalId,
+      String libelle,
+      EExternalSkillType type,
+      ExternalSkillCategoryEntity externalSkillCategory) {
+    return new ExternalSkillEntity(
+        UUID.randomUUID(), externalId, libelle, type, externalSkillCategory);
   }
 
   public Optional<ExternalSkillCategoryEntity> getExternalSkillCategory() {

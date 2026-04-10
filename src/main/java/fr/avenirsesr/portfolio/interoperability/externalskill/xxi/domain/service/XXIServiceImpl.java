@@ -37,6 +37,7 @@ public class XXIServiceImpl implements XXIService {
                     ExternalSkill.create(
                         dataGenerator.with("externalSkillId").uuid(),
                         competence.libelle(),
+                        String.valueOf(competence.id()),
                         buildCategory(competence.category(), categories),
                         EExternalSkillType.XXI))
             .toList();
