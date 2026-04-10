@@ -23,6 +23,7 @@ import fr.avenirsesr.portfolio.interoperability.externalskill.rome.domain.servic
 import java.time.Instant;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
@@ -46,6 +47,9 @@ class RomeExternalSkillServiceImplTest {
   private ExternalSkill externalSkill1;
   private ExternalSkill externalSkill2;
 
+  private static final UUID SKILL_ID_1 = UUID.randomUUID();
+  private static final UUID SKILL_ID_2 = UUID.randomUUID();
+
   @BeforeEach
   void setUp() {
     var domain1 =
@@ -59,7 +63,7 @@ class RomeExternalSkillServiceImplTest {
             "macroSkillLibelle1", target1, EExternalSkillCategoryType.MACRO_SKILL);
 
     externalSkill1 =
-        ExternalSkill.create("skillLibelle1", "skillCode1", macro1, EExternalSkillType.ROME4);
+        ExternalSkill.create(SKILL_ID_1, "skillLibelle1", macro1, EExternalSkillType.ROME4);
 
     var domain2 =
         ExternalSkillCategory.of("domainLibelle2", null, EExternalSkillCategoryType.DOMAIN);
@@ -72,7 +76,7 @@ class RomeExternalSkillServiceImplTest {
             "macroSkillLibelle2", targe2, EExternalSkillCategoryType.MACRO_SKILL);
 
     externalSkill2 =
-        ExternalSkill.create("skillLibelle2", "skillCode2", macro2, EExternalSkillType.ROME4);
+        ExternalSkill.create(SKILL_ID_2, "skillLibelle2", macro2, EExternalSkillType.ROME4);
   }
 
   @Test
@@ -90,7 +94,7 @@ class RomeExternalSkillServiceImplTest {
   void shouldSaveAndIndexExternalSkills_WhenNewSkills() {
     BddLogger.given("the method synchronizeExternalSkills");
     List<ExternalSkill> inputSkills = List.of(externalSkill1, externalSkill2);
-    when(externalSkillRepository.findAllByExternalId(anyList())).thenReturn(List.of());
+    when(externalSkillRepository.findAllById(anyList())).thenReturn(List.of());
     when(externalSkillRepository.saveAll(anyList()))
         .thenAnswer(invocation -> invocation.getArgument(0));
 
@@ -100,7 +104,7 @@ class RomeExternalSkillServiceImplTest {
 
     BddLogger.then("it should save and index external skills");
     assertThat(result).hasSize(2);
-    verify(externalSkillRepository).findAllByExternalId(List.of("skillCode1", "skillCode2"));
+    verify(externalSkillRepository).findAllById(List.of(SKILL_ID_1, SKILL_ID_2));
     verify(externalSkillRepository).saveAll(anyList());
     verify(openSearchIndex).indexAll(result);
   }
@@ -118,9 +122,9 @@ class RomeExternalSkillServiceImplTest {
         ExternalSkillCategory.of(
             "macroSkillLibelle1", target1, EExternalSkillCategoryType.MACRO_SKILL);
     ExternalSkill existingSkill =
-        ExternalSkill.create("skillLibelle1", "skillCode1", macro1, EExternalSkillType.ROME4);
+        ExternalSkill.create(SKILL_ID_1, "skillLibelle1", macro1, EExternalSkillType.ROME4);
 
-    when(externalSkillRepository.findAllByExternalId(anyList())).thenReturn(List.of(existingSkill));
+    when(externalSkillRepository.findAllById(anyList())).thenReturn(List.of(existingSkill));
     when(externalSkillRepository.saveAll(anyList()))
         .thenAnswer(invocation -> invocation.getArgument(0));
 

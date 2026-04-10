@@ -22,13 +22,6 @@ public class ExternalSkillDatabaseRepository
   }
 
   @Override
-  public List<ExternalSkill> findAllByExternalId(List<String> skillCodes) {
-    return jpaRepository.findAll(ExternalSkillSpecification.hasExternalId(skillCodes)).stream()
-        .map(ExternalSkillMapper.INSTANCE::toDomain)
-        .toList();
-  }
-
-  @Override
   public int countAll(EExternalSkillType type) {
     return jpaRepository.findAll(ExternalSkillSpecification.hasType(type)).size();
   }
