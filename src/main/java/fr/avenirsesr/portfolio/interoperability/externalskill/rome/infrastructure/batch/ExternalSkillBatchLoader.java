@@ -1,6 +1,8 @@
 package fr.avenirsesr.portfolio.interoperability.externalskill.rome.infrastructure.batch;
 
 import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillType;
+import fr.avenirsesr.portfolio.common.seeder.domain.port.output.SharedDataGenerator;
+import fr.avenirsesr.portfolio.common.seeder.infrastructure.adapter.data.DataGeneratorProvider;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkill;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkillCategory;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.port.output.repository.ExternalSkillRepository;
@@ -50,6 +52,10 @@ import org.springframework.transaction.PlatformTransactionManager;
 @Profile("!test")
 @RequiredArgsConstructor
 public class ExternalSkillBatchLoader {
+  private static final DataGeneratorProvider<SharedDataGenerator> dataGenerator =
+      new DataGeneratorProvider<SharedDataGenerator>()
+          .init(ExternalSkillBatchLoader.class, SharedDataGenerator.class);
+
   private final RomeExternalSkillApi romeAdditionalSkillApi;
   private final RomeExternalSkillService romeAdditionalSkillService;
   private final ExternalSkillRepository externalSkillRepository;
@@ -181,8 +187,8 @@ public class ExternalSkillBatchLoader {
       ArrayList<ExternalSkillCategory> categories) {
     return (Competence competence) -> {
       return ExternalSkill.create(
+          dataGenerator.with("externalSkillId").uuid(),
           competence.getLibelle(),
-          competence.getCode(),
           CompetenceMapper.toCategoryDomain(competence, categories),
           EExternalSkillType.ROME4);
     };

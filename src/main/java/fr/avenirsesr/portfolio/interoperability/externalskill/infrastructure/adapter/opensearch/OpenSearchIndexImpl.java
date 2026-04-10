@@ -145,7 +145,6 @@ public class OpenSearchIndexImpl implements OpenSearchIndex {
               return ExternalSkill.toDomain(
                   UUID.fromString((String) src.get(ExternalSkillConstants.FIELD_ID)),
                   (String) src.get(ExternalSkillConstants.FIELD_SKILL_LIBELLE),
-                  (String) src.get(ExternalSkillConstants.FIELD_SKILL_CODE),
                   getCategoryFromSource(src.get(ExternalSkillConstants.FIELD_SKILL_CATEGORIES)),
                   EExternalSkillType.valueOf((String) src.get(ExternalSkillConstants.FIELD_TYPE)),
                   Instant.now(),

@@ -2,6 +2,8 @@ package fr.avenirsesr.portfolio.interoperability.externalskill.casoc.domain.serv
 
 import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillCategoryType;
 import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillType;
+import fr.avenirsesr.portfolio.common.seeder.domain.port.output.SharedDataGenerator;
+import fr.avenirsesr.portfolio.common.seeder.infrastructure.adapter.data.DataGeneratorProvider;
 import fr.avenirsesr.portfolio.interoperability.externalskill.casoc.domain.model.Competence;
 import fr.avenirsesr.portfolio.interoperability.externalskill.casoc.domain.port.input.CasocService;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkill;
@@ -16,6 +18,10 @@ import lombok.extern.slf4j.Slf4j;
 @Slf4j
 @RequiredArgsConstructor
 public class CasocServiceImpl implements CasocService {
+  private static final DataGeneratorProvider<SharedDataGenerator> dataGenerator =
+      new DataGeneratorProvider<SharedDataGenerator>()
+          .init(CasocServiceImpl.class, SharedDataGenerator.class);
+
   private final CompetenceReader competenceReader;
   private final OpenSearchIndex openSearchIndex;
   private final ExternalSkillRepository externalSkillRepository;
@@ -29,8 +35,8 @@ public class CasocServiceImpl implements CasocService {
             .map(
                 competence ->
                     ExternalSkill.create(
+                        dataGenerator.with("externalSkillId").uuid(),
                         competence.libelle(),
-                        String.valueOf(competence.id()),
                         buildCategory(competence, categories),
                         EExternalSkillType.CASOC))
             .toList();

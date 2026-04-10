@@ -23,9 +23,6 @@ import lombok.Setter;
 @Setter
 public class ExternalSkillEntity extends AvenirsBaseEntity {
 
-  @Column(nullable = false, name = "external_id")
-  private String externalId;
-
   @Column(nullable = false)
   private String libelle;
 
@@ -41,33 +38,26 @@ public class ExternalSkillEntity extends AvenirsBaseEntity {
 
   private ExternalSkillEntity(
       UUID id,
-      String externalId,
       String libelle,
       EExternalSkillType type,
       ExternalSkillCategoryEntity externalSkillCategory) {
     setId(id);
     this.type = type;
     this.externalSkillCategory = externalSkillCategory;
-    this.externalId = externalId;
     this.libelle = libelle;
   }
 
   public static ExternalSkillEntity of(
       UUID id,
-      String externalId,
       String libelle,
       EExternalSkillType type,
       ExternalSkillCategoryEntity externalSkillCategory) {
-    return new ExternalSkillEntity(id, externalId, libelle, type, externalSkillCategory);
+    return new ExternalSkillEntity(id, libelle, type, externalSkillCategory);
   }
 
   public static ExternalSkillEntity create(
-      String externalId,
-      String libelle,
-      EExternalSkillType type,
-      ExternalSkillCategoryEntity externalSkillCategory) {
-    return new ExternalSkillEntity(
-        UUID.randomUUID(), externalId, libelle, type, externalSkillCategory);
+      String libelle, EExternalSkillType type, ExternalSkillCategoryEntity externalSkillCategory) {
+    return new ExternalSkillEntity(UUID.randomUUID(), libelle, type, externalSkillCategory);
   }
 
   public Optional<ExternalSkillCategoryEntity> getExternalSkillCategory() {
