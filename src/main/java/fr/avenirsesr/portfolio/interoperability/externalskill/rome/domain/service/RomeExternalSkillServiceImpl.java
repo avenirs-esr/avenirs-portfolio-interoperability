@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.Objects;
-import java.util.UUID;
 import java.util.function.Function;
 import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
@@ -35,18 +34,18 @@ public class RomeExternalSkillServiceImpl implements RomeExternalSkillService {
 
   @Override
   public List<ExternalSkill> synchronizeExternalSkills(List<ExternalSkill> externalSkillList) {
-    List<UUID> skillCodes =
+    List<String> skillCodes =
         externalSkillList.stream()
-            .map(ExternalSkill::getId)
+            .map(ExternalSkill::getExternalId)
             .filter(Objects::nonNull)
             .distinct()
             .toList();
 
-    List<ExternalSkill> existingSkillList = externalSkillRepository.findAllById(skillCodes);
+    List<ExternalSkill> existingSkillList = externalSkillRepository.findAllByExternalId(skillCodes);
 
-    Map<UUID, ExternalSkill> existingSkillByCode =
+    Map<String, ExternalSkill> existingSkillByCode =
         existingSkillList.stream()
-            .collect(Collectors.toMap(ExternalSkill::getId, Function.identity()));
+            .collect(Collectors.toMap(ExternalSkill::getExternalId, Function.identity()));
 
     List<ExternalSkill> toSave = getExternalSkillsToSave(externalSkillList, existingSkillByCode);
     List<ExternalSkill> savedExternalSkill = externalSkillRepository.saveAll(toSave);
@@ -79,11 +78,11 @@ public class RomeExternalSkillServiceImpl implements RomeExternalSkillService {
   }
 
   private List<ExternalSkill> getExternalSkillsToSave(
-      List<ExternalSkill> externalSkillList, Map<UUID, ExternalSkill> existingSkillByCode) {
+      List<ExternalSkill> externalSkillList, Map<String, ExternalSkill> existingSkillByCode) {
     List<ExternalSkill> toSave = new ArrayList<>(externalSkillList.size());
 
     for (ExternalSkill externalSkill : externalSkillList) {
-      ExternalSkill existingSkill = existingSkillByCode.get(externalSkill.getId());
+      ExternalSkill existingSkill = existingSkillByCode.get(externalSkill.getExternalId());
 
       if (existingSkill != null) {
         existingSkill.setExternalSkillCategory(

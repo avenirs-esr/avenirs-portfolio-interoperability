@@ -17,6 +17,7 @@ public class ExternalSkillFixture {
 
   private UUID id;
   private String libelle;
+  private String externalId;
   private ExternalSkillCategory externalSkillCategory;
   private EExternalSkillType type;
   private Instant createdAt;
@@ -27,6 +28,7 @@ public class ExternalSkillFixture {
     this.externalSkillCategory = null;
     this.type = EExternalSkillType.ROME4;
     this.libelle = "libelle";
+    this.externalId = UUID.randomUUID().toString();
     this.createdAt = Instant.now();
     this.updatedAt = Instant.now();
   }
@@ -42,6 +44,11 @@ public class ExternalSkillFixture {
 
   public ExternalSkillFixture withLibelle(String libelle) {
     this.libelle = libelle;
+    return this;
+  }
+
+  public ExternalSkillFixture withExternalId(String externalId) {
+    this.externalId = externalId;
     return this;
   }
 
@@ -74,6 +81,7 @@ public class ExternalSkillFixture {
   }
 
   public ExternalSkill toModel() {
-    return ExternalSkill.toDomain(id, libelle, externalSkillCategory, type, createdAt, updatedAt);
+    return ExternalSkill.toDomain(
+        id, libelle, externalId, externalSkillCategory, type, createdAt, updatedAt);
   }
 }

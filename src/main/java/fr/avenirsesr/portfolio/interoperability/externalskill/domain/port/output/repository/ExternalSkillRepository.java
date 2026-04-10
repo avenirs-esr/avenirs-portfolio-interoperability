@@ -6,6 +6,8 @@ import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.Exter
 import java.util.List;
 
 public interface ExternalSkillRepository extends GenericRepositoryPort<ExternalSkill> {
+  List<ExternalSkill> findAllByExternalId(List<String> skillCodes);
+
   int countAll(EExternalSkillType type);
 
   List<ExternalSkill> findAll();

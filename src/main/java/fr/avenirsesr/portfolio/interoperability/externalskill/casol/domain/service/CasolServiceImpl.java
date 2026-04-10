@@ -37,6 +37,7 @@ public class CasolServiceImpl implements CasolService {
                     ExternalSkill.create(
                         dataGenerator.with("externalSkillId").uuid(),
                         competence.libelle(),
+                        String.valueOf(competence.id()),
                         buildCategory(competence, categories),
                         EExternalSkillType.CASOL))
             .toList();
