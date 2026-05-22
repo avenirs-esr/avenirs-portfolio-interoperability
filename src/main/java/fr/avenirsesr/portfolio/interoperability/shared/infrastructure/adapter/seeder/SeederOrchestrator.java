@@ -2,6 +2,7 @@ package fr.avenirsesr.portfolio.interoperability.shared.infrastructure.adapter.s
 
 import fr.avenirsesr.portfolio.common.seeder.infrastructure.configuration.SeedingState;
 import fr.avenirsesr.portfolio.interoperability.externalskill.infrastructure.adapter.seeder.ExternalSkillSeeder;
+import fr.avenirsesr.portfolio.interoperability.externaluser.infrastructure.adapter.seeder.ExternalUserSeeder;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
@@ -12,6 +13,7 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class SeederOrchestrator {
   private final ExternalSkillSeeder externalSkillSeeder;
+  private final ExternalUserSeeder externalUserSeeder;
   private final SeedingState seedingState;
 
   @Transactional()
@@ -19,6 +21,7 @@ public class SeederOrchestrator {
     try {
       log.info("Seeding enabled and starting...");
       externalSkillSeeder.seed();
+      externalUserSeeder.seed();
       log.info("✔ Seeding successfully finished");
 
       seedingState.markCompleted();
