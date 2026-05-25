@@ -12,9 +12,9 @@ public class ExternalUserMapper implements Mapper<ExternalUserEntity, ExternalUs
   public ExternalUserEntity fromDomain(ExternalUser externalUser) {
     return ExternalUserEntity.of(
         externalUser.getId(),
+        externalUser.getEppn(),
         externalUser.getExternalId(),
         externalUser.getSource(),
-        externalUser.getUserId(),
         externalUser.getCategory(),
         externalUser.getEmail(),
         externalUser.getFirstName(),
@@ -30,9 +30,9 @@ public class ExternalUserMapper implements Mapper<ExternalUserEntity, ExternalUs
         externalUserEntity.getId(),
         externalUserEntity.getCreatedAt(),
         externalUserEntity.getUpdatedAt(),
+        externalUserEntity.getEppn(),
         externalUserEntity.getExternalId(),
         externalUserEntity.getSource(),
-        externalUserEntity.getUserId(),
         externalUserEntity.getCategory(),
         externalUserEntity.getEmail(),
         externalUserEntity.getFirstName(),

@@ -2,8 +2,8 @@ package fr.avenirsesr.portfolio.interoperability.externaluser.domain.model;
 
 import fr.avenirsesr.portfolio.common.data.domain.model.AvenirsBaseModel;
 import fr.avenirsesr.portfolio.common.data.domain.model.enums.EUserCategory;
+import fr.avenirsesr.portfolio.common.user.domain.model.enums.EUserStatus;
 import fr.avenirsesr.portfolio.interoperability.externaluser.domain.model.enums.EExternalSource;
-import fr.avenirsesr.portfolio.interoperability.externaluser.domain.model.enums.EExternalUserStatus;
 import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
@@ -12,31 +12,31 @@ import lombok.Getter;
 @Getter
 public class ExternalUser extends AvenirsBaseModel {
 
+  private final String eppn;
   private final String externalId;
   private final EExternalSource source;
-  private final UUID userId;
   private final EUserCategory category;
   private final String email;
   private final String firstName;
   private final String lastName;
-  private final EExternalUserStatus status;
+  private final EUserStatus status;
 
   private ExternalUser(
       UUID id,
       Instant createdAt,
       Instant updatedAt,
+      String eppn,
       String externalId,
       EExternalSource source,
-      UUID userId,
       EUserCategory category,
       String email,
       String firstName,
       String lastName,
-      EExternalUserStatus status) {
+      EUserStatus status) {
     super(id, createdAt, updatedAt);
+    this.eppn = eppn;
     this.externalId = externalId;
     this.source = source;
-    this.userId = userId;
     this.category = category;
     this.email = email;
     this.firstName = firstName;
@@ -45,23 +45,23 @@ public class ExternalUser extends AvenirsBaseModel {
   }
 
   public static ExternalUser create(
-      UUID userId,
+      String eppn,
       String externalId,
       EExternalSource source,
       EUserCategory category,
       String email,
       String firstName,
       String lastName,
-      EExternalUserStatus status) {
+      EUserStatus status) {
     Instant now = Instant.now();
 
     return new ExternalUser(
         UUID.randomUUID(),
         now,
         now,
+        eppn,
         externalId,
         source,
-        userId,
         category,
         email,
         firstName,
@@ -73,49 +73,30 @@ public class ExternalUser extends AvenirsBaseModel {
       UUID id,
       Instant createdAt,
       Instant updatedAt,
+      String eppn,
       String externalId,
       EExternalSource source,
-      UUID userId,
       EUserCategory category,
       String email,
       String firstName,
       String lastName,
-      EExternalUserStatus status) {
+      EUserStatus status) {
     return new ExternalUser(
         id,
         createdAt,
         updatedAt,
+        eppn,
         externalId,
         source,
-        userId,
         category,
         email,
         firstName,
         lastName,
         status);
-  }
-
-  public ExternalUser linkToUser(UUID userId) {
-    return new ExternalUser(
-        getId(),
-        getCreatedAt(),
-        Instant.now(),
-        externalId,
-        source,
-        userId,
-        category,
-        email,
-        firstName,
-        lastName,
-        status);
-  }
-
-  public boolean isLinkedToUser() {
-    return userId != null;
   }
 
   public boolean isActive() {
-    return EExternalUserStatus.ACTIVE.equals(status);
+    return EUserStatus.ACTIVE.equals(status);
   }
 
   @Override
@@ -123,16 +104,16 @@ public class ExternalUser extends AvenirsBaseModel {
     if (this == o) return true;
     if (o == null || getClass() != o.getClass()) return false;
     ExternalUser that = (ExternalUser) o;
-    return Objects.equals(externalId, that.externalId) && source == that.source;
+    return Objects.equals(eppn, that.eppn);
   }
 
   @Override
   public int hashCode() {
-    return Objects.hash(externalId, source);
+    return Objects.hash(eppn);
   }
 
   @Override
   public String toString() {
-    return "ExternalUser[source=" + source + ", externalId=" + externalId + ']';
+    return "ExternalUser[eppn=" + eppn + ", source=" + source + ", externalId=" + externalId + ']';
   }
 }
