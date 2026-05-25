@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ExternalUserServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">avenirs-portfolio-interoperability</a> &gt; <a href="index.source.html" class="el_package">fr.avenirsesr.portfolio.interoperability.externaluser.domain.service</a> &gt; <span class="el_source">ExternalUserServiceImpl.java</span></div><h1>ExternalUserServiceImpl.java</h1><pre class="source lang-java linenums">package fr.avenirsesr.portfolio.interoperability.externaluser.domain.service;
 
 import fr.avenirsesr.portfolio.common.data.domain.model.enums.EUserCategory;
+import fr.avenirsesr.portfolio.common.user.domain.model.enums.EUserStatus;
 import fr.avenirsesr.portfolio.interoperability.externaluser.domain.model.ExternalUser;
 import fr.avenirsesr.portfolio.interoperability.externaluser.domain.model.enums.EExternalSource;
-import fr.avenirsesr.portfolio.interoperability.externaluser.domain.model.enums.EExternalUserStatus;
 import fr.avenirsesr.portfolio.interoperability.externaluser.domain.port.input.ExternalUserService;
 import fr.avenirsesr.portfolio.interoperability.externaluser.domain.port.output.repository.ExternalUserRepository;
 import lombok.AllArgsConstructor;
@@ -24,7 +24,7 @@ public class ExternalUserServiceImpl implements ExternalUserService {
       EUserCategory category,
       String externalId,
       EExternalSource source,
-      EExternalUserStatus status) {
+      EUserStatus status) {
 
 <span class="fc" id="L29">    var externalUser =</span>
 <span class="fc" id="L30">        ExternalUser.create(</span>
@@ -35,7 +35,7 @@ public class ExternalUserServiceImpl implements ExternalUserService {
             email,
             firstName,
             lastName,
-<span class="fc bfc" id="L38" title="All 2 branches covered.">            status != null ? status : EExternalUserStatus.ACTIVE);</span>
+<span class="fc bfc" id="L38" title="All 2 branches covered.">            status != null ? status : EUserStatus.ACTIVE);</span>
 
 <span class="fc" id="L40">    externalUserRepository.save(externalUser);</span>
 
