@@ -6,10 +6,13 @@ import fr.avenirsesr.portfolio.interoperability.externaluser.domain.model.Extern
 import fr.avenirsesr.portfolio.interoperability.externaluser.domain.model.enums.EExternalSource;
 import fr.avenirsesr.portfolio.interoperability.externaluser.domain.port.input.ExternalUserService;
 import fr.avenirsesr.portfolio.interoperability.externaluser.domain.port.output.repository.ExternalUserRepository;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-<span class="fc" id="L12">@Slf4j</span>
+<span class="fc" id="L15">@Slf4j</span>
 @AllArgsConstructor
 public class ExternalUserServiceImpl implements ExternalUserService {
 
@@ -26,8 +29,8 @@ public class ExternalUserServiceImpl implements ExternalUserService {
       EExternalSource source,
       EUserStatus status) {
 
-<span class="fc" id="L29">    var externalUser =</span>
-<span class="fc" id="L30">        ExternalUser.create(</span>
+<span class="fc" id="L32">    var externalUser =</span>
+<span class="fc" id="L33">        ExternalUser.create(</span>
             eppn,
             externalId,
             source,
@@ -35,11 +38,26 @@ public class ExternalUserServiceImpl implements ExternalUserService {
             email,
             firstName,
             lastName,
-<span class="fc bfc" id="L38" title="All 2 branches covered.">            status != null ? status : EUserStatus.ACTIVE);</span>
+<span class="fc bfc" id="L41" title="All 2 branches covered.">            status != null ? status : EUserStatus.ACTIVE);</span>
 
-<span class="fc" id="L40">    externalUserRepository.save(externalUser);</span>
+<span class="fc" id="L43">    externalUserRepository.save(externalUser);</span>
 
-<span class="fc" id="L42">    return externalUser;</span>
+<span class="fc" id="L45">    return externalUser;</span>
+  }
+
+  @Override
+  public List&lt;ExternalUser&gt; getAllExternalUsers() {
+<span class="fc" id="L50">    return externalUserRepository.findAll();</span>
+  }
+
+  @Override
+  public Optional&lt;ExternalUser&gt; getById(UUID id) {
+<span class="fc" id="L55">    return externalUserRepository.findById(id);</span>
+  }
+
+  @Override
+  public Optional&lt;ExternalUser&gt; getByEppn(String eppn) {
+<span class="fc" id="L60">    return externalUserRepository.findByEppn(eppn);</span>
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
