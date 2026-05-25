@@ -6,11 +6,10 @@ import fr.avenirsesr.portfolio.interoperability.externaluser.domain.model.enums.
 import fr.avenirsesr.portfolio.interoperability.externaluser.domain.model.enums.EExternalUserStatus;
 import fr.avenirsesr.portfolio.interoperability.externaluser.domain.port.input.ExternalUserService;
 import fr.avenirsesr.portfolio.interoperability.externaluser.domain.port.output.repository.ExternalUserRepository;
-import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-<span class="fc" id="L13">@Slf4j</span>
+<span class="fc" id="L12">@Slf4j</span>
 @AllArgsConstructor
 public class ExternalUserServiceImpl implements ExternalUserService {
 
@@ -18,7 +17,7 @@ public class ExternalUserServiceImpl implements ExternalUserService {
 
   @Override
   public ExternalUser importExternalUser(
-      UUID userId,
+      String eppn,
       String firstName,
       String lastName,
       String email,
@@ -27,20 +26,20 @@ public class ExternalUserServiceImpl implements ExternalUserService {
       EExternalSource source,
       EExternalUserStatus status) {
 
-<span class="fc" id="L30">    var externalUser =</span>
-<span class="fc" id="L31">        ExternalUser.create(</span>
-            userId,
+<span class="fc" id="L29">    var externalUser =</span>
+<span class="fc" id="L30">        ExternalUser.create(</span>
+            eppn,
             externalId,
             source,
             category,
             email,
             firstName,
             lastName,
-<span class="fc bfc" id="L39" title="All 2 branches covered.">            status != null ? status : EExternalUserStatus.ACTIVE);</span>
+<span class="fc bfc" id="L38" title="All 2 branches covered.">            status != null ? status : EExternalUserStatus.ACTIVE);</span>
 
-<span class="fc" id="L41">    externalUserRepository.save(externalUser);</span>
+<span class="fc" id="L40">    externalUserRepository.save(externalUser);</span>
 
-<span class="fc" id="L43">    return externalUser;</span>
+<span class="fc" id="L42">    return externalUser;</span>
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
