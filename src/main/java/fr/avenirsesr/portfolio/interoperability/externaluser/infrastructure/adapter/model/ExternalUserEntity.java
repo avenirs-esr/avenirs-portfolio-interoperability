@@ -2,8 +2,8 @@ package fr.avenirsesr.portfolio.interoperability.externaluser.infrastructure.ada
 
 import fr.avenirsesr.portfolio.common.data.domain.model.enums.EUserCategory;
 import fr.avenirsesr.portfolio.common.data.infrastructure.adapter.model.AvenirsBaseEntity;
+import fr.avenirsesr.portfolio.common.user.domain.model.enums.EUserStatus;
 import fr.avenirsesr.portfolio.interoperability.externaluser.domain.model.enums.EExternalSource;
-import fr.avenirsesr.portfolio.interoperability.externaluser.domain.model.enums.EExternalUserStatus;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Email;
 import java.time.Instant;
@@ -16,64 +16,66 @@ import lombok.Setter;
 @Table(
     name = "external_user",
     uniqueConstraints = {
+      @UniqueConstraint(name = "external_user_eppn_uk", columnNames = "eppn"),
       @UniqueConstraint(
           name = "external_user_external_id_source_uk",
           columnNames = {"external_id", "source"})
     },
     indexes = {
-      @Index(name = "idx_ext_user_user_id", columnList = "user_id"),
+      @Index(name = "idx_ext_user_eppn", columnList = "eppn"),
       @Index(name = "idx_ext_user_email", columnList = "email"),
-      @Index(name = "idx_ext_user_source_external_id", columnList = "source, external_id")
+      @Index(name = "idx_ext_user_source_external_id", columnList = "source, external_id"),
+      @Index(name = "idx_ext_user_status", columnList = "status")
     })
 @NoArgsConstructor
 @Getter
 @Setter
 public class ExternalUserEntity extends AvenirsBaseEntity {
 
-  @Column(nullable = false, name = "external_id")
+  @Column(nullable = false, unique = true, length = 255)
+  private String eppn;
+
+  @Column(nullable = false, name = "external_id", length = 255)
   private String externalId;
 
-  @Column(nullable = false)
+  @Column(nullable = false, length = 100)
   @Enumerated(EnumType.STRING)
   private EExternalSource source;
 
-  @Column(name = "user_id")
-  private UUID userId;
-
-  @Column(nullable = false)
+  @Column(nullable = false, length = 50)
   @Enumerated(EnumType.STRING)
   private EUserCategory category;
 
-  @Column(nullable = false)
+  @Column(nullable = false, length = 255)
   @Email
   private String email;
 
-  @Column(nullable = false, name = "first_name")
+  @Column(nullable = false, name = "first_name", length = 255)
   private String firstName;
 
-  @Column(nullable = false, name = "last_name")
+  @Column(nullable = false, name = "last_name", length = 255)
   private String lastName;
 
-  @Column(nullable = false)
+  @Column(nullable = false, length = 50)
   @Enumerated(EnumType.STRING)
-  private EExternalUserStatus status;
+  private EUserStatus status;
 
   private ExternalUserEntity(
       UUID id,
+      String eppn,
       String externalId,
       EExternalSource source,
-      UUID userId,
       EUserCategory category,
       String email,
       String firstName,
       String lastName,
-      EExternalUserStatus status,
+      EUserStatus status,
       Instant createdAt,
       Instant updatedAt) {
     this.setId(id);
+    this.eppn = eppn;
     this.externalId = externalId;
     this.source = source;
-    this.userId = userId;
     this.category = category;
     this.email = email;
     this.firstName = firstName;
@@ -85,21 +87,21 @@ public class ExternalUserEntity extends AvenirsBaseEntity {
 
   public static ExternalUserEntity of(
       UUID id,
+      String eppn,
       String externalId,
       EExternalSource source,
-      UUID userId,
       EUserCategory category,
       String email,
       String firstName,
       String lastName,
-      EExternalUserStatus status,
+      EUserStatus status,
       Instant createdAt,
       Instant updatedAt) {
     return new ExternalUserEntity(
         id,
+        eppn,
         externalId,
         source,
-        userId,
         category,
         email,
         firstName,

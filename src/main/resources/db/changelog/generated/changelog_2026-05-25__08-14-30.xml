@@ -1,0 +1,30 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet author="nathp (generated)" id="1779696876389-4">
+        <addColumn tableName="external_user">
+            <column name="eppn" type="varchar(255)">
+                <constraints nullable="false"/>
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="nathp (generated)" id="1779696876389-5">
+        <addUniqueConstraint columnNames="eppn" constraintName="external_user_eppn_uk" tableName="external_user"/>
+    </changeSet>
+    <changeSet author="nathp (generated)" id="1779696876389-6">
+        <createIndex indexName="idx_ext_user_status" tableName="external_user">
+            <column name="status"/>
+        </createIndex>
+    </changeSet>
+    <changeSet author="nathp (generated)" id="1779696876389-7">
+        <dropColumn columnName="user_id" tableName="external_user"/>
+    </changeSet>
+    <changeSet author="nathp (generated)" id="1779696876389-1">
+        <modifyDataType columnName="category" newDataType="varchar(50)" tableName="external_user"/>
+    </changeSet>
+    <changeSet author="nathp (generated)" id="1779696876389-2">
+        <modifyDataType columnName="source" newDataType="varchar(100)" tableName="external_user"/>
+    </changeSet>
+    <changeSet author="nathp (generated)" id="1779696876389-3">
+        <modifyDataType columnName="status" newDataType="varchar(50)" tableName="external_user"/>
+    </changeSet>
+</databaseChangeLog>
