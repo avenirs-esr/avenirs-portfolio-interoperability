@@ -4,6 +4,9 @@ import fr.avenirsesr.portfolio.common.data.domain.model.enums.EUserCategory;
 import fr.avenirsesr.portfolio.common.user.domain.model.enums.EUserStatus;
 import fr.avenirsesr.portfolio.interoperability.externaluser.domain.model.ExternalUser;
 import fr.avenirsesr.portfolio.interoperability.externaluser.domain.model.enums.EExternalSource;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 
 public interface ExternalUserService {
 
@@ -16,4 +19,10 @@ public interface ExternalUserService {
       String externalId,
       EExternalSource source,
       EUserStatus status);
+
+  List<ExternalUser> getAllExternalUsers();
+
+  Optional<ExternalUser> getById(UUID id);
+
+  Optional<ExternalUser> getByEppn(String eppn);
 }
