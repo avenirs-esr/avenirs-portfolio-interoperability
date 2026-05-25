@@ -1,30 +1,59 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
-<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:pro="http://www.liquibase.org/xml/ns/pro" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
-    <changeSet author="nathp (generated)" id="1779696876389-4">
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+        xmlns:pro="http://www.liquibase.org/xml/ns/pro"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="
+      http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+      http://www.liquibase.org/xml/ns/pro http://www.liquibase.org/xml/ns/pro/liquibase-pro-latest.xsd
+      http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet author="nathp" id="2026-05-25-external-user-modify-types">
+        <modifyDataType tableName="external_user" columnName="category" newDataType="varchar(50)"/>
+        <modifyDataType tableName="external_user" columnName="source" newDataType="varchar(100)"/>
+        <modifyDataType tableName="external_user" columnName="status" newDataType="varchar(50)"/>
+    </changeSet>
+
+    <changeSet author="nathp" id="2026-05-25-external-user-add-eppn-column">
         <addColumn tableName="external_user">
-            <column name="eppn" type="varchar(255)">
-                <constraints nullable="false"/>
-            </column>
+            <column name="eppn" type="varchar(255)"/>
         </addColumn>
     </changeSet>
-    <changeSet author="nathp (generated)" id="1779696876389-5">
-        <addUniqueConstraint columnNames="eppn" constraintName="external_user_eppn_uk" tableName="external_user"/>
+
+    <changeSet author="nathp" id="2026-05-25-external-user-backfill-eppn">
+        <sql>
+            UPDATE external_user
+            SET eppn = COALESCE(eppn, email)
+            WHERE eppn IS NULL;
+        </sql>
     </changeSet>
-    <changeSet author="nathp (generated)" id="1779696876389-6">
+
+    <changeSet author="nathp" id="2026-05-25-external-user-add-eppn-not-null">
+        <addNotNullConstraint
+                tableName="external_user"
+                columnName="eppn"
+                columnDataType="varchar(255)"/>
+    </changeSet>
+
+    <changeSet author="nathp" id="2026-05-25-external-user-add-eppn-unique">
+        <addUniqueConstraint
+                tableName="external_user"
+                columnNames="eppn"
+                constraintName="external_user_eppn_uk"/>
+    </changeSet>
+
+    <changeSet author="nathp" id="2026-05-25-external-user-create-status-index">
         <createIndex indexName="idx_ext_user_status" tableName="external_user">
             <column name="status"/>
         </createIndex>
     </changeSet>
-    <changeSet author="nathp (generated)" id="1779696876389-7">
-        <dropColumn columnName="user_id" tableName="external_user"/>
+
+    <changeSet author="nathp" id="2026-05-25-external-user-drop-user-id">
+        <preConditions onFail="MARK_RAN">
+            <columnExists tableName="external_user" columnName="user_id"/>
+        </preConditions>
+        <dropColumn tableName="external_user" columnName="user_id"/>
     </changeSet>
-    <changeSet author="nathp (generated)" id="1779696876389-1">
-        <modifyDataType columnName="category" newDataType="varchar(50)" tableName="external_user"/>
-    </changeSet>
-    <changeSet author="nathp (generated)" id="1779696876389-2">
-        <modifyDataType columnName="source" newDataType="varchar(100)" tableName="external_user"/>
-    </changeSet>
-    <changeSet author="nathp (generated)" id="1779696876389-3">
-        <modifyDataType columnName="status" newDataType="varchar(50)" tableName="external_user"/>
-    </changeSet>
+
 </databaseChangeLog>

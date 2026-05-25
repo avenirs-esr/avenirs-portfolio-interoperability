@@ -5,6 +5,7 @@ import fr.avenirsesr.portfolio.interoperability.externaluser.domain.model.Extern
 import fr.avenirsesr.portfolio.interoperability.externaluser.domain.port.output.repository.ExternalUserRepository;
 import fr.avenirsesr.portfolio.interoperability.externaluser.infrastructure.adapter.mapper.ExternalUserMapper;
 import fr.avenirsesr.portfolio.interoperability.externaluser.infrastructure.adapter.model.ExternalUserEntity;
+import java.util.Optional;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -12,7 +13,16 @@ public class ExternalUserDatabaseRepository
     extends GenericJpaRepositoryAdapter<ExternalUser, ExternalUserEntity>
     implements ExternalUserRepository {
 
+  private final ExternalUserJpaRepository jpaRepository;
+
   public ExternalUserDatabaseRepository(ExternalUserJpaRepository jpaRepository) {
     super(jpaRepository, jpaRepository, ExternalUserEntity.class, ExternalUserMapper.INSTANCE);
+    this.jpaRepository = jpaRepository;
+  }
+
+  @Override
+  public Optional<ExternalUser> findByEppn(String eppn) {
+    return Optional.ofNullable(
+        ExternalUserMapper.INSTANCE.toDomain(jpaRepository.findByEppn(eppn)));
   }
 }

@@ -9,6 +9,10 @@ import fr.avenirsesr.portfolio.common.user.domain.model.enums.EUserStatus;
 import fr.avenirsesr.portfolio.interoperability.externaluser.domain.model.ExternalUser;
 import fr.avenirsesr.portfolio.interoperability.externaluser.domain.model.enums.EExternalSource;
 import fr.avenirsesr.portfolio.interoperability.externaluser.domain.port.output.repository.ExternalUserRepository;
+import java.time.Instant;
+import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;
@@ -21,7 +25,11 @@ import org.mockito.junit.jupiter.MockitoExtension;
 @ExtendWith(MockitoExtension.class)
 class ExternalUserServiceImplTest {
 
+  private static final UUID EXTERNAL_USER_ID =
+      UUID.fromString("00000000-0000-0000-0000-000000000001");
+
   private static final String EPPN = "lucas.tessier@university.com";
+  private static final String UNKNOWN_EPPN = "unknown@university.com";
   private static final String FIRST_NAME = "Lucas";
   private static final String LAST_NAME = "Tessier";
   private static final String EMAIL = "lucas.tessier@university.com";
@@ -171,6 +179,155 @@ class ExternalUserServiceImplTest {
     }
 
     @Nested
+    class WhenGettingAllExternalUsers {
+
+      private ExternalUser externalUser;
+      private List<ExternalUser> result;
+
+      @BeforeEach
+      void setupWhen() {
+        BddLogger.when("getting all external users");
+
+        externalUser = externalUser();
+
+        when(externalUserRepository.findAll()).thenReturn(List.of(externalUser));
+
+        result = service.getAllExternalUsers();
+      }
+
+      @Test
+      void thenItShouldReturnAllExternalUsers() {
+        BddLogger.then("it should return all external users");
+
+        assertEquals(List.of(externalUser), result);
+
+        verify(externalUserRepository).findAll();
+        verifyNoMoreInteractions(externalUserRepository);
+      }
+    }
+
+    @Nested
+    class WhenGettingExternalUserById {
+
+      @Nested
+      class AndExternalUserExists {
+
+        private ExternalUser externalUser;
+        private Optional<ExternalUser> result;
+
+        @BeforeEach
+        void setupWhen() {
+          BddLogger.when("getting external user by id");
+          BddLogger.and("external user exists");
+
+          externalUser = externalUser();
+
+          when(externalUserRepository.findById(EXTERNAL_USER_ID))
+              .thenReturn(Optional.of(externalUser));
+
+          result = service.getById(EXTERNAL_USER_ID);
+        }
+
+        @Test
+        void thenItShouldReturnExternalUser() {
+          BddLogger.then("it should return external user");
+
+          assertTrue(result.isPresent());
+          assertEquals(externalUser, result.orElseThrow());
+
+          verify(externalUserRepository).findById(EXTERNAL_USER_ID);
+          verifyNoMoreInteractions(externalUserRepository);
+        }
+      }
+
+      @Nested
+      class AndExternalUserDoesNotExist {
+
+        private Optional<ExternalUser> result;
+
+        @BeforeEach
+        void setupWhen() {
+          BddLogger.when("getting external user by id");
+          BddLogger.and("external user does not exist");
+
+          when(externalUserRepository.findById(EXTERNAL_USER_ID)).thenReturn(Optional.empty());
+
+          result = service.getById(EXTERNAL_USER_ID);
+        }
+
+        @Test
+        void thenItShouldReturnEmpty() {
+          BddLogger.then("it should return empty");
+
+          assertTrue(result.isEmpty());
+
+          verify(externalUserRepository).findById(EXTERNAL_USER_ID);
+          verifyNoMoreInteractions(externalUserRepository);
+        }
+      }
+    }
+
+    @Nested
+    class WhenGettingExternalUserByEppn {
+
+      @Nested
+      class AndExternalUserExists {
+
+        private ExternalUser externalUser;
+        private Optional<ExternalUser> result;
+
+        @BeforeEach
+        void setupWhen() {
+          BddLogger.when("getting external user by eppn");
+          BddLogger.and("external user exists");
+
+          externalUser = externalUser();
+
+          when(externalUserRepository.findByEppn(EPPN)).thenReturn(Optional.of(externalUser));
+
+          result = service.getByEppn(EPPN);
+        }
+
+        @Test
+        void thenItShouldReturnExternalUser() {
+          BddLogger.then("it should return external user");
+
+          assertTrue(result.isPresent());
+          assertEquals(externalUser, result.orElseThrow());
+
+          verify(externalUserRepository).findByEppn(EPPN);
+          verifyNoMoreInteractions(externalUserRepository);
+        }
+      }
+
+      @Nested
+      class AndExternalUserDoesNotExist {
+
+        private Optional<ExternalUser> result;
+
+        @BeforeEach
+        void setupWhen() {
+          BddLogger.when("getting external user by eppn");
+          BddLogger.and("external user does not exist");
+
+          when(externalUserRepository.findByEppn(UNKNOWN_EPPN)).thenReturn(Optional.empty());
+
+          result = service.getByEppn(UNKNOWN_EPPN);
+        }
+
+        @Test
+        void thenItShouldReturnEmpty() {
+          BddLogger.then("it should return empty");
+
+          assertTrue(result.isEmpty());
+
+          verify(externalUserRepository).findByEppn(UNKNOWN_EPPN);
+          verifyNoMoreInteractions(externalUserRepository);
+        }
+      }
+    }
+
+    @Nested
     class WhenRepositoryFails {
 
       private RuntimeException exception;
@@ -208,5 +365,20 @@ class ExternalUserServiceImplTest {
         verifyNoMoreInteractions(externalUserRepository);
       }
     }
+  }
+
+  private ExternalUser externalUser() {
+    return ExternalUser.toDomain(
+        EXTERNAL_USER_ID,
+        Instant.parse("2026-01-01T00:00:00Z"),
+        Instant.parse("2026-01-01T00:00:00Z"),
+        EPPN,
+        EXTERNAL_ID,
+        SOURCE,
+        CATEGORY,
+        EMAIL,
+        FIRST_NAME,
+        LAST_NAME,
+        EUserStatus.ACTIVE);
   }
 }
