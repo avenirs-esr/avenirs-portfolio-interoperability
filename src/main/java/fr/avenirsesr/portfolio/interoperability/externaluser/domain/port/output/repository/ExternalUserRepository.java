@@ -12,4 +12,6 @@ public interface ExternalUserRepository extends GenericRepositoryPort<ExternalUs
   Optional<ExternalUser> findByEppn(String eppn);
 
   List<ExternalUser> findAll();
+
+  int countAll();
 }

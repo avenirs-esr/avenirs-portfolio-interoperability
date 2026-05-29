@@ -1,5 +1,6 @@
 package fr.avenirsesr.portfolio.interoperability.externaluser.infrastructure.adapter.openapi;
 
+import fr.avenirsesr.portfolio.common.data.domain.model.enums.EUserCategory;
 import fr.avenirsesr.portfolio.common.user.domain.model.enums.EUserStatus;
 import fr.avenirsesr.portfolio.interoperability.externaluser.domain.model.enums.EExternalSource;
 import io.swagger.v3.oas.models.media.Schema;
@@ -15,9 +16,15 @@ public final class SwaggerSchema {
           ._enum(Arrays.stream(EExternalSource.values()).map(Enum::name).toList())
           .description("Enum for external source");
 
+  public static final Schema<String> userCategorySchema =
+      new StringSchema()
+          .name("EUserCategory")
+          ._enum(Arrays.stream(EUserCategory.values()).map(Enum::name).toList())
+          .description("Enum for external user category");
+
   public static final Schema<String> externalUserStatusSchema =
       new StringSchema()
-          .name("EExternalUserStatus")
+          .name("EUserStatus")
           ._enum(Arrays.stream(EUserStatus.values()).map(Enum::name).toList())
           .description("Enum for external user status");
 }

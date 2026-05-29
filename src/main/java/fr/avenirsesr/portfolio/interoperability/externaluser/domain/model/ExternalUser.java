@@ -8,6 +8,7 @@ import java.time.Instant;
 import java.util.Objects;
 import java.util.UUID;
 import lombok.Getter;
+import lombok.Setter;
 
 @Getter
 public class ExternalUser extends AvenirsBaseModel {
@@ -19,7 +20,8 @@ public class ExternalUser extends AvenirsBaseModel {
   private final String email;
   private final String firstName;
   private final String lastName;
-  private final EUserStatus status;
+
+  @Setter private EUserStatus status;
 
   private ExternalUser(
       UUID id,
