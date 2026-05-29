@@ -50,4 +50,13 @@ public class ExternalUserController {
         .map(ResponseEntity::ok)
         .orElse(ResponseEntity.notFound().build());
   }
+
+  @PatchMapping(path = "/eppn/{eppn}/activate")
+  public ResponseEntity<ExternalUserDTO> activateExternalUserByEppn(@PathVariable String eppn) {
+    log.debug("Activating external user for eppn: {}", eppn);
+
+    ExternalUser externalUser = externalUserService.activateByEppn(eppn);
+
+    return ResponseEntity.ok(ExternalUserApplicationMapper.toExternalUserDTO(externalUser));
+  }
 }

@@ -25,4 +25,6 @@ public interface ExternalUserService {
   Optional<ExternalUser> getById(UUID id);
 
   Optional<ExternalUser> getByEppn(String eppn);
+
+  ExternalUser activateByEppn(String eppn);
 }

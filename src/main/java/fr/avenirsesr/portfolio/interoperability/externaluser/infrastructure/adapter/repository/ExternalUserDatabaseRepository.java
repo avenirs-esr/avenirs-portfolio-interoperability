@@ -25,4 +25,9 @@ public class ExternalUserDatabaseRepository
     return Optional.ofNullable(
         ExternalUserMapper.INSTANCE.toDomain(jpaRepository.findByEppn(eppn)));
   }
+
+  @Override
+  public int countAll() {
+    return jpaRepository.findAll().size();
+  }
 }

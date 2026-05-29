@@ -1008,5 +1008,1125 @@
     "externalId": "TEACH-AG-82",
     "source": "PEGASE",
     "status": "ACTIVE"
+  },
+  {
+    "eppn": "Etu1L1.AMU",
+    "firstName": "Etu1",
+    "lastName": "L1",
+    "email": "etu1l1.amu@university.com",
+    "category": "STUDENT",
+    "externalId": "AMU-STU-L1-001",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu2L1.AMU",
+    "firstName": "Etu2",
+    "lastName": "L1",
+    "email": "etu2l1.amu@university.com",
+    "category": "STUDENT",
+    "externalId": "AMU-STU-L1-002",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu3L1.AMU",
+    "firstName": "Etu3",
+    "lastName": "L1",
+    "email": "etu3l1.amu@university.com",
+    "category": "STUDENT",
+    "externalId": "AMU-STU-L1-003",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu4L2.AMU",
+    "firstName": "Etu4",
+    "lastName": "L2",
+    "email": "etu4l2.amu@university.com",
+    "category": "STUDENT",
+    "externalId": "AMU-STU-L2-004",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu5L3.AMU",
+    "firstName": "Etu5",
+    "lastName": "L3",
+    "email": "etu5l3.amu@university.com",
+    "category": "STUDENT",
+    "externalId": "AMU-STU-L3-005",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu6M1.AMU",
+    "firstName": "Etu6",
+    "lastName": "M1",
+    "email": "etu6m1.amu@university.com",
+    "category": "STUDENT",
+    "externalId": "AMU-STU-M1-006",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu7M1.AMU",
+    "firstName": "Etu7",
+    "lastName": "M1",
+    "email": "etu7m1.amu@university.com",
+    "category": "STUDENT",
+    "externalId": "AMU-STU-M1-007",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu8M1.AMU",
+    "firstName": "Etu8",
+    "lastName": "M1",
+    "email": "etu8m1.amu@university.com",
+    "category": "STUDENT",
+    "externalId": "AMU-STU-M1-008",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu9M2.AMU",
+    "firstName": "Etu9",
+    "lastName": "M2",
+    "email": "etu9m2.amu@university.com",
+    "category": "STUDENT",
+    "externalId": "AMU-STU-M2-009",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu10FMUL.AMU",
+    "firstName": "Etu10",
+    "lastName": "FMUL",
+    "email": "etu10fmul.amu@university.com",
+    "category": "STUDENT",
+    "externalId": "AMU-STU-FMUL-010",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Staff1SUIO.AMU",
+    "firstName": "Staff1",
+    "lastName": "SUIO",
+    "email": "staff1suio.amu@university.com",
+    "category": "STAFF",
+    "externalId": "AMU-SUIO-001",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Staff2SUIO.AMU",
+    "firstName": "Staff2",
+    "lastName": "SUIO",
+    "email": "staff2suio.amu@university.com",
+    "category": "STAFF",
+    "externalId": "AMU-SUIO-002",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Staff3SUIO.AMU",
+    "firstName": "Staff3",
+    "lastName": "SUIO",
+    "email": "staff3suio.amu@university.com",
+    "category": "STAFF",
+    "externalId": "AMU-SUIO-003",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Ens1.AMU",
+    "firstName": "Ens1",
+    "lastName": "AMU",
+    "email": "ens1.amu@university.com",
+    "category": "STAFF",
+    "externalId": "AMU-ENS-LIC-001",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Ens2.AMU",
+    "firstName": "Ens2",
+    "lastName": "AMU",
+    "email": "ens2.amu@university.com",
+    "category": "STAFF",
+    "externalId": "AMU-ENS-MAS-002",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Ens3.AMU",
+    "firstName": "Ens3",
+    "lastName": "AMU",
+    "email": "ens3.amu@university.com",
+    "category": "STAFF",
+    "externalId": "AMU-ENS-LM-003",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu1L1.UBO",
+    "firstName": "Etu1",
+    "lastName": "L1",
+    "email": "etu1l1.ubo@university.com",
+    "category": "STUDENT",
+    "externalId": "UBO-STU-L1-001",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu2L1.UBO",
+    "firstName": "Etu2",
+    "lastName": "L1",
+    "email": "etu2l1.ubo@university.com",
+    "category": "STUDENT",
+    "externalId": "UBO-STU-L1-002",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu3L1.UBO",
+    "firstName": "Etu3",
+    "lastName": "L1",
+    "email": "etu3l1.ubo@university.com",
+    "category": "STUDENT",
+    "externalId": "UBO-STU-L1-003",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu4L2.UBO",
+    "firstName": "Etu4",
+    "lastName": "L2",
+    "email": "etu4l2.ubo@university.com",
+    "category": "STUDENT",
+    "externalId": "UBO-STU-L2-004",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu5L3.UBO",
+    "firstName": "Etu5",
+    "lastName": "L3",
+    "email": "etu5l3.ubo@university.com",
+    "category": "STUDENT",
+    "externalId": "UBO-STU-L3-005",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu6M1.UBO",
+    "firstName": "Etu6",
+    "lastName": "M1",
+    "email": "etu6m1.ubo@university.com",
+    "category": "STUDENT",
+    "externalId": "UBO-STU-M1-006",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu7M1.UBO",
+    "firstName": "Etu7",
+    "lastName": "M1",
+    "email": "etu7m1.ubo@university.com",
+    "category": "STUDENT",
+    "externalId": "UBO-STU-M1-007",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu8M1.UBO",
+    "firstName": "Etu8",
+    "lastName": "M1",
+    "email": "etu8m1.ubo@university.com",
+    "category": "STUDENT",
+    "externalId": "UBO-STU-M1-008",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu9M2.UBO",
+    "firstName": "Etu9",
+    "lastName": "M2",
+    "email": "etu9m2.ubo@university.com",
+    "category": "STUDENT",
+    "externalId": "UBO-STU-M2-009",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu10FMUL.UBO",
+    "firstName": "Etu10",
+    "lastName": "FMUL",
+    "email": "etu10fmul.ubo@university.com",
+    "category": "STUDENT",
+    "externalId": "UBO-STU-FMUL-010",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Staff1SUIO.UBO",
+    "firstName": "Staff1",
+    "lastName": "SUIO",
+    "email": "staff1suio.ubo@university.com",
+    "category": "STAFF",
+    "externalId": "UBO-SUIO-001",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Staff2SUIO.UBO",
+    "firstName": "Staff2",
+    "lastName": "SUIO",
+    "email": "staff2suio.ubo@university.com",
+    "category": "STAFF",
+    "externalId": "UBO-SUIO-002",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Staff3SUIO.UBO",
+    "firstName": "Staff3",
+    "lastName": "SUIO",
+    "email": "staff3suio.ubo@university.com",
+    "category": "STAFF",
+    "externalId": "UBO-SUIO-003",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Ens1.UBO",
+    "firstName": "Ens1",
+    "lastName": "UBO",
+    "email": "ens1.ubo@university.com",
+    "category": "STAFF",
+    "externalId": "UBO-ENS-LIC-001",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Ens2.UBO",
+    "firstName": "Ens2",
+    "lastName": "UBO",
+    "email": "ens2.ubo@university.com",
+    "category": "STAFF",
+    "externalId": "UBO-ENS-MAS-002",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Ens3.UBO",
+    "firstName": "Ens3",
+    "lastName": "UBO",
+    "email": "ens3.ubo@university.com",
+    "category": "STAFF",
+    "externalId": "UBO-ENS-LM-003",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu1L1.USMB",
+    "firstName": "Etu1",
+    "lastName": "L1",
+    "email": "etu1l1.usmb@university.com",
+    "category": "STUDENT",
+    "externalId": "USMB-STU-L1-001",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu2L1.USMB",
+    "firstName": "Etu2",
+    "lastName": "L1",
+    "email": "etu2l1.usmb@university.com",
+    "category": "STUDENT",
+    "externalId": "USMB-STU-L1-002",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu3L1.USMB",
+    "firstName": "Etu3",
+    "lastName": "L1",
+    "email": "etu3l1.usmb@university.com",
+    "category": "STUDENT",
+    "externalId": "USMB-STU-L1-003",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu4L2.USMB",
+    "firstName": "Etu4",
+    "lastName": "L2",
+    "email": "etu4l2.usmb@university.com",
+    "category": "STUDENT",
+    "externalId": "USMB-STU-L2-004",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu5L3.USMB",
+    "firstName": "Etu5",
+    "lastName": "L3",
+    "email": "etu5l3.usmb@university.com",
+    "category": "STUDENT",
+    "externalId": "USMB-STU-L3-005",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu6M1.USMB",
+    "firstName": "Etu6",
+    "lastName": "M1",
+    "email": "etu6m1.usmb@university.com",
+    "category": "STUDENT",
+    "externalId": "USMB-STU-M1-006",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu7M1.USMB",
+    "firstName": "Etu7",
+    "lastName": "M1",
+    "email": "etu7m1.usmb@university.com",
+    "category": "STUDENT",
+    "externalId": "USMB-STU-M1-007",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu8M1.USMB",
+    "firstName": "Etu8",
+    "lastName": "M1",
+    "email": "etu8m1.usmb@university.com",
+    "category": "STUDENT",
+    "externalId": "USMB-STU-M1-008",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu9M2.USMB",
+    "firstName": "Etu9",
+    "lastName": "M2",
+    "email": "etu9m2.usmb@university.com",
+    "category": "STUDENT",
+    "externalId": "USMB-STU-M2-009",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu10FMUL.USMB",
+    "firstName": "Etu10",
+    "lastName": "FMUL",
+    "email": "etu10fmul.usmb@university.com",
+    "category": "STUDENT",
+    "externalId": "USMB-STU-FMUL-010",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Staff1SUIO.USMB",
+    "firstName": "Staff1",
+    "lastName": "SUIO",
+    "email": "staff1suio.usmb@university.com",
+    "category": "STAFF",
+    "externalId": "USMB-SUIO-001",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Staff2SUIO.USMB",
+    "firstName": "Staff2",
+    "lastName": "SUIO",
+    "email": "staff2suio.usmb@university.com",
+    "category": "STAFF",
+    "externalId": "USMB-SUIO-002",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Staff3SUIO.USMB",
+    "firstName": "Staff3",
+    "lastName": "SUIO",
+    "email": "staff3suio.usmb@university.com",
+    "category": "STAFF",
+    "externalId": "USMB-SUIO-003",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Ens1.USMB",
+    "firstName": "Ens1",
+    "lastName": "USMB",
+    "email": "ens1.usmb@university.com",
+    "category": "STAFF",
+    "externalId": "USMB-ENS-LIC-001",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Ens2.USMB",
+    "firstName": "Ens2",
+    "lastName": "USMB",
+    "email": "ens2.usmb@university.com",
+    "category": "STAFF",
+    "externalId": "USMB-ENS-MAS-002",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Ens3.USMB",
+    "firstName": "Ens3",
+    "lastName": "USMB",
+    "email": "ens3.usmb@university.com",
+    "category": "STAFF",
+    "externalId": "USMB-ENS-LM-003",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu1L1.ULILLE",
+    "firstName": "Etu1",
+    "lastName": "L1",
+    "email": "etu1l1.ulille@university.com",
+    "category": "STUDENT",
+    "externalId": "ULILLE-STU-L1-001",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu2L1.ULILLE",
+    "firstName": "Etu2",
+    "lastName": "L1",
+    "email": "etu2l1.ulille@university.com",
+    "category": "STUDENT",
+    "externalId": "ULILLE-STU-L1-002",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu3L1.ULILLE",
+    "firstName": "Etu3",
+    "lastName": "L1",
+    "email": "etu3l1.ulille@university.com",
+    "category": "STUDENT",
+    "externalId": "ULILLE-STU-L1-003",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu4L2.ULILLE",
+    "firstName": "Etu4",
+    "lastName": "L2",
+    "email": "etu4l2.ulille@university.com",
+    "category": "STUDENT",
+    "externalId": "ULILLE-STU-L2-004",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu5L3.ULILLE",
+    "firstName": "Etu5",
+    "lastName": "L3",
+    "email": "etu5l3.ulille@university.com",
+    "category": "STUDENT",
+    "externalId": "ULILLE-STU-L3-005",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu6M1.ULILLE",
+    "firstName": "Etu6",
+    "lastName": "M1",
+    "email": "etu6m1.ulille@university.com",
+    "category": "STUDENT",
+    "externalId": "ULILLE-STU-M1-006",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu7M1.ULILLE",
+    "firstName": "Etu7",
+    "lastName": "M1",
+    "email": "etu7m1.ulille@university.com",
+    "category": "STUDENT",
+    "externalId": "ULILLE-STU-M1-007",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu8M1.ULILLE",
+    "firstName": "Etu8",
+    "lastName": "M1",
+    "email": "etu8m1.ulille@university.com",
+    "category": "STUDENT",
+    "externalId": "ULILLE-STU-M1-008",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu9M2.ULILLE",
+    "firstName": "Etu9",
+    "lastName": "M2",
+    "email": "etu9m2.ulille@university.com",
+    "category": "STUDENT",
+    "externalId": "ULILLE-STU-M2-009",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu10FMUL.ULILLE",
+    "firstName": "Etu10",
+    "lastName": "FMUL",
+    "email": "etu10fmul.ulille@university.com",
+    "category": "STUDENT",
+    "externalId": "ULILLE-STU-FMUL-010",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Staff1SUIO.ULILLE",
+    "firstName": "Staff1",
+    "lastName": "SUIO",
+    "email": "staff1suio.ulille@university.com",
+    "category": "STAFF",
+    "externalId": "ULILLE-SUIO-001",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Staff2SUIO.ULILLE",
+    "firstName": "Staff2",
+    "lastName": "SUIO",
+    "email": "staff2suio.ulille@university.com",
+    "category": "STAFF",
+    "externalId": "ULILLE-SUIO-002",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Staff3SUIO.ULILLE",
+    "firstName": "Staff3",
+    "lastName": "SUIO",
+    "email": "staff3suio.ulille@university.com",
+    "category": "STAFF",
+    "externalId": "ULILLE-SUIO-003",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Ens1.ULILLE",
+    "firstName": "Ens1",
+    "lastName": "ULILLE",
+    "email": "ens1.ulille@university.com",
+    "category": "STAFF",
+    "externalId": "ULILLE-ENS-LIC-001",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Ens2.ULILLE",
+    "firstName": "Ens2",
+    "lastName": "ULILLE",
+    "email": "ens2.ulille@university.com",
+    "category": "STAFF",
+    "externalId": "ULILLE-ENS-MAS-002",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Ens3.ULILLE",
+    "firstName": "Ens3",
+    "lastName": "ULILLE",
+    "email": "ens3.ulille@university.com",
+    "category": "STAFF",
+    "externalId": "ULILLE-ENS-LM-003",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu1L1.RPLTK",
+    "firstName": "Etu1",
+    "lastName": "L1",
+    "email": "etu1l1.rpltk@university.com",
+    "category": "STUDENT",
+    "externalId": "RPLTK-STU-L1-001",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu2L1.RPLTK",
+    "firstName": "Etu2",
+    "lastName": "L1",
+    "email": "etu2l1.rpltk@university.com",
+    "category": "STUDENT",
+    "externalId": "RPLTK-STU-L1-002",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu3L1.RPLTK",
+    "firstName": "Etu3",
+    "lastName": "L1",
+    "email": "etu3l1.rpltk@university.com",
+    "category": "STUDENT",
+    "externalId": "RPLTK-STU-L1-003",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu4L2.RPLTK",
+    "firstName": "Etu4",
+    "lastName": "L2",
+    "email": "etu4l2.rpltk@university.com",
+    "category": "STUDENT",
+    "externalId": "RPLTK-STU-L2-004",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu5L3.RPLTK",
+    "firstName": "Etu5",
+    "lastName": "L3",
+    "email": "etu5l3.rpltk@university.com",
+    "category": "STUDENT",
+    "externalId": "RPLTK-STU-L3-005",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu6M1.RPLTK",
+    "firstName": "Etu6",
+    "lastName": "M1",
+    "email": "etu6m1.rpltk@university.com",
+    "category": "STUDENT",
+    "externalId": "RPLTK-STU-M1-006",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu7M1.RPLTK",
+    "firstName": "Etu7",
+    "lastName": "M1",
+    "email": "etu7m1.rpltk@university.com",
+    "category": "STUDENT",
+    "externalId": "RPLTK-STU-M1-007",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu8M1.RPLTK",
+    "firstName": "Etu8",
+    "lastName": "M1",
+    "email": "etu8m1.rpltk@university.com",
+    "category": "STUDENT",
+    "externalId": "RPLTK-STU-M1-008",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu9M2.RPLTK",
+    "firstName": "Etu9",
+    "lastName": "M2",
+    "email": "etu9m2.rpltk@university.com",
+    "category": "STUDENT",
+    "externalId": "RPLTK-STU-M2-009",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu10FMUL.RPLTK",
+    "firstName": "Etu10",
+    "lastName": "FMUL",
+    "email": "etu10fmul.rpltk@university.com",
+    "category": "STUDENT",
+    "externalId": "RPLTK-STU-FMUL-010",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Staff1SUIO.RPLTK",
+    "firstName": "Staff1",
+    "lastName": "SUIO",
+    "email": "staff1suio.rpltk@university.com",
+    "category": "STAFF",
+    "externalId": "RPLTK-SUIO-001",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Staff2SUIO.RPLTK",
+    "firstName": "Staff2",
+    "lastName": "SUIO",
+    "email": "staff2suio.rpltk@university.com",
+    "category": "STAFF",
+    "externalId": "RPLTK-SUIO-002",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Staff3SUIO.RPLTK",
+    "firstName": "Staff3",
+    "lastName": "SUIO",
+    "email": "staff3suio.rpltk@university.com",
+    "category": "STAFF",
+    "externalId": "RPLTK-SUIO-003",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Ens1.RPLTK",
+    "firstName": "Ens1",
+    "lastName": "RPLTK",
+    "email": "ens1.rpltk@university.com",
+    "category": "STAFF",
+    "externalId": "RPLTK-ENS-LIC-001",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Ens2.RPLTK",
+    "firstName": "Ens2",
+    "lastName": "RPLTK",
+    "email": "ens2.rpltk@university.com",
+    "category": "STAFF",
+    "externalId": "RPLTK-ENS-MAS-002",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Ens3.RPLTK",
+    "firstName": "Ens3",
+    "lastName": "RPLTK",
+    "email": "ens3.rpltk@university.com",
+    "category": "STAFF",
+    "externalId": "RPLTK-ENS-LM-003",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu1L1.UTLN",
+    "firstName": "Etu1",
+    "lastName": "L1",
+    "email": "etu1l1.utln@university.com",
+    "category": "STUDENT",
+    "externalId": "UTLN-STU-L1-001",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu2L1.UTLN",
+    "firstName": "Etu2",
+    "lastName": "L1",
+    "email": "etu2l1.utln@university.com",
+    "category": "STUDENT",
+    "externalId": "UTLN-STU-L1-002",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu3L1.UTLN",
+    "firstName": "Etu3",
+    "lastName": "L1",
+    "email": "etu3l1.utln@university.com",
+    "category": "STUDENT",
+    "externalId": "UTLN-STU-L1-003",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu4L2.UTLN",
+    "firstName": "Etu4",
+    "lastName": "L2",
+    "email": "etu4l2.utln@university.com",
+    "category": "STUDENT",
+    "externalId": "UTLN-STU-L2-004",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu5L3.UTLN",
+    "firstName": "Etu5",
+    "lastName": "L3",
+    "email": "etu5l3.utln@university.com",
+    "category": "STUDENT",
+    "externalId": "UTLN-STU-L3-005",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu6M1.UTLN",
+    "firstName": "Etu6",
+    "lastName": "M1",
+    "email": "etu6m1.utln@university.com",
+    "category": "STUDENT",
+    "externalId": "UTLN-STU-M1-006",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu7M1.UTLN",
+    "firstName": "Etu7",
+    "lastName": "M1",
+    "email": "etu7m1.utln@university.com",
+    "category": "STUDENT",
+    "externalId": "UTLN-STU-M1-007",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu8M1.UTLN",
+    "firstName": "Etu8",
+    "lastName": "M1",
+    "email": "etu8m1.utln@university.com",
+    "category": "STUDENT",
+    "externalId": "UTLN-STU-M1-008",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu9M2.UTLN",
+    "firstName": "Etu9",
+    "lastName": "M2",
+    "email": "etu9m2.utln@university.com",
+    "category": "STUDENT",
+    "externalId": "UTLN-STU-M2-009",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu10FMUL.UTLN",
+    "firstName": "Etu10",
+    "lastName": "FMUL",
+    "email": "etu10fmul.utln@university.com",
+    "category": "STUDENT",
+    "externalId": "UTLN-STU-FMUL-010",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Staff1SUIO.UTLN",
+    "firstName": "Staff1",
+    "lastName": "SUIO",
+    "email": "staff1suio.utln@university.com",
+    "category": "STAFF",
+    "externalId": "UTLN-SUIO-001",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Staff2SUIO.UTLN",
+    "firstName": "Staff2",
+    "lastName": "SUIO",
+    "email": "staff2suio.utln@university.com",
+    "category": "STAFF",
+    "externalId": "UTLN-SUIO-002",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Staff3SUIO.UTLN",
+    "firstName": "Staff3",
+    "lastName": "SUIO",
+    "email": "staff3suio.utln@university.com",
+    "category": "STAFF",
+    "externalId": "UTLN-SUIO-003",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Ens1.UTLN",
+    "firstName": "Ens1",
+    "lastName": "UTLN",
+    "email": "ens1.utln@university.com",
+    "category": "STAFF",
+    "externalId": "UTLN-ENS-LIC-001",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Ens2.UTLN",
+    "firstName": "Ens2",
+    "lastName": "UTLN",
+    "email": "ens2.utln@university.com",
+    "category": "STAFF",
+    "externalId": "UTLN-ENS-MAS-002",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Ens3.UTLN",
+    "firstName": "Ens3",
+    "lastName": "UTLN",
+    "email": "ens3.utln@university.com",
+    "category": "STAFF",
+    "externalId": "UTLN-ENS-LM-003",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu1L1.NU",
+    "firstName": "Etu1",
+    "lastName": "L1",
+    "email": "etu1l1.nu@university.com",
+    "category": "STUDENT",
+    "externalId": "NU-STU-L1-001",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu2L1.NU",
+    "firstName": "Etu2",
+    "lastName": "L1",
+    "email": "etu2l1.nu@university.com",
+    "category": "STUDENT",
+    "externalId": "NU-STU-L1-002",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu3L1.NU",
+    "firstName": "Etu3",
+    "lastName": "L1",
+    "email": "etu3l1.nu@university.com",
+    "category": "STUDENT",
+    "externalId": "NU-STU-L1-003",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu4L2.NU",
+    "firstName": "Etu4",
+    "lastName": "L2",
+    "email": "etu4l2.nu@university.com",
+    "category": "STUDENT",
+    "externalId": "NU-STU-L2-004",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu5L3.NU",
+    "firstName": "Etu5",
+    "lastName": "L3",
+    "email": "etu5l3.nu@university.com",
+    "category": "STUDENT",
+    "externalId": "NU-STU-L3-005",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu6M1.NU",
+    "firstName": "Etu6",
+    "lastName": "M1",
+    "email": "etu6m1.nu@university.com",
+    "category": "STUDENT",
+    "externalId": "NU-STU-M1-006",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu7M1.NU",
+    "firstName": "Etu7",
+    "lastName": "M1",
+    "email": "etu7m1.nu@university.com",
+    "category": "STUDENT",
+    "externalId": "NU-STU-M1-007",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu8M1.NU",
+    "firstName": "Etu8",
+    "lastName": "M1",
+    "email": "etu8m1.nu@university.com",
+    "category": "STUDENT",
+    "externalId": "NU-STU-M1-008",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu9M2.NU",
+    "firstName": "Etu9",
+    "lastName": "M2",
+    "email": "etu9m2.nu@university.com",
+    "category": "STUDENT",
+    "externalId": "NU-STU-M2-009",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Etu10FMUL.NU",
+    "firstName": "Etu10",
+    "lastName": "FMUL",
+    "email": "etu10fmul.nu@university.com",
+    "category": "STUDENT",
+    "externalId": "NU-STU-FMUL-010",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Staff1SUIO.NU",
+    "firstName": "Staff1",
+    "lastName": "SUIO",
+    "email": "staff1suio.nu@university.com",
+    "category": "STAFF",
+    "externalId": "NU-SUIO-001",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Staff2SUIO.NU",
+    "firstName": "Staff2",
+    "lastName": "SUIO",
+    "email": "staff2suio.nu@university.com",
+    "category": "STAFF",
+    "externalId": "NU-SUIO-002",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Staff3SUIO.NU",
+    "firstName": "Staff3",
+    "lastName": "SUIO",
+    "email": "staff3suio.nu@university.com",
+    "category": "STAFF",
+    "externalId": "NU-SUIO-003",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Ens1.NU",
+    "firstName": "Ens1",
+    "lastName": "NU",
+    "email": "ens1.nu@university.com",
+    "category": "STAFF",
+    "externalId": "NU-ENS-LIC-001",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Ens2.NU",
+    "firstName": "Ens2",
+    "lastName": "NU",
+    "email": "ens2.nu@university.com",
+    "category": "STAFF",
+    "externalId": "NU-ENS-MAS-002",
+    "source": "PEGASE",
+    "status": "INACTIVE"
+  },
+  {
+    "eppn": "Ens3.NU",
+    "firstName": "Ens3",
+    "lastName": "NU",
+    "email": "ens3.nu@university.com",
+    "category": "STAFF",
+    "externalId": "NU-ENS-LM-003",
+    "source": "PEGASE",
+    "status": "INACTIVE"
   }
 ]

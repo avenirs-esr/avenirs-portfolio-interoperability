@@ -12,7 +12,8 @@ public class OpenApiUserEnumConfiguration {
       openApi
           .getComponents()
           .addSchemas("EExternalSource", SwaggerSchema.userExternalSourceSchema)
-          .addSchemas("EUserCategory", SwaggerSchema.externalUserStatusSchema);
+          .addSchemas("EUserCategory", SwaggerSchema.userCategorySchema)
+          .addSchemas("EUserStatus", SwaggerSchema.externalUserStatusSchema);
     };
   }
 }

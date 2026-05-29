@@ -1,6 +1,7 @@
 package fr.avenirsesr.portfolio.interoperability.externaluser.domain.service;
 
 import fr.avenirsesr.portfolio.common.data.domain.model.enums.EUserCategory;
+import fr.avenirsesr.portfolio.common.user.domain.exceptions.ExternalUserNotFoundException;
 import fr.avenirsesr.portfolio.common.user.domain.model.enums.EUserStatus;
 import fr.avenirsesr.portfolio.interoperability.externaluser.domain.model.ExternalUser;
 import fr.avenirsesr.portfolio.interoperability.externaluser.domain.model.enums.EExternalSource;
@@ -58,5 +59,17 @@ public class ExternalUserServiceImpl implements ExternalUserService {
   @Override
   public Optional<ExternalUser> getByEppn(String eppn) {
     return externalUserRepository.findByEppn(eppn);
+  }
+
+  @Override
+  public ExternalUser activateByEppn(String eppn) {
+    var externalUser =
+        externalUserRepository.findByEppn(eppn).orElseThrow(ExternalUserNotFoundException::new);
+
+    if (!externalUser.isActive()) {
+      externalUser.setStatus(EUserStatus.ACTIVE);
+      externalUserRepository.save(externalUser);
+    }
+    return externalUser;
   }
 }
