@@ -60,5 +60,5 @@ avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.exte
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externalskill.casol.infrastructure.service,CsvCompetenceReader,63,0,2,0,12,0,7,0,6,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externalskill.casol.infrastructure.service,CasolServiceConfig,10,0,0,0,1,0,1,0,1,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externaluser.domain.service,ExternalUserServiceImpl,18,39,0,2,5,9,1,6,1,5
-avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externaluser.infrastructure.adapter.repository,ExternalUserDatabaseRepository,18,0,0,0,5,0,2,0,2,0
+avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externaluser.infrastructure.adapter.repository,ExternalUserDatabaseRepository,23,0,0,0,6,0,3,0,3,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.validation.domain.utils,FieldValidationUtils,100,0,24,0,29,0,17,0,5,0

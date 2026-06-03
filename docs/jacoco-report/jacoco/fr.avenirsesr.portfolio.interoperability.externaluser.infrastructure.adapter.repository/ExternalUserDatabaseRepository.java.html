@@ -25,5 +25,10 @@ public class ExternalUserDatabaseRepository
 <span class="nc" id="L25">    return Optional.ofNullable(</span>
 <span class="nc" id="L26">        ExternalUserMapper.INSTANCE.toDomain(jpaRepository.findByEppn(eppn)));</span>
   }
+
+  @Override
+  public int countAll() {
+<span class="nc" id="L31">    return jpaRepository.findAll().size();</span>
+  }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
