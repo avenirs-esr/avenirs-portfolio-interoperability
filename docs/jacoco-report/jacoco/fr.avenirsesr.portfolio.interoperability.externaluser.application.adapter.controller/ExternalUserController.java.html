@@ -50,5 +50,14 @@ public class ExternalUserController {
 <span class="nc" id="L50">        .map(ResponseEntity::ok)</span>
 <span class="nc" id="L51">        .orElse(ResponseEntity.notFound().build());</span>
   }
+
+  @PatchMapping(path = &quot;/eppn/{eppn}/activate&quot;)
+  public ResponseEntity&lt;ExternalUserDTO&gt; activateExternalUserByEppn(@PathVariable String eppn) {
+<span class="nc" id="L56">    log.debug(&quot;Activating external user for eppn: {}&quot;, eppn);</span>
+
+<span class="nc" id="L58">    ExternalUser externalUser = externalUserService.activateByEppn(eppn);</span>
+
+<span class="nc" id="L60">    return ResponseEntity.ok(ExternalUserApplicationMapper.toExternalUserDTO(externalUser));</span>
+  }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
