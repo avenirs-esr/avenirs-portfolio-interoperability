@@ -1,6 +1,6 @@
 GROUP,PACKAGE,CLASS,INSTRUCTION_MISSED,INSTRUCTION_COVERED,BRANCH_MISSED,BRANCH_COVERED,LINE_MISSED,LINE_COVERED,COMPLEXITY_MISSED,COMPLEXITY_COVERED,METHOD_MISSED,METHOD_COVERED
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.web.infrastructure.context,RequestContext,19,0,0,0,7,0,5,0,5,0
-avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.web.infrastructure.context,RequestContextFilter,75,0,2,0,23,0,5,0,4,0
+avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.web.infrastructure.context,RequestContextFilter,74,0,2,0,23,0,5,0,4,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.web.infrastructure.context,RequestData,9,0,0,0,1,0,1,0,1,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.language.infrastructure.adapter.filter,LanguageFilterAspect,10,0,0,0,3,0,1,0,1,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.language.infrastructure.adapter.filter,LanguageFilterSupplier,14,0,2,0,5,0,3,0,2,0
@@ -8,17 +8,18 @@ avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.exte
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.utils,FileReader,70,0,2,0,16,0,4,0,3,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.utils,RedirectUtils,38,0,12,0,10,0,10,0,4,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externalskill.casol.domain.service,CasolServiceImpl,98,0,4,0,29,0,7,0,5,0
+avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.user.domain.exceptions,ExternalUserNotFoundException,13,0,0,0,6,0,3,0,3,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externalskill.infrastructure.adapter.opensearch,OpenSearchIndexImpl,373,0,16,0,87,0,17,0,9,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externalskill.infrastructure.adapter.opensearch,ExternalSkillConstants,3,0,0,0,1,0,1,0,1,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.language.infrastructure.adapter.utils,TranslationUtil,113,0,4,0,28,0,12,0,10,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externalskill.rome.infrastructure.adapter.service,RomeAdditionalSkillServiceConfig,16,0,0,0,2,0,2,0,2,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.security.infrastructure.filter,DisabledAuthenticationFilter,45,0,8,0,10,0,8,0,4,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.security.infrastructure.filter,ApiKeyAuthenticationFilter,177,0,32,0,43,0,22,0,6,0
-avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.security.infrastructure.filter,DevAuthenticationFilter,64,0,12,0,14,0,10,0,4,0
+avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.security.infrastructure.filter,DevAuthenticationFilter,63,0,12,0,14,0,10,0,4,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.security.infrastructure.filter,HmacAuthenticationFilter,194,0,22,0,48,0,18,0,7,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.data.infrastructure.adapter.specification,DateFilterSpecificationBuilder,50,0,6,0,8,0,9,0,6,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.data.infrastructure.adapter.specification,FilterSpecificationBuilder,39,0,6,0,8,0,5,0,2,0
-avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.user.infrastructure.service,NoOpUserService,5,0,0,0,2,0,2,0,2,0
+avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.user.infrastructure.service,NoOpUserService,7,0,0,0,3,0,3,0,3,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.data.infrastructure.adapter.repository,GenericJpaRepositoryAdapter,727,0,36,0,124,0,43,0,25,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.data.infrastructure.adapter.repository,GenericTranslatableJpaRepositoryAdapter,69,0,2,0,13,0,3,0,2,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.data.infrastructure.adapter.repository,GenericDeletableJpaRepositoryAdapter,25,0,0,0,7,0,2,0,2,0
@@ -26,6 +27,7 @@ avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.shar
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externalskill.infrastructure.adapter.repository,ExternalSkillDatabaseRepository,56,0,0,0,11,0,5,0,5,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.data.domain,FetchGraph,97,0,6,0,23,0,10,0,7,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.data.infrastructure.adapter,EntityGrapher,259,0,19,0,53,0,21,0,10,0
+avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externaluser.application.adapter.controller,ExternalUserController,65,0,0,0,20,0,5,0,5,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.openapi.infrastructure.adapter,BaseOpenApiConfiguration,22,0,0,0,9,0,2,0,2,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.openapi.infrastructure.adapter,BaseSwaggerSchema,91,0,0,0,25,0,3,0,3,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externalskill.xxi.domain.service,XXIServiceImpl,129,0,4,0,36,0,10,0,8,0
@@ -38,7 +40,7 @@ avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.exte
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.testutils.infrastructure.adapter.util,TestResourceUtils,26,0,2,0,5,0,3,0,2,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externalskill.application.adapter.controller,ExternalSkillController,62,0,0,0,14,0,4,0,4,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externaluser.infrastructure.adapter.service,ExternalUserServiceConfig,6,0,0,0,1,0,1,0,1,0
-avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.testutils,BddLogger,4,18,0,0,2,8,1,4,1,4
+avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.testutils,BddLogger,0,22,0,0,0,10,0,5,0,5
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability,InteroperabilityApplication,8,0,0,0,3,0,2,0,2,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externalskill.casoc.domain.service,CasocServiceImpl,98,0,4,0,29,0,7,0,5,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.validation.infrastructure.adapter.utils,ValidationUtils,14,0,4,0,4,0,4,0,2,0
@@ -57,6 +59,6 @@ avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.exte
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externalskill.casol.infrastructure.service,CasolCsvReaderConfig,7,0,0,0,2,0,2,0,2,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externalskill.casol.infrastructure.service,CsvCompetenceReader,63,0,2,0,12,0,7,0,6,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externalskill.casol.infrastructure.service,CasolServiceConfig,10,0,0,0,1,0,1,0,1,0
-avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externaluser.domain.service,ExternalUserServiceImpl,0,25,0,2,0,6,0,3,0,2
-avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externaluser.infrastructure.adapter.repository,ExternalUserDatabaseRepository,7,0,0,0,2,0,1,0,1,0
+avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externaluser.domain.service,ExternalUserServiceImpl,18,39,0,2,5,9,1,6,1,5
+avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externaluser.infrastructure.adapter.repository,ExternalUserDatabaseRepository,23,0,0,0,6,0,3,0,3,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.validation.domain.utils,FieldValidationUtils,100,0,24,0,29,0,17,0,5,0
