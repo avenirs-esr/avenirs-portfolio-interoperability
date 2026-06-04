@@ -34,6 +34,6 @@ public class SeederRunner implements CommandLineRunner {
       return;
     }
 
-    seederOrchestrator.seedAll();
+    seederOrchestrator.resetAndSeed();
   }
 }
