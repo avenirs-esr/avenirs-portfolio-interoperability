@@ -1,8 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RomeExternalSkillServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">avenirs-portfolio-interoperability</a> &gt; <a href="index.source.html" class="el_package">fr.avenirsesr.portfolio.interoperability.externalskill.rome.domain.service</a> &gt; <span class="el_source">RomeExternalSkillServiceImpl.java</span></div><h1>RomeExternalSkillServiceImpl.java</h1><pre class="source lang-java linenums">package fr.avenirsesr.portfolio.interoperability.externalskill.rome.domain.service;
 
+import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillCategoryType;
+import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillType;
+import fr.avenirsesr.portfolio.common.seeder.domain.port.output.SharedDataGenerator;
+import fr.avenirsesr.portfolio.common.seeder.infrastructure.adapter.data.DataGeneratorProvider;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkill;
+import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkillCategory;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.port.output.OpenSearchIndex;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.port.output.repository.ExternalSkillRepository;
+import fr.avenirsesr.portfolio.interoperability.externalskill.rome.domain.model.Competence;
 import fr.avenirsesr.portfolio.interoperability.externalskill.rome.domain.model.Rome4Version;
 import fr.avenirsesr.portfolio.interoperability.externalskill.rome.domain.port.input.RomeExternalSkillService;
 import fr.avenirsesr.portfolio.interoperability.externalskill.rome.domain.port.output.RomeExternalSkillApi;
@@ -16,7 +22,7 @@ import java.util.stream.Collectors;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 
-<span class="fc" id="L19">@Slf4j</span>
+<span class="fc" id="L25">@Slf4j</span>
 @AllArgsConstructor
 public class RomeExternalSkillServiceImpl implements RomeExternalSkillService {
   private final ExternalSkillRepository externalSkillRepository;
@@ -24,76 +30,124 @@ public class RomeExternalSkillServiceImpl implements RomeExternalSkillService {
   private final RomeExternalSkillApi romeExternalSkillApi;
   private final OpenSearchIndex openSearchIndex;
 
+<span class="fc" id="L33">  private static final DataGeneratorProvider&lt;SharedDataGenerator&gt; dataGenerator =</span>
+      new DataGeneratorProvider&lt;SharedDataGenerator&gt;()
+<span class="fc" id="L35">          .init(RomeExternalSkillServiceImpl.class, SharedDataGenerator.class);</span>
+
   @Override
   public void cleanAndCreateExternalSkillIndex() {
-<span class="fc" id="L29">    openSearchIndex.cleanAndCreateExternalSkillIndex();</span>
-<span class="fc" id="L30">    List&lt;ExternalSkill&gt; allSkills = externalSkillRepository.findAll();</span>
-<span class="fc" id="L31">    openSearchIndex.indexAll(allSkills);</span>
-<span class="fc" id="L32">    log.info(&quot;Indexed {} external skills in OpenSearch.&quot;, allSkills.size());</span>
-<span class="fc" id="L33">  }</span>
+<span class="fc" id="L39">    openSearchIndex.cleanAndCreateExternalSkillIndex();</span>
+<span class="fc" id="L40">    List&lt;ExternalSkill&gt; allSkills = externalSkillRepository.findAll();</span>
+<span class="fc" id="L41">    openSearchIndex.indexAll(allSkills);</span>
+<span class="fc" id="L42">    log.info(&quot;Indexed {} external skills in OpenSearch.&quot;, allSkills.size());</span>
+<span class="fc" id="L43">  }</span>
 
   @Override
   public List&lt;ExternalSkill&gt; synchronizeExternalSkills(List&lt;ExternalSkill&gt; externalSkillList) {
-<span class="fc" id="L37">    List&lt;String&gt; skillCodes =</span>
-<span class="fc" id="L38">        externalSkillList.stream()</span>
-<span class="fc" id="L39">            .map(ExternalSkill::getExternalId)</span>
-<span class="fc" id="L40">            .filter(Objects::nonNull)</span>
-<span class="fc" id="L41">            .distinct()</span>
-<span class="fc" id="L42">            .toList();</span>
+<span class="fc" id="L47">    List&lt;String&gt; skillCodes =</span>
+<span class="fc" id="L48">        externalSkillList.stream()</span>
+<span class="fc" id="L49">            .map(ExternalSkill::getExternalId)</span>
+<span class="fc" id="L50">            .filter(Objects::nonNull)</span>
+<span class="fc" id="L51">            .distinct()</span>
+<span class="fc" id="L52">            .toList();</span>
 
-<span class="fc" id="L44">    List&lt;ExternalSkill&gt; existingSkillList = externalSkillRepository.findAllByExternalId(skillCodes);</span>
+<span class="fc" id="L54">    List&lt;ExternalSkill&gt; existingSkillList = externalSkillRepository.findAllByExternalId(skillCodes);</span>
 
-<span class="fc" id="L46">    Map&lt;String, ExternalSkill&gt; existingSkillByCode =</span>
-<span class="fc" id="L47">        existingSkillList.stream()</span>
-<span class="fc" id="L48">            .collect(Collectors.toMap(ExternalSkill::getExternalId, Function.identity()));</span>
+<span class="fc" id="L56">    Map&lt;String, ExternalSkill&gt; existingSkillByCode =</span>
+<span class="fc" id="L57">        existingSkillList.stream()</span>
+<span class="fc" id="L58">            .collect(Collectors.toMap(ExternalSkill::getExternalId, Function.identity()));</span>
 
-<span class="fc" id="L50">    List&lt;ExternalSkill&gt; toSave = getExternalSkillsToSave(externalSkillList, existingSkillByCode);</span>
-<span class="fc" id="L51">    List&lt;ExternalSkill&gt; savedExternalSkill = externalSkillRepository.saveAll(toSave);</span>
-<span class="fc" id="L52">    openSearchIndex.indexAll(savedExternalSkill);</span>
-<span class="fc" id="L53">    return savedExternalSkill;</span>
+<span class="fc" id="L60">    List&lt;ExternalSkill&gt; toSave = getExternalSkillsToSave(externalSkillList, existingSkillByCode);</span>
+<span class="fc" id="L61">    List&lt;ExternalSkill&gt; savedExternalSkill = externalSkillRepository.saveAll(toSave);</span>
+<span class="fc" id="L62">    openSearchIndex.indexAll(savedExternalSkill);</span>
+<span class="fc" id="L63">    return savedExternalSkill;</span>
+  }
+
+  @Override
+  public List&lt;ExternalSkill&gt; syncSkills() {
+<span class="nc" id="L68">    log.info(&quot;Synchronizing ROME4 external skills...&quot;);</span>
+
+<span class="nc" id="L70">    List&lt;Competence&gt; competences = romeExternalSkillApi.fetchAdditionalSkills();</span>
+
+<span class="nc" id="L72">    List&lt;ExternalSkill&gt; externalSkills = competences.stream().map(this::toExternalSkill).toList();</span>
+
+<span class="nc" id="L74">    List&lt;ExternalSkill&gt; savedExternalSkills = synchronizeExternalSkills(externalSkills);</span>
+
+<span class="nc" id="L76">    log.info(&quot;{} ROME4 external skills saved and indexed&quot;, savedExternalSkills.size());</span>
+
+<span class="nc" id="L78">    return savedExternalSkills;</span>
   }
 
   @Override
   public boolean checkRomeVersionUpdated() {
     try {
-<span class="fc" id="L59">      Rome4Version newVersion = romeExternalSkillApi.fetchRomeVersion();</span>
+<span class="fc" id="L84">      Rome4Version newVersion = romeExternalSkillApi.fetchRomeVersion();</span>
 
-<span class="fc" id="L61">      boolean shouldSave =</span>
+<span class="fc" id="L86">      boolean shouldSave =</span>
           rome4VersionRepository
-<span class="fc" id="L63">              .findFirstByOrderByVersionDesc()</span>
-<span class="fc bfc" id="L64" title="All 2 branches covered.">              .map(oldVersion -&gt; newVersion.getVersion() &gt; oldVersion.getVersion())</span>
-<span class="fc" id="L65">              .orElse(true);</span>
+<span class="fc" id="L88">              .findFirstByOrderByVersionDesc()</span>
+<span class="fc bfc" id="L89" title="All 2 branches covered.">              .map(oldVersion -&gt; newVersion.getVersion() &gt; oldVersion.getVersion())</span>
+<span class="fc" id="L90">              .orElse(true);</span>
 
-<span class="fc bfc" id="L67" title="All 2 branches covered.">      if (shouldSave) {</span>
-<span class="fc" id="L68">        var rome4Version =</span>
-<span class="fc" id="L69">            Rome4Version.create(newVersion.getVersion(), newVersion.getLastModifiedDate());</span>
-<span class="fc" id="L70">        rome4VersionRepository.save(rome4Version);</span>
+<span class="fc bfc" id="L92" title="All 2 branches covered.">      if (shouldSave) {</span>
+<span class="fc" id="L93">        var rome4Version =</span>
+<span class="fc" id="L94">            Rome4Version.create(newVersion.getVersion(), newVersion.getLastModifiedDate());</span>
+<span class="fc" id="L95">        rome4VersionRepository.save(rome4Version);</span>
       }
 
-<span class="fc" id="L73">      return shouldSave;</span>
-<span class="nc" id="L74">    } catch (Exception e) {</span>
-<span class="nc" id="L75">      log.error(&quot;An error occurred while fetching ROME 4.0 version.&quot;, e);</span>
-<span class="nc" id="L76">      return false;</span>
+<span class="fc" id="L98">      return shouldSave;</span>
+<span class="nc" id="L99">    } catch (Exception e) {</span>
+<span class="nc" id="L100">      log.error(&quot;An error occurred while fetching ROME 4.0 version.&quot;, e);</span>
+<span class="nc" id="L101">      return false;</span>
     }
   }
 
   private List&lt;ExternalSkill&gt; getExternalSkillsToSave(
       List&lt;ExternalSkill&gt; externalSkillList, Map&lt;String, ExternalSkill&gt; existingSkillByCode) {
-<span class="fc" id="L82">    List&lt;ExternalSkill&gt; toSave = new ArrayList&lt;&gt;(externalSkillList.size());</span>
+<span class="fc" id="L107">    List&lt;ExternalSkill&gt; toSave = new ArrayList&lt;&gt;(externalSkillList.size());</span>
 
-<span class="fc bfc" id="L84" title="All 2 branches covered.">    for (ExternalSkill externalSkill : externalSkillList) {</span>
-<span class="fc" id="L85">      ExternalSkill existingSkill = existingSkillByCode.get(externalSkill.getExternalId());</span>
+<span class="fc bfc" id="L109" title="All 2 branches covered.">    for (ExternalSkill externalSkill : externalSkillList) {</span>
+<span class="fc" id="L110">      ExternalSkill existingSkill = existingSkillByCode.get(externalSkill.getExternalId());</span>
 
-<span class="fc bfc" id="L87" title="All 2 branches covered.">      if (existingSkill != null) {</span>
-<span class="fc" id="L88">        existingSkill.setExternalSkillCategory(</span>
-<span class="fc" id="L89">            externalSkill.getExternalSkillCategory().orElse(null));</span>
-<span class="fc" id="L90">        existingSkill.setType(externalSkill.getType());</span>
-<span class="fc" id="L91">        toSave.add(existingSkill);</span>
+<span class="fc bfc" id="L112" title="All 2 branches covered.">      if (existingSkill != null) {</span>
+<span class="fc" id="L113">        existingSkill.setExternalSkillCategory(</span>
+<span class="fc" id="L114">            externalSkill.getExternalSkillCategory().orElse(null));</span>
+<span class="fc" id="L115">        existingSkill.setType(externalSkill.getType());</span>
+<span class="fc" id="L116">        toSave.add(existingSkill);</span>
       } else {
-<span class="fc" id="L93">        toSave.add(externalSkill);</span>
+<span class="fc" id="L118">        toSave.add(externalSkill);</span>
       }
-<span class="fc" id="L95">    }</span>
-<span class="fc" id="L96">    return toSave;</span>
+<span class="fc" id="L120">    }</span>
+<span class="fc" id="L121">    return toSave;</span>
+  }
+
+  private ExternalSkill toExternalSkill(Competence competence) {
+<span class="nc" id="L125">    return ExternalSkill.create(</span>
+<span class="nc" id="L126">        dataGenerator.with(&quot;rome4ExternalSkillId&quot;).uuid(),</span>
+<span class="nc" id="L127">        competence.getLibelle(),</span>
+<span class="nc" id="L128">        competence.getCode(),</span>
+<span class="nc" id="L129">        buildCategory(competence),</span>
+        EExternalSkillType.ROME4);
+  }
+
+  private ExternalSkillCategory buildCategory(Competence competence) {
+<span class="nc" id="L134">    var macroCompetence = competence.getMacroCompetence();</span>
+<span class="nc" id="L135">    var objectif = macroCompetence.getObjectif();</span>
+<span class="nc" id="L136">    var enjeu = objectif.getEnjeu();</span>
+<span class="nc" id="L137">    var domaineCompetence = enjeu.getDomaineCompetence();</span>
+
+<span class="nc" id="L139">    ExternalSkillCategory domain =</span>
+<span class="nc" id="L140">        ExternalSkillCategory.of(</span>
+<span class="nc" id="L141">            domaineCompetence.getLibelle(), null, EExternalSkillCategoryType.DOMAIN);</span>
+
+<span class="nc" id="L143">    ExternalSkillCategory issue =</span>
+<span class="nc" id="L144">        ExternalSkillCategory.of(enjeu.getLibelle(), domain, EExternalSkillCategoryType.ISSUE);</span>
+
+<span class="nc" id="L146">    ExternalSkillCategory target =</span>
+<span class="nc" id="L147">        ExternalSkillCategory.of(objectif.getLibelle(), issue, EExternalSkillCategoryType.TARGET);</span>
+
+<span class="nc" id="L149">    return ExternalSkillCategory.of(</span>
+<span class="nc" id="L150">        macroCompetence.getLibelle(), target, EExternalSkillCategoryType.MACRO_SKILL);</span>
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>

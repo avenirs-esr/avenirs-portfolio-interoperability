@@ -5,7 +5,6 @@ import fr.avenirsesr.portfolio.interoperability.externaluser.domain.model.Extern
 import fr.avenirsesr.portfolio.interoperability.externaluser.domain.port.output.repository.ExternalUserRepository;
 import fr.avenirsesr.portfolio.interoperability.externaluser.infrastructure.adapter.mapper.ExternalUserMapper;
 import fr.avenirsesr.portfolio.interoperability.externaluser.infrastructure.adapter.model.ExternalUserEntity;
-import java.util.Optional;
 import org.springframework.stereotype.Component;
 
 @Component
@@ -13,22 +12,8 @@ public class ExternalUserDatabaseRepository
     extends GenericJpaRepositoryAdapter&lt;ExternalUser, ExternalUserEntity&gt;
     implements ExternalUserRepository {
 
-  private final ExternalUserJpaRepository jpaRepository;
-
   public ExternalUserDatabaseRepository(ExternalUserJpaRepository jpaRepository) {
-<span class="nc" id="L19">    super(jpaRepository, jpaRepository, ExternalUserEntity.class, ExternalUserMapper.INSTANCE);</span>
-<span class="nc" id="L20">    this.jpaRepository = jpaRepository;</span>
-<span class="nc" id="L21">  }</span>
-
-  @Override
-  public Optional&lt;ExternalUser&gt; findByEppn(String eppn) {
-<span class="nc" id="L25">    return Optional.ofNullable(</span>
-<span class="nc" id="L26">        ExternalUserMapper.INSTANCE.toDomain(jpaRepository.findByEppn(eppn)));</span>
-  }
-
-  @Override
-  public int countAll() {
-<span class="nc" id="L31">    return jpaRepository.findAll().size();</span>
-  }
+<span class="nc" id="L16">    super(jpaRepository, jpaRepository, ExternalUserEntity.class, ExternalUserMapper.INSTANCE);</span>
+<span class="nc" id="L17">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
