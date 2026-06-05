@@ -6,8 +6,8 @@ import fr.avenirsesr.portfolio.common.data.domain.model.PageCriteria;
 import fr.avenirsesr.portfolio.common.externalskill.application.adapter.dto.ExternalSkillDTO;
 import fr.avenirsesr.portfolio.common.externalskill.application.adapter.dto.ExternalSkillDetailsDTO;
 import fr.avenirsesr.portfolio.interoperability.externalskill.application.adapter.mapper.ExternalSkillMapper;
+import fr.avenirsesr.portfolio.interoperability.externalskill.domain.port.input.ExternalSkillService;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.port.output.OpenSearchIndex;
-import fr.avenirsesr.portfolio.interoperability.externalskill.domain.port.output.repository.ExternalSkillRepository;
 import java.util.List;
 import java.util.UUID;
 import lombok.AllArgsConstructor;
@@ -21,7 +21,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping({"interoperability/external-skills"})
 public class ExternalSkillController {
   private final OpenSearchIndex openSearchIndex;
-  private final ExternalSkillRepository externalSkillRepository;
+  private final ExternalSkillService externalSkillService;
 
   @GetMapping(path = "/search")
   public ResponseEntity<PagedResponse<ExternalSkillDTO>> searchExternalSkills(
@@ -39,15 +39,18 @@ public class ExternalSkillController {
   public ResponseEntity<List<ExternalSkillDTO>> getRandomSkills(
       @RequestParam(defaultValue = "200") int count) {
     log.debug("Getting {} random external skills", count);
-    var skills = externalSkillRepository.findRandom(count);
-    return ResponseEntity.ok(skills.stream().map(ExternalSkillMapper::toExternalSkillDTO).toList());
+    return ResponseEntity.ok(
+        externalSkillService.getRandomExternalSkills(count).stream()
+            .map(ExternalSkillMapper::toExternalSkillDTO)
+            .toList());
   }
 
   @GetMapping(path = "/{id}")
   public ResponseEntity<ExternalSkillDetailsDTO> getExternalSkillById(@PathVariable UUID id) {
     log.debug("Getting external skill details for id: {}", id);
-    return externalSkillRepository
-        .findById(id)
+
+    return externalSkillService
+        .getById(id)
         .map(ExternalSkillMapper::toExternalSkillDetailsDTO)
         .map(ResponseEntity::ok)
         .orElse(ResponseEntity.notFound().build());

@@ -16,6 +16,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.opensearch.action.admin.indices.delete.DeleteIndexRequest;
 import org.opensearch.action.bulk.BulkRequest;
 import org.opensearch.action.bulk.BulkResponse;
+import org.opensearch.action.get.GetRequest;
+import org.opensearch.action.get.GetResponse;
 import org.opensearch.action.index.IndexRequest;
 import org.opensearch.action.search.SearchRequest;
 import org.opensearch.action.search.SearchResponse;
@@ -125,11 +127,40 @@ public class OpenSearchIndexImpl implements OpenSearchIndex {
     }
   }
 
+  @Override
+  public Optional<ExternalSkill> findById(UUID id) {
+    try {
+      GetResponse response =
+          client.get(
+              new GetRequest(ExternalSkillConstants.INDEX, id.toString()), RequestOptions.DEFAULT);
+
+      if (!response.isExists()) {
+        return Optional.empty();
+      }
+
+      Map<String, Object> src = response.getSourceAsMap();
+
+      return Optional.of(
+          ExternalSkill.toDomain(
+              UUID.fromString((String) src.get(ExternalSkillConstants.FIELD_ID)),
+              (String) src.get(ExternalSkillConstants.FIELD_SKILL_LIBELLE),
+              (String) src.get(ExternalSkillConstants.FIELD_SKILL_CODE),
+              getCategoryFromSource(src.get(ExternalSkillConstants.FIELD_SKILL_CATEGORIES)),
+              EExternalSkillType.valueOf((String) src.get(ExternalSkillConstants.FIELD_TYPE)),
+              Instant.now(),
+              Instant.now()));
+    } catch (IOException e) {
+      throw new RuntimeException("OpenSearchIndex findById failed with id=" + id, e);
+    }
+  }
+
   private Map<String, Object> getExternalSkillSourceMap(ExternalSkill externalSkill) {
     var map = new HashMap<String, Object>();
+
     map.put(ExternalSkillConstants.FIELD_ID, externalSkill.getId().toString());
+    map.put(ExternalSkillConstants.FIELD_SKILL_CODE, externalSkill.getExternalId());
     map.put(ExternalSkillConstants.FIELD_SKILL_LIBELLE, externalSkill.getLibelle());
-    map.put(ExternalSkillConstants.FIELD_TYPE, externalSkill.getType());
+    map.put(ExternalSkillConstants.FIELD_TYPE, externalSkill.getType().name());
     map.put(
         ExternalSkillConstants.FIELD_SKILL_CATEGORIES,
         externalSkill.getExternalSkillCategory().map(this::getCategorySource).orElse(null));
