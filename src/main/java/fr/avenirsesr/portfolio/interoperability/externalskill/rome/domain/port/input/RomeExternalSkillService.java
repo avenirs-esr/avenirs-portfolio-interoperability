@@ -9,5 +9,7 @@ public interface RomeExternalSkillService {
 
   List<ExternalSkill> synchronizeExternalSkills(List<ExternalSkill> externalSkill);
 
+  List<ExternalSkill> syncSkills();
+
   boolean checkRomeVersionUpdated();
 }

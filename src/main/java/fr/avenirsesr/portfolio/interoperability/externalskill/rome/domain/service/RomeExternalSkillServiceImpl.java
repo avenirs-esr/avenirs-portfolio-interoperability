@@ -1,8 +1,14 @@
 package fr.avenirsesr.portfolio.interoperability.externalskill.rome.domain.service;
 
+import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillCategoryType;
+import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillType;
+import fr.avenirsesr.portfolio.common.seeder.domain.port.output.SharedDataGenerator;
+import fr.avenirsesr.portfolio.common.seeder.infrastructure.adapter.data.DataGeneratorProvider;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkill;
+import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkillCategory;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.port.output.OpenSearchIndex;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.port.output.repository.ExternalSkillRepository;
+import fr.avenirsesr.portfolio.interoperability.externalskill.rome.domain.model.Competence;
 import fr.avenirsesr.portfolio.interoperability.externalskill.rome.domain.model.Rome4Version;
 import fr.avenirsesr.portfolio.interoperability.externalskill.rome.domain.port.input.RomeExternalSkillService;
 import fr.avenirsesr.portfolio.interoperability.externalskill.rome.domain.port.output.RomeExternalSkillApi;
@@ -23,6 +29,10 @@ public class RomeExternalSkillServiceImpl implements RomeExternalSkillService {
   private final Rome4VersionRepository rome4VersionRepository;
   private final RomeExternalSkillApi romeExternalSkillApi;
   private final OpenSearchIndex openSearchIndex;
+
+  private static final DataGeneratorProvider<SharedDataGenerator> dataGenerator =
+      new DataGeneratorProvider<SharedDataGenerator>()
+          .init(RomeExternalSkillServiceImpl.class, SharedDataGenerator.class);
 
   @Override
   public void cleanAndCreateExternalSkillIndex() {
@@ -51,6 +61,21 @@ public class RomeExternalSkillServiceImpl implements RomeExternalSkillService {
     List<ExternalSkill> savedExternalSkill = externalSkillRepository.saveAll(toSave);
     openSearchIndex.indexAll(savedExternalSkill);
     return savedExternalSkill;
+  }
+
+  @Override
+  public List<ExternalSkill> syncSkills() {
+    log.info("Synchronizing ROME4 external skills...");
+
+    List<Competence> competences = romeExternalSkillApi.fetchAdditionalSkills();
+
+    List<ExternalSkill> externalSkills = competences.stream().map(this::toExternalSkill).toList();
+
+    List<ExternalSkill> savedExternalSkills = synchronizeExternalSkills(externalSkills);
+
+    log.info("{} ROME4 external skills saved and indexed", savedExternalSkills.size());
+
+    return savedExternalSkills;
   }
 
   @Override
@@ -94,5 +119,34 @@ public class RomeExternalSkillServiceImpl implements RomeExternalSkillService {
       }
     }
     return toSave;
+  }
+
+  private ExternalSkill toExternalSkill(Competence competence) {
+    return ExternalSkill.create(
+        dataGenerator.with("rome4ExternalSkillId").uuid(),
+        competence.getLibelle(),
+        competence.getCode(),
+        buildCategory(competence),
+        EExternalSkillType.ROME4);
+  }
+
+  private ExternalSkillCategory buildCategory(Competence competence) {
+    var macroCompetence = competence.getMacroCompetence();
+    var objectif = macroCompetence.getObjectif();
+    var enjeu = objectif.getEnjeu();
+    var domaineCompetence = enjeu.getDomaineCompetence();
+
+    ExternalSkillCategory domain =
+        ExternalSkillCategory.of(
+            domaineCompetence.getLibelle(), null, EExternalSkillCategoryType.DOMAIN);
+
+    ExternalSkillCategory issue =
+        ExternalSkillCategory.of(enjeu.getLibelle(), domain, EExternalSkillCategoryType.ISSUE);
+
+    ExternalSkillCategory target =
+        ExternalSkillCategory.of(objectif.getLibelle(), issue, EExternalSkillCategoryType.TARGET);
+
+    return ExternalSkillCategory.of(
+        macroCompetence.getLibelle(), target, EExternalSkillCategoryType.MACRO_SKILL);
   }
 }

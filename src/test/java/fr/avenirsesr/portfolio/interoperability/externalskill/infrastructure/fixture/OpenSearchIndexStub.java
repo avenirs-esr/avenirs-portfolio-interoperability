@@ -6,6 +6,8 @@ import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.Exter
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkillPagedResult;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.port.output.OpenSearchIndex;
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
@@ -27,5 +29,10 @@ public class OpenSearchIndexStub implements OpenSearchIndex {
   public ExternalSkillPagedResult search(String keyword, PageCriteria pageCriteria) {
     return new ExternalSkillPagedResult(
         List.of(), new PageInfo(pageCriteria.page(), pageCriteria.pageSize(), 0));
+  }
+
+  @Override
+  public Optional<ExternalSkill> findById(UUID id) {
+    return Optional.empty();
   }
 }
