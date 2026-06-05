@@ -46,8 +46,8 @@ avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.testutils,BddL
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability,InteroperabilityApplication,8,0,0,0,3,0,2,0,2,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externalskill.casoc.domain.service,CasocServiceImpl,98,0,4,0,29,0,7,0,5,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.common.validation.infrastructure.adapter.utils,ValidationUtils,14,0,4,0,4,0,4,0,2,0
-avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externaluser.infrastructure.adapter.openapi,SwaggerSchema,29,0,0,0,8,0,1,0,1,0
-avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externaluser.infrastructure.adapter.openapi,OpenApiUserEnumConfiguration,15,0,0,0,7,0,3,0,3,0
+avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externaluser.infrastructure.adapter.openapi,SwaggerSchema,43,0,0,0,12,0,1,0,1,0
+avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externaluser.infrastructure.adapter.openapi,OpenApiUserEnumConfiguration,18,0,0,0,8,0,3,0,3,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externalskill.rome.domain.service,RomeExternalSkillServiceImpl,84,155,0,8,27,43,3,10,3,6
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externalskill.rome.infrastructure.batch,ExternalSkillBatchScheduler,40,0,0,0,13,0,3,0,3,0
 avenirs-portfolio-interoperability,fr.avenirsesr.portfolio.interoperability.externalskill.rome.infrastructure.batch,ExternalSkillBatchLoader.new JobExecutionListener() {...},73,0,16,0,17,0,12,0,4,0
