@@ -37,7 +37,7 @@ public class RomeExternalSkillServiceImpl implements RomeExternalSkillService {
   @Override
   public void cleanAndCreateExternalSkillIndex() {
     openSearchIndex.cleanAndCreateExternalSkillIndex();
-    List<ExternalSkill> allSkills = externalSkillRepository.findAll();
+    List<ExternalSkill> allSkills = externalSkillRepository.findAllForIndexing();
     openSearchIndex.indexAll(allSkills);
     log.info("Indexed {} external skills in OpenSearch.", allSkills.size());
   }
