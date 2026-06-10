@@ -29,7 +29,6 @@ public class SeederRunner implements CommandLineRunner {
       seedingState.markCompleted();
       return;
     }
-    seederOrchestrator.resetAndSeed();
 
     if (reindexEnabled) {
       log.info("Reindexing starting ....");
@@ -38,5 +37,7 @@ public class SeederRunner implements CommandLineRunner {
     } else {
       log.info("Reindexing disabled: skipped");
     }
+
+    seederOrchestrator.resetAndSeed();
   }
 }

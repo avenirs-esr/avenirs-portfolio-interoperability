@@ -16,4 +16,15 @@ public interface ExternalSkillJpaRepository
       value = "SELECT * FROM external_skill ORDER BY md5(id::text) LIMIT :limit",
       nativeQuery = true)
   List<ExternalSkillEntity> findRandom(@Param("limit") int limit);
+
+  @Query(
+      """
+      select distinct es
+      from ExternalSkillEntity es
+      left join fetch es.externalSkillCategory c
+      left join fetch c.parent p1
+      left join fetch p1.parent p2
+      left join fetch p2.parent p3
+      """)
+  List<ExternalSkillEntity> findAllWithCategories();
 }

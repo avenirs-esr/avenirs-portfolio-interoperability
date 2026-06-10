@@ -38,6 +38,13 @@ public class ExternalSkillDatabaseRepository
     return jpaRepository.findAll().stream().map(ExternalSkillMapper.INSTANCE::toDomain).toList();
   }
 
+  @Override
+  public List<ExternalSkill> findAllForIndexing() {
+    return jpaRepository.findAllWithCategories().stream()
+        .map(ExternalSkillMapper.INSTANCE::toDomain)
+        .toList();
+  }
+
   // Used for seeding in api
   @Override
   public List<ExternalSkill> findRandom(int limit) {

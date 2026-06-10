@@ -12,5 +12,7 @@ public interface ExternalSkillRepository extends GenericRepositoryPort<ExternalS
 
   List<ExternalSkill> findAll();
 
+  List<ExternalSkill> findAllForIndexing();
+
   List<ExternalSkill> findRandom(int limit);
 }
