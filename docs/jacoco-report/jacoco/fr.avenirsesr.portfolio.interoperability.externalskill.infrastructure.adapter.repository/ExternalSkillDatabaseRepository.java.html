@@ -38,12 +38,19 @@ public class ExternalSkillDatabaseRepository
 <span class="nc" id="L38">    return jpaRepository.findAll().stream().map(ExternalSkillMapper.INSTANCE::toDomain).toList();</span>
   }
 
+  @Override
+  public List&lt;ExternalSkill&gt; findAllForIndexing() {
+<span class="nc" id="L43">    return jpaRepository.findAllWithCategories().stream()</span>
+<span class="nc" id="L44">        .map(ExternalSkillMapper.INSTANCE::toDomain)</span>
+<span class="nc" id="L45">        .toList();</span>
+  }
+
   // Used for seeding in api
   @Override
   public List&lt;ExternalSkill&gt; findRandom(int limit) {
-<span class="nc" id="L44">    return jpaRepository.findRandom(limit).stream()</span>
-<span class="nc" id="L45">        .map(ExternalSkillMapper.INSTANCE::toDomain)</span>
-<span class="nc" id="L46">        .toList();</span>
+<span class="nc" id="L51">    return jpaRepository.findRandom(limit).stream()</span>
+<span class="nc" id="L52">        .map(ExternalSkillMapper.INSTANCE::toDomain)</span>
+<span class="nc" id="L53">        .toList();</span>
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
