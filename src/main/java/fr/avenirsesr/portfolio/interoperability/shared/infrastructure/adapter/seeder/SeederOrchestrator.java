@@ -3,7 +3,6 @@ package fr.avenirsesr.portfolio.interoperability.shared.infrastructure.adapter.s
 import fr.avenirsesr.portfolio.common.dependency.domain.port.input.DependencyChecker;
 import fr.avenirsesr.portfolio.common.seeder.infrastructure.configuration.SeedingState;
 import fr.avenirsesr.portfolio.interoperability.externalskill.infrastructure.adapter.seeder.ExternalSkillSeeder;
-import fr.avenirsesr.portfolio.interoperability.externaluser.infrastructure.adapter.seeder.ExternalUserSeeder;
 import java.util.List;
 import java.util.concurrent.locks.ReentrantLock;
 import lombok.RequiredArgsConstructor;
@@ -18,7 +17,6 @@ import org.springframework.transaction.annotation.Transactional;
 @RequiredArgsConstructor
 public class SeederOrchestrator {
   private final ExternalSkillSeeder externalSkillSeeder;
-  private final ExternalUserSeeder externalUserSeeder;
   private final SeedingState seedingState;
 
   private final DependencyChecker dependencyChecker;
@@ -38,7 +36,6 @@ public class SeederOrchestrator {
       log.info("Seeding enabled and starting...");
       dependencyChecker.checkAndWait("OpenSearch", openSearchHealthUrl);
       externalSkillSeeder.seed();
-      externalUserSeeder.seed();
       seedingState.markCompleted();
       log.info("✔ Seeding successfully finished");
     } catch (Exception e) {
