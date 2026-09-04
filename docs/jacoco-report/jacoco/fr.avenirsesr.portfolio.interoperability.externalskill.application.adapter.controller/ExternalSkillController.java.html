@@ -13,9 +13,10 @@ import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
-<span class="nc" id="L18">@Slf4j</span>
+<span class="nc" id="L19">@Slf4j</span>
 @AllArgsConstructor
 @RestController
 @RequestMapping({&quot;interoperability/external-skills&quot;})
@@ -23,37 +24,40 @@ public class ExternalSkillController {
   private final OpenSearchIndex openSearchIndex;
   private final ExternalSkillService externalSkillService;
 
+  @PreAuthorize(&quot;hasAuthority('external-skill:read')&quot;)
   @GetMapping(path = &quot;/search&quot;)
   public ResponseEntity&lt;PagedResponse&lt;ExternalSkillDTO&gt;&gt; searchExternalSkills(
       @RequestParam String keyword,
       @RequestParam(required = false) Integer page,
       @RequestParam(required = false) Integer pageSize) {
-<span class="nc" id="L31">    var result = openSearchIndex.search(keyword, new PageCriteria(page, pageSize));</span>
-<span class="nc" id="L32">    return ResponseEntity.ok(</span>
+<span class="nc" id="L33">    var result = openSearchIndex.search(keyword, new PageCriteria(page, pageSize));</span>
+<span class="nc" id="L34">    return ResponseEntity.ok(</span>
         new PagedResponse&lt;&gt;(
-<span class="nc" id="L34">            result.content().stream().map(ExternalSkillMapper::toExternalSkillDTO).toList(),</span>
-<span class="nc" id="L35">            PageInfoDTO.fromDomain(result.pageInfo())));</span>
+<span class="nc" id="L36">            result.content().stream().map(ExternalSkillMapper::toExternalSkillDTO).toList(),</span>
+<span class="nc" id="L37">            PageInfoDTO.fromDomain(result.pageInfo())));</span>
   }
 
+  @PreAuthorize(&quot;hasAuthority('external-skill:read')&quot;)
   @GetMapping(path = &quot;/random&quot;)
   public ResponseEntity&lt;List&lt;ExternalSkillDTO&gt;&gt; getRandomSkills(
       @RequestParam(defaultValue = &quot;200&quot;) int count) {
-<span class="nc" id="L41">    log.debug(&quot;Getting {} random external skills&quot;, count);</span>
-<span class="nc" id="L42">    return ResponseEntity.ok(</span>
-<span class="nc" id="L43">        externalSkillService.getRandomExternalSkills(count).stream()</span>
-<span class="nc" id="L44">            .map(ExternalSkillMapper::toExternalSkillDTO)</span>
-<span class="nc" id="L45">            .toList());</span>
+<span class="nc" id="L44">    log.debug(&quot;Getting {} random external skills&quot;, count);</span>
+<span class="nc" id="L45">    return ResponseEntity.ok(</span>
+<span class="nc" id="L46">        externalSkillService.getRandomExternalSkills(count).stream()</span>
+<span class="nc" id="L47">            .map(ExternalSkillMapper::toExternalSkillDTO)</span>
+<span class="nc" id="L48">            .toList());</span>
   }
 
+  @PreAuthorize(&quot;hasAuthority('external-skill:read')&quot;)
   @GetMapping(path = &quot;/{id}&quot;)
   public ResponseEntity&lt;ExternalSkillDetailsDTO&gt; getExternalSkillById(@PathVariable UUID id) {
-<span class="nc" id="L50">    log.debug(&quot;Getting external skill details for id: {}&quot;, id);</span>
+<span class="nc" id="L54">    log.debug(&quot;Getting external skill details for id: {}&quot;, id);</span>
 
-<span class="nc" id="L52">    return externalSkillService</span>
-<span class="nc" id="L53">        .getById(id)</span>
-<span class="nc" id="L54">        .map(ExternalSkillMapper::toExternalSkillDetailsDTO)</span>
-<span class="nc" id="L55">        .map(ResponseEntity::ok)</span>
-<span class="nc" id="L56">        .orElse(ResponseEntity.notFound().build());</span>
+<span class="nc" id="L56">    return externalSkillService</span>
+<span class="nc" id="L57">        .getById(id)</span>
+<span class="nc" id="L58">        .map(ExternalSkillMapper::toExternalSkillDetailsDTO)</span>
+<span class="nc" id="L59">        .map(ResponseEntity::ok)</span>
+<span class="nc" id="L60">        .orElse(ResponseEntity.notFound().build());</span>
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.12.202403310830</span></div></body></html>
