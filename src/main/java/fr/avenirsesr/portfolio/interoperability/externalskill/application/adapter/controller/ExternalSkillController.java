@@ -13,6 +13,7 @@ import java.util.UUID;
 import lombok.AllArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @Slf4j
@@ -23,6 +24,7 @@ public class ExternalSkillController {
   private final OpenSearchIndex openSearchIndex;
   private final ExternalSkillService externalSkillService;
 
+  @PreAuthorize("hasAuthority('external-skill:read')")
   @GetMapping(path = "/search")
   public ResponseEntity<PagedResponse<ExternalSkillDTO>> searchExternalSkills(
       @RequestParam String keyword,
@@ -35,6 +37,7 @@ public class ExternalSkillController {
             PageInfoDTO.fromDomain(result.pageInfo())));
   }
 
+  @PreAuthorize("hasAuthority('external-skill:read')")
   @GetMapping(path = "/random")
   public ResponseEntity<List<ExternalSkillDTO>> getRandomSkills(
       @RequestParam(defaultValue = "200") int count) {
@@ -45,6 +48,7 @@ public class ExternalSkillController {
             .toList());
   }
 
+  @PreAuthorize("hasAuthority('external-skill:read')")
   @GetMapping(path = "/{id}")
   public ResponseEntity<ExternalSkillDetailsDTO> getExternalSkillById(@PathVariable UUID id) {
     log.debug("Getting external skill details for id: {}", id);
