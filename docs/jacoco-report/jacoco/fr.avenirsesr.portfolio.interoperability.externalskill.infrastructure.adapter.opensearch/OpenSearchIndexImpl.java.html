@@ -2,8 +2,8 @@
 
 import fr.avenirsesr.portfolio.common.data.domain.model.PageCriteria;
 import fr.avenirsesr.portfolio.common.data.domain.model.PageInfo;
-import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillCategoryType;
-import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillType;
+import fr.avenirsesr.portfolio.common.skill.domain.model.enums.ESkillKind;
+import fr.avenirsesr.portfolio.common.skill.domain.model.enums.ESkillReferentialType;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkill;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkillCategory;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkillPagedResult;
@@ -146,7 +146,7 @@ public class OpenSearchIndexImpl implements OpenSearchIndex {
 <span class="nc" id="L146">              (String) src.get(ExternalSkillConstants.FIELD_SKILL_LIBELLE),</span>
 <span class="nc" id="L147">              (String) src.get(ExternalSkillConstants.FIELD_SKILL_CODE),</span>
 <span class="nc" id="L148">              getCategoryFromSource(src.get(ExternalSkillConstants.FIELD_SKILL_CATEGORIES)),</span>
-<span class="nc" id="L149">              EExternalSkillType.valueOf((String) src.get(ExternalSkillConstants.FIELD_TYPE)),</span>
+<span class="nc" id="L149">              ESkillReferentialType.valueOf((String) src.get(ExternalSkillConstants.FIELD_TYPE)),</span>
 <span class="nc" id="L150">              Instant.now(),</span>
 <span class="nc" id="L151">              Instant.now()));</span>
 <span class="nc" id="L152">    } catch (IOException e) {</span>
@@ -178,35 +178,35 @@ public class OpenSearchIndexImpl implements OpenSearchIndex {
 <span class="nc" id="L178">                  (String) src.get(ExternalSkillConstants.FIELD_SKILL_LIBELLE),</span>
 <span class="nc" id="L179">                  (String) src.get(ExternalSkillConstants.FIELD_SKILL_CODE),</span>
 <span class="nc" id="L180">                  getCategoryFromSource(src.get(ExternalSkillConstants.FIELD_SKILL_CATEGORIES)),</span>
-<span class="nc" id="L181">                  EExternalSkillType.valueOf((String) src.get(ExternalSkillConstants.FIELD_TYPE)),</span>
-<span class="nc" id="L182">                  Instant.now(),</span>
-<span class="nc" id="L183">                  Instant.now());</span>
+<span class="nc" id="L181">                  ESkillReferentialType.valueOf(</span>
+<span class="nc" id="L182">                      (String) src.get(ExternalSkillConstants.FIELD_TYPE)),</span>
+<span class="nc" id="L183">                  Instant.now(),</span>
+<span class="nc" id="L184">                  Instant.now());</span>
             })
-<span class="nc" id="L185">        .toList();</span>
+<span class="nc" id="L186">        .toList();</span>
   }
 
   private Map&lt;String, Object&gt; getCategorySource(ExternalSkillCategory externalSkillCategory) {
-<span class="nc bnc" id="L189" title="All 2 branches missed.">    if (externalSkillCategory == null) return null;</span>
+<span class="nc bnc" id="L190" title="All 2 branches missed.">    if (externalSkillCategory == null) return null;</span>
 
-<span class="nc" id="L191">    Map&lt;String, Object&gt; map = new HashMap&lt;&gt;();</span>
-<span class="nc" id="L192">    map.put(&quot;id&quot;, externalSkillCategory.getId().toString());</span>
-<span class="nc" id="L193">    map.put(&quot;libelle&quot;, externalSkillCategory.getLibelle());</span>
-<span class="nc" id="L194">    map.put(&quot;type&quot;, externalSkillCategory.getType());</span>
-<span class="nc bnc" id="L195" title="All 2 branches missed.">    if (externalSkillCategory.getParent().isPresent()) {</span>
-<span class="nc" id="L196">      map.put(&quot;parent&quot;, getCategorySource(externalSkillCategory.getParent().get()));</span>
+<span class="nc" id="L192">    Map&lt;String, Object&gt; map = new HashMap&lt;&gt;();</span>
+<span class="nc" id="L193">    map.put(&quot;id&quot;, externalSkillCategory.getId().toString());</span>
+<span class="nc" id="L194">    map.put(&quot;libelle&quot;, externalSkillCategory.getLibelle());</span>
+<span class="nc" id="L195">    map.put(&quot;type&quot;, externalSkillCategory.getType());</span>
+<span class="nc bnc" id="L196" title="All 2 branches missed.">    if (externalSkillCategory.getParent().isPresent()) {</span>
+<span class="nc" id="L197">      map.put(&quot;parent&quot;, getCategorySource(externalSkillCategory.getParent().get()));</span>
     }
-<span class="nc" id="L198">    return map;</span>
+<span class="nc" id="L199">    return map;</span>
   }
 
   @SuppressWarnings(&quot;unchecked&quot;)
   private ExternalSkillCategory getCategoryFromSource(Object source) {
-<span class="nc bnc" id="L203" title="All 2 branches missed.">    if (source == null) return null;</span>
+<span class="nc bnc" id="L204" title="All 2 branches missed.">    if (source == null) return null;</span>
 
-<span class="nc" id="L205">    Map&lt;String, Object&gt; map = (Map&lt;String, Object&gt;) source;</span>
-<span class="nc bnc" id="L206" title="All 2 branches missed.">    UUID id = map.containsKey(&quot;id&quot;) ? UUID.fromString((String) map.get(&quot;id&quot;)) : null;</span>
-<span class="nc" id="L207">    String libelle = (String) map.get(&quot;libelle&quot;);</span>
-<span class="nc" id="L208">    EExternalSkillCategoryType type =</span>
-<span class="nc" id="L209">        EExternalSkillCategoryType.valueOf(map.get(&quot;type&quot;).toString());</span>
+<span class="nc" id="L206">    Map&lt;String, Object&gt; map = (Map&lt;String, Object&gt;) source;</span>
+<span class="nc bnc" id="L207" title="All 2 branches missed.">    UUID id = map.containsKey(&quot;id&quot;) ? UUID.fromString((String) map.get(&quot;id&quot;)) : null;</span>
+<span class="nc" id="L208">    String libelle = (String) map.get(&quot;libelle&quot;);</span>
+<span class="nc" id="L209">    ESkillKind type = ESkillKind.valueOf(map.get(&quot;type&quot;).toString());</span>
 
 <span class="nc" id="L211">    ExternalSkillCategory parent = null;</span>
 <span class="nc bnc" id="L212" title="All 2 branches missed.">    if (map.containsKey(&quot;parent&quot;)) {</span>

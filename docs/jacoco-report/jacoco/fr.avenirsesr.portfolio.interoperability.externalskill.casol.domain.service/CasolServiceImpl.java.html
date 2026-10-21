@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CasolServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">avenirs-portfolio-interoperability</a> &gt; <a href="index.source.html" class="el_package">fr.avenirsesr.portfolio.interoperability.externalskill.casol.domain.service</a> &gt; <span class="el_source">CasolServiceImpl.java</span></div><h1>CasolServiceImpl.java</h1><pre class="source lang-java linenums">package fr.avenirsesr.portfolio.interoperability.externalskill.casol.domain.service;
 
-import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillCategoryType;
-import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillType;
 import fr.avenirsesr.portfolio.common.seeder.domain.port.output.SharedDataGenerator;
 import fr.avenirsesr.portfolio.common.seeder.infrastructure.adapter.data.DataGeneratorProvider;
+import fr.avenirsesr.portfolio.common.skill.domain.model.enums.ESkillKind;
+import fr.avenirsesr.portfolio.common.skill.domain.model.enums.ESkillReferentialType;
 import fr.avenirsesr.portfolio.interoperability.externalskill.casol.domain.model.Competence;
 import fr.avenirsesr.portfolio.interoperability.externalskill.casol.domain.port.input.CasolService;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkill;
@@ -39,7 +39,7 @@ public class CasolServiceImpl implements CasolService {
 <span class="nc" id="L39">                        competence.libelle(),</span>
 <span class="nc" id="L40">                        String.valueOf(competence.id()),</span>
 <span class="nc" id="L41">                        buildCategory(competence, categories),</span>
-                        EExternalSkillType.CASOL))
+                        ESkillReferentialType.CASOL))
 <span class="nc" id="L43">            .toList();</span>
 
 <span class="nc" id="L45">    externalSkillRepository.saveAll(externalSkills);</span>
@@ -51,19 +51,18 @@ public class CasolServiceImpl implements CasolService {
   private ExternalSkillCategory buildCategory(
       Competence competence, ArrayList&lt;ExternalSkillCategory&gt; categories) {
 <span class="nc" id="L53">    var externalSkillCategory =</span>
-<span class="nc" id="L54">        ExternalSkillCategory.of(</span>
-<span class="nc" id="L55">            competence.category().libelle(), null, EExternalSkillCategoryType.DOMAIN);</span>
+<span class="nc" id="L54">        ExternalSkillCategory.of(competence.category().libelle(), null, ESkillKind.DOMAIN);</span>
 
-<span class="nc" id="L57">    var categoryToSave =</span>
-<span class="nc" id="L58">        categories.stream()</span>
-<span class="nc bnc" id="L59" title="All 2 branches missed.">            .filter(c -&gt; c.uniqHash() == externalSkillCategory.uniqHash())</span>
-<span class="nc" id="L60">            .findFirst()</span>
-<span class="nc" id="L61">            .orElse(externalSkillCategory);</span>
+<span class="nc" id="L56">    var categoryToSave =</span>
+<span class="nc" id="L57">        categories.stream()</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">            .filter(c -&gt; c.uniqHash() == externalSkillCategory.uniqHash())</span>
+<span class="nc" id="L59">            .findFirst()</span>
+<span class="nc" id="L60">            .orElse(externalSkillCategory);</span>
 
-<span class="nc bnc" id="L63" title="All 2 branches missed.">    if (categoryToSave.equals(externalSkillCategory)) {</span>
-<span class="nc" id="L64">      categories.add(externalSkillCategory);</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">    if (categoryToSave.equals(externalSkillCategory)) {</span>
+<span class="nc" id="L63">      categories.add(externalSkillCategory);</span>
     }
-<span class="nc" id="L66">    return categoryToSave;</span>
+<span class="nc" id="L65">    return categoryToSave;</span>
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.15.202606040825</span></div></body></html>

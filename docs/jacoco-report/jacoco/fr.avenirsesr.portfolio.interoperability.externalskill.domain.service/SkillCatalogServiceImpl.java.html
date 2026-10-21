@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SkillCatalogServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">avenirs-portfolio-interoperability</a> &gt; <a href="index.source.html" class="el_package">fr.avenirsesr.portfolio.interoperability.externalskill.domain.service</a> &gt; <span class="el_source">SkillCatalogServiceImpl.java</span></div><h1>SkillCatalogServiceImpl.java</h1><pre class="source lang-java linenums">package fr.avenirsesr.portfolio.interoperability.externalskill.domain.service;
+
+import fr.avenirsesr.portfolio.common.data.domain.model.AvenirsBaseModel;
+import fr.avenirsesr.portfolio.common.skill.application.adapter.dto.SkillCatalogDTO;
+import fr.avenirsesr.portfolio.common.skill.application.adapter.dto.SkillNodeDTO;
+import fr.avenirsesr.portfolio.common.skill.domain.model.enums.ESkillReferentialType;
+import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkill;
+import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkillCategory;
+import fr.avenirsesr.portfolio.interoperability.externalskill.domain.port.input.SkillCatalogService;
+import fr.avenirsesr.portfolio.interoperability.externalskill.domain.port.output.repository.ExternalSkillRepository;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+
+<span class="fc" id="L19">@Slf4j</span>
+@RequiredArgsConstructor
+public class SkillCatalogServiceImpl implements SkillCatalogService {
+  private final ExternalSkillRepository externalSkillRepository;
+
+  @Override
+  public SkillCatalogDTO getCatalog(ESkillReferentialType type) {
+<span class="fc" id="L26">    List&lt;ExternalSkill&gt; externalSkills = externalSkillRepository.findAllWithCategoriesByType(type);</span>
+
+<span class="fc" id="L28">    List&lt;SkillNodeDTO&gt; nodes = new ArrayList&lt;&gt;(collectCategoryNodes(externalSkills).values());</span>
+<span class="fc" id="L29">    externalSkills.forEach(externalSkill -&gt; nodes.add(toSkillNode(externalSkill)));</span>
+
+<span class="fc" id="L31">    log.debug(&quot;Built the {} skill catalog with {} nodes&quot;, type, nodes.size());</span>
+
+<span class="fc" id="L33">    return new SkillCatalogDTO(type, type.name(), type.name(), nodes);</span>
+  }
+
+  private Map&lt;UUID, SkillNodeDTO&gt; collectCategoryNodes(List&lt;ExternalSkill&gt; externalSkills) {
+<span class="fc" id="L37">    Map&lt;UUID, SkillNodeDTO&gt; nodeById = new LinkedHashMap&lt;&gt;();</span>
+
+<span class="fc" id="L39">    externalSkills.forEach(</span>
+        externalSkill -&gt;
+<span class="fc" id="L41">            externalSkill</span>
+<span class="fc" id="L42">                .getCategoryPath()</span>
+<span class="fc" id="L43">                .forEach(</span>
+                    category -&gt;
+<span class="fc" id="L45">                        nodeById.computeIfAbsent(</span>
+<span class="fc" id="L46">                            category.getId(), id -&gt; toCategoryNode(category))));</span>
+
+<span class="fc" id="L48">    return nodeById;</span>
+  }
+
+  private SkillNodeDTO toCategoryNode(ExternalSkillCategory category) {
+<span class="fc" id="L52">    return new SkillNodeDTO(</span>
+<span class="fc" id="L53">        category.getId(),</span>
+        null,
+<span class="fc" id="L55">        category.getLibelle(),</span>
+        null,
+<span class="fc" id="L57">        category.getParent().map(AvenirsBaseModel::getId).orElse(null),</span>
+<span class="fc" id="L58">        category.getType(),</span>
+        false);
+  }
+
+  private SkillNodeDTO toSkillNode(ExternalSkill externalSkill) {
+<span class="fc" id="L63">    return new SkillNodeDTO(</span>
+<span class="fc" id="L64">        externalSkill.getId(),</span>
+<span class="fc" id="L65">        externalSkill.getExternalId(),</span>
+<span class="fc" id="L66">        externalSkill.getLibelle(),</span>
+        null,
+<span class="fc" id="L68">        externalSkill.getExternalSkillCategory().map(AvenirsBaseModel::getId).orElse(null),</span>
+        null,
+        true);
+  }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.15.202606040825</span></div></body></html>

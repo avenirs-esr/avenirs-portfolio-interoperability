@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ExternalSkillBatchLoader.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">avenirs-portfolio-interoperability</a> &gt; <a href="index.source.html" class="el_package">fr.avenirsesr.portfolio.interoperability.externalskill.rome.infrastructure.batch</a> &gt; <span class="el_source">ExternalSkillBatchLoader.java</span></div><h1>ExternalSkillBatchLoader.java</h1><pre class="source lang-java linenums">package fr.avenirsesr.portfolio.interoperability.externalskill.rome.infrastructure.batch;
 
-import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillType;
 import fr.avenirsesr.portfolio.common.seeder.domain.port.output.SharedDataGenerator;
 import fr.avenirsesr.portfolio.common.seeder.infrastructure.adapter.data.DataGeneratorProvider;
+import fr.avenirsesr.portfolio.common.skill.domain.model.enums.ESkillReferentialType;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkill;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkillCategory;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.port.output.repository.ExternalSkillRepository;
@@ -98,7 +98,7 @@ public class ExternalSkillBatchLoader {
 <span class="nc" id="L98">    return new StepBuilder(&quot;checkAdditionalSkillCountStep&quot;, jobRepository)</span>
 <span class="nc" id="L99">        .tasklet(</span>
             (contribution, chunkContext) -&gt; {
-<span class="nc" id="L101">              int count = externalSkillRepository.countAll(EExternalSkillType.ROME4);</span>
+<span class="nc" id="L101">              int count = externalSkillRepository.countAll(ESkillReferentialType.ROME4);</span>
 
 <span class="nc bnc" id="L103" title="All 2 branches missed.">              if (count == 0) {</span>
 <span class="nc" id="L104">                log.info(</span>
@@ -191,7 +191,7 @@ public class ExternalSkillBatchLoader {
 <span class="nc" id="L191">          competence.getLibelle(),</span>
 <span class="nc" id="L192">          competence.getCode(),</span>
 <span class="nc" id="L193">          CompetenceMapper.toCategoryDomain(competence, categories),</span>
-          EExternalSkillType.ROME4);
+          ESkillReferentialType.ROME4);
     };
   }
 

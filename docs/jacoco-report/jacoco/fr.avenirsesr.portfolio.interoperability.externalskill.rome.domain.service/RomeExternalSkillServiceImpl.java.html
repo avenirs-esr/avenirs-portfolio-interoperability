@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>RomeExternalSkillServiceImpl.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">avenirs-portfolio-interoperability</a> &gt; <a href="index.source.html" class="el_package">fr.avenirsesr.portfolio.interoperability.externalskill.rome.domain.service</a> &gt; <span class="el_source">RomeExternalSkillServiceImpl.java</span></div><h1>RomeExternalSkillServiceImpl.java</h1><pre class="source lang-java linenums">package fr.avenirsesr.portfolio.interoperability.externalskill.rome.domain.service;
 
-import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillCategoryType;
-import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillType;
 import fr.avenirsesr.portfolio.common.seeder.domain.port.output.SharedDataGenerator;
 import fr.avenirsesr.portfolio.common.seeder.infrastructure.adapter.data.DataGeneratorProvider;
+import fr.avenirsesr.portfolio.common.skill.domain.model.enums.ESkillKind;
+import fr.avenirsesr.portfolio.common.skill.domain.model.enums.ESkillReferentialType;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkill;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkillCategory;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.port.output.OpenSearchIndex;
@@ -127,7 +127,7 @@ public class RomeExternalSkillServiceImpl implements RomeExternalSkillService {
 <span class="nc" id="L127">        competence.getLibelle(),</span>
 <span class="nc" id="L128">        competence.getCode(),</span>
 <span class="nc" id="L129">        buildCategory(competence),</span>
-        EExternalSkillType.ROME4);
+        ESkillReferentialType.ROME4);
   }
 
   private ExternalSkillCategory buildCategory(Competence competence) {
@@ -137,17 +137,15 @@ public class RomeExternalSkillServiceImpl implements RomeExternalSkillService {
 <span class="nc" id="L137">    var domaineCompetence = enjeu.getDomaineCompetence();</span>
 
 <span class="nc" id="L139">    ExternalSkillCategory domain =</span>
-<span class="nc" id="L140">        ExternalSkillCategory.of(</span>
-<span class="nc" id="L141">            domaineCompetence.getLibelle(), null, EExternalSkillCategoryType.DOMAIN);</span>
+<span class="nc" id="L140">        ExternalSkillCategory.of(domaineCompetence.getLibelle(), null, ESkillKind.DOMAIN);</span>
 
-<span class="nc" id="L143">    ExternalSkillCategory issue =</span>
-<span class="nc" id="L144">        ExternalSkillCategory.of(enjeu.getLibelle(), domain, EExternalSkillCategoryType.ISSUE);</span>
+<span class="nc" id="L142">    ExternalSkillCategory issue =</span>
+<span class="nc" id="L143">        ExternalSkillCategory.of(enjeu.getLibelle(), domain, ESkillKind.ISSUE);</span>
 
-<span class="nc" id="L146">    ExternalSkillCategory target =</span>
-<span class="nc" id="L147">        ExternalSkillCategory.of(objectif.getLibelle(), issue, EExternalSkillCategoryType.TARGET);</span>
+<span class="nc" id="L145">    ExternalSkillCategory target =</span>
+<span class="nc" id="L146">        ExternalSkillCategory.of(objectif.getLibelle(), issue, ESkillKind.TARGET);</span>
 
-<span class="nc" id="L149">    return ExternalSkillCategory.of(</span>
-<span class="nc" id="L150">        macroCompetence.getLibelle(), target, EExternalSkillCategoryType.MACRO_SKILL);</span>
+<span class="nc" id="L148">    return ExternalSkillCategory.of(macroCompetence.getLibelle(), target, ESkillKind.MACRO_SKILL);</span>
   }
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.15.202606040825</span></div></body></html>
