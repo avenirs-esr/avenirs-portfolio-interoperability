@@ -1,7 +1,7 @@
 package fr.avenirsesr.portfolio.interoperability.externalskill.domain.model;
 
 import fr.avenirsesr.portfolio.common.data.domain.model.AvenirsBaseModel;
-import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillType;
+import fr.avenirsesr.portfolio.common.skill.domain.model.enums.ESkillReferentialType;
 import java.time.Instant;
 import java.util.*;
 import lombok.AccessLevel;
@@ -16,14 +16,14 @@ public class ExternalSkill extends AvenirsBaseModel {
 
   private String libelle;
   private String externalId;
-  private EExternalSkillType type;
+  private ESkillReferentialType type;
 
   private ExternalSkill(
       UUID id,
       Instant createdAt,
       Instant updatedAt,
       ExternalSkillCategory externalSkillCategory,
-      EExternalSkillType type,
+      ESkillReferentialType type,
       String libelle,
       String externalId) {
     super(id, createdAt, updatedAt);
@@ -38,7 +38,7 @@ public class ExternalSkill extends AvenirsBaseModel {
       String libelle,
       String externalId,
       ExternalSkillCategory externalSkillCategory,
-      EExternalSkillType type) {
+      ESkillReferentialType type) {
     Instant now = Instant.now();
     return new ExternalSkill(id, now, now, externalSkillCategory, type, libelle, externalId);
   }
@@ -48,7 +48,7 @@ public class ExternalSkill extends AvenirsBaseModel {
       String libelle,
       String externalId,
       ExternalSkillCategory externalSkillCategory,
-      EExternalSkillType type,
+      ESkillReferentialType type,
       Instant createdAt,
       Instant updatedAt) {
     return new ExternalSkill(

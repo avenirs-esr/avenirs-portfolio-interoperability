@@ -1,7 +1,7 @@
 package fr.avenirsesr.portfolio.interoperability.externalskill.infrastructure.adapter.repository;
 
 import fr.avenirsesr.portfolio.common.data.infrastructure.adapter.repository.GenericJpaRepositoryAdapter;
-import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillType;
+import fr.avenirsesr.portfolio.common.skill.domain.model.enums.ESkillReferentialType;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkill;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.port.output.repository.ExternalSkillRepository;
 import fr.avenirsesr.portfolio.interoperability.externalskill.infrastructure.adapter.mapper.ExternalSkillMapper;
@@ -29,7 +29,7 @@ public class ExternalSkillDatabaseRepository
   }
 
   @Override
-  public int countAll(EExternalSkillType type) {
+  public int countAll(ESkillReferentialType type) {
     return jpaRepository.findAll(ExternalSkillSpecification.hasType(type)).size();
   }
 
@@ -41,6 +41,13 @@ public class ExternalSkillDatabaseRepository
   @Override
   public List<ExternalSkill> findAllForIndexing() {
     return jpaRepository.findAllWithCategories().stream()
+        .map(ExternalSkillMapper.INSTANCE::toDomain)
+        .toList();
+  }
+
+  @Override
+  public List<ExternalSkill> findAllWithCategoriesByType(ESkillReferentialType type) {
+    return jpaRepository.findAllWithCategoriesByType(type).stream()
         .map(ExternalSkillMapper.INSTANCE::toDomain)
         .toList();
   }

@@ -1,9 +1,9 @@
 package fr.avenirsesr.portfolio.interoperability.externalskill.rome.domain.service;
 
-import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillCategoryType;
-import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillType;
 import fr.avenirsesr.portfolio.common.seeder.domain.port.output.SharedDataGenerator;
 import fr.avenirsesr.portfolio.common.seeder.infrastructure.adapter.data.DataGeneratorProvider;
+import fr.avenirsesr.portfolio.common.skill.domain.model.enums.ESkillKind;
+import fr.avenirsesr.portfolio.common.skill.domain.model.enums.ESkillReferentialType;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkill;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkillCategory;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.port.output.OpenSearchIndex;
@@ -127,7 +127,7 @@ public class RomeExternalSkillServiceImpl implements RomeExternalSkillService {
         competence.getLibelle(),
         competence.getCode(),
         buildCategory(competence),
-        EExternalSkillType.ROME4);
+        ESkillReferentialType.ROME4);
   }
 
   private ExternalSkillCategory buildCategory(Competence competence) {
@@ -137,16 +137,14 @@ public class RomeExternalSkillServiceImpl implements RomeExternalSkillService {
     var domaineCompetence = enjeu.getDomaineCompetence();
 
     ExternalSkillCategory domain =
-        ExternalSkillCategory.of(
-            domaineCompetence.getLibelle(), null, EExternalSkillCategoryType.DOMAIN);
+        ExternalSkillCategory.of(domaineCompetence.getLibelle(), null, ESkillKind.DOMAIN);
 
     ExternalSkillCategory issue =
-        ExternalSkillCategory.of(enjeu.getLibelle(), domain, EExternalSkillCategoryType.ISSUE);
+        ExternalSkillCategory.of(enjeu.getLibelle(), domain, ESkillKind.ISSUE);
 
     ExternalSkillCategory target =
-        ExternalSkillCategory.of(objectif.getLibelle(), issue, EExternalSkillCategoryType.TARGET);
+        ExternalSkillCategory.of(objectif.getLibelle(), issue, ESkillKind.TARGET);
 
-    return ExternalSkillCategory.of(
-        macroCompetence.getLibelle(), target, EExternalSkillCategoryType.MACRO_SKILL);
+    return ExternalSkillCategory.of(macroCompetence.getLibelle(), target, ESkillKind.MACRO_SKILL);
   }
 }

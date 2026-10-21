@@ -1,6 +1,6 @@
 package fr.avenirsesr.portfolio.interoperability.externalskill.xxi.infrastructure.service;
 
-import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillCategoryType;
+import fr.avenirsesr.portfolio.common.skill.domain.model.enums.ESkillKind;
 import fr.avenirsesr.portfolio.interoperability.externalskill.xxi.domain.model.Category;
 import fr.avenirsesr.portfolio.interoperability.externalskill.xxi.domain.model.Competence;
 import fr.avenirsesr.portfolio.interoperability.externalskill.xxi.domain.service.CompetenceReader;
@@ -28,7 +28,7 @@ public class CsvCompetenceReader implements CompetenceReader {
                 Integer.parseInt(tokens[0].trim()),
                 tokens[1].trim(),
                 categories.stream()
-                    .filter(category -> category.type() == EExternalSkillCategoryType.ISSUE)
+                    .filter(category -> category.type() == ESkillKind.ISSUE)
                     .filter(category -> category.id() == Integer.parseInt(tokens[2].trim()))
                     .findAny()
                     .orElseThrow()));
@@ -41,10 +41,7 @@ public class CsvCompetenceReader implements CompetenceReader {
             DOMAIN_CSV_SEPARATOR,
             tokens ->
                 new Category(
-                    Integer.parseInt(tokens[0].trim()),
-                    tokens[1].trim(),
-                    null,
-                    EExternalSkillCategoryType.DOMAIN));
+                    Integer.parseInt(tokens[0].trim()), tokens[1].trim(), null, ESkillKind.DOMAIN));
 
     var issues =
         FileReader.readCSV(
@@ -58,7 +55,7 @@ public class CsvCompetenceReader implements CompetenceReader {
                         .filter(d -> d.id() == Integer.parseInt(tokens[2].trim()))
                         .findAny()
                         .orElseThrow(),
-                    EExternalSkillCategoryType.ISSUE));
+                    ESkillKind.ISSUE));
 
     return Stream.concat(domains.stream(), issues.stream()).toList();
   }

@@ -9,8 +9,8 @@ import static org.mockito.Mockito.never;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillCategoryType;
-import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillType;
+import fr.avenirsesr.portfolio.common.skill.domain.model.enums.ESkillKind;
+import fr.avenirsesr.portfolio.common.skill.domain.model.enums.ESkillReferentialType;
 import fr.avenirsesr.portfolio.common.testutils.BddLogger;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkill;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkillCategory;
@@ -54,33 +54,23 @@ class RomeExternalSkillServiceImplTest {
 
   @BeforeEach
   void setUp() {
-    var domain1 =
-        ExternalSkillCategory.of("domainLibelle1", null, EExternalSkillCategoryType.DOMAIN);
-    var issue1 =
-        ExternalSkillCategory.of("issueLibelle1", domain1, EExternalSkillCategoryType.ISSUE);
-    var target1 =
-        ExternalSkillCategory.of("targetLibelle1", issue1, EExternalSkillCategoryType.TARGET);
-    var macro1 =
-        ExternalSkillCategory.of(
-            "macroSkillLibelle1", target1, EExternalSkillCategoryType.MACRO_SKILL);
+    var domain1 = ExternalSkillCategory.of("domainLibelle1", null, ESkillKind.DOMAIN);
+    var issue1 = ExternalSkillCategory.of("issueLibelle1", domain1, ESkillKind.ISSUE);
+    var target1 = ExternalSkillCategory.of("targetLibelle1", issue1, ESkillKind.TARGET);
+    var macro1 = ExternalSkillCategory.of("macroSkillLibelle1", target1, ESkillKind.MACRO_SKILL);
 
     externalSkill1 =
         ExternalSkill.create(
-            SKILL_ID_1, "skillLibelle1", SKILL_CODE_1, macro1, EExternalSkillType.ROME4);
+            SKILL_ID_1, "skillLibelle1", SKILL_CODE_1, macro1, ESkillReferentialType.ROME4);
 
-    var domain2 =
-        ExternalSkillCategory.of("domainLibelle2", null, EExternalSkillCategoryType.DOMAIN);
-    var issue2 =
-        ExternalSkillCategory.of("issueLibelle2", domain2, EExternalSkillCategoryType.ISSUE);
-    var target2 =
-        ExternalSkillCategory.of("targetLibelle2", issue2, EExternalSkillCategoryType.TARGET);
-    var macro2 =
-        ExternalSkillCategory.of(
-            "macroSkillLibelle2", target2, EExternalSkillCategoryType.MACRO_SKILL);
+    var domain2 = ExternalSkillCategory.of("domainLibelle2", null, ESkillKind.DOMAIN);
+    var issue2 = ExternalSkillCategory.of("issueLibelle2", domain2, ESkillKind.ISSUE);
+    var target2 = ExternalSkillCategory.of("targetLibelle2", issue2, ESkillKind.TARGET);
+    var macro2 = ExternalSkillCategory.of("macroSkillLibelle2", target2, ESkillKind.MACRO_SKILL);
 
     externalSkill2 =
         ExternalSkill.create(
-            SKILL_ID_2, "skillLibelle2", SKILL_CODE_2, macro2, EExternalSkillType.ROME4);
+            SKILL_ID_2, "skillLibelle2", SKILL_CODE_2, macro2, ESkillReferentialType.ROME4);
   }
 
   @Test
@@ -116,18 +106,13 @@ class RomeExternalSkillServiceImplTest {
   @Test
   void shouldUpdateExistingSkillAndIndex() {
     BddLogger.given("the method synchronizeExternalSkills");
-    var domain1 =
-        ExternalSkillCategory.of("domainLibelle1", null, EExternalSkillCategoryType.DOMAIN);
-    var issue1 =
-        ExternalSkillCategory.of("issueLibelle1", domain1, EExternalSkillCategoryType.ISSUE);
-    var target1 =
-        ExternalSkillCategory.of("targetLibelle1", issue1, EExternalSkillCategoryType.TARGET);
-    var macro1 =
-        ExternalSkillCategory.of(
-            "macroSkillLibelle1", target1, EExternalSkillCategoryType.MACRO_SKILL);
+    var domain1 = ExternalSkillCategory.of("domainLibelle1", null, ESkillKind.DOMAIN);
+    var issue1 = ExternalSkillCategory.of("issueLibelle1", domain1, ESkillKind.ISSUE);
+    var target1 = ExternalSkillCategory.of("targetLibelle1", issue1, ESkillKind.TARGET);
+    var macro1 = ExternalSkillCategory.of("macroSkillLibelle1", target1, ESkillKind.MACRO_SKILL);
     ExternalSkill existingSkill =
         ExternalSkill.create(
-            SKILL_ID_1, "skillLibelle1", SKILL_CODE_1, macro1, EExternalSkillType.ROME4);
+            SKILL_ID_1, "skillLibelle1", SKILL_CODE_1, macro1, ESkillReferentialType.ROME4);
 
     when(externalSkillRepository.findAllByExternalId(anyList())).thenReturn(List.of(existingSkill));
     when(externalSkillRepository.saveAll(anyList()))
@@ -139,7 +124,7 @@ class RomeExternalSkillServiceImplTest {
 
     BddLogger.then("it should update existing external skill and index");
     assertThat(result).hasSize(1);
-    assertThat(result.getFirst().getType()).isEqualTo(EExternalSkillType.ROME4);
+    assertThat(result.getFirst().getType()).isEqualTo(ESkillReferentialType.ROME4);
     verify(openSearchIndex).indexAll(result);
   }
 

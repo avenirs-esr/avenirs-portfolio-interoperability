@@ -1,8 +1,8 @@
 package fr.avenirsesr.portfolio.interoperability.externalskill.infrastructure.fixture;
 
-import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillType;
 import fr.avenirsesr.portfolio.common.seeder.domain.port.output.SharedDataGenerator;
 import fr.avenirsesr.portfolio.common.seeder.infrastructure.adapter.data.DataGeneratorProvider;
+import fr.avenirsesr.portfolio.common.skill.domain.model.enums.ESkillReferentialType;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkill;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkillCategory;
 import java.time.Instant;
@@ -19,14 +19,14 @@ public class ExternalSkillFixture {
   private String libelle;
   private String externalId;
   private ExternalSkillCategory externalSkillCategory;
-  private EExternalSkillType type;
+  private ESkillReferentialType type;
   private Instant createdAt;
   private Instant updatedAt;
 
   private ExternalSkillFixture() {
     this.id = dataGenerator.with("id").uuid();
     this.externalSkillCategory = null;
-    this.type = EExternalSkillType.ROME4;
+    this.type = ESkillReferentialType.ROME4;
     this.libelle = "libelle";
     this.externalId = UUID.randomUUID().toString();
     this.createdAt = Instant.now();
@@ -67,7 +67,7 @@ public class ExternalSkillFixture {
     return this;
   }
 
-  public ExternalSkillFixture withType(EExternalSkillType type) {
+  public ExternalSkillFixture withType(ESkillReferentialType type) {
     this.type = type;
     return this;
   }
