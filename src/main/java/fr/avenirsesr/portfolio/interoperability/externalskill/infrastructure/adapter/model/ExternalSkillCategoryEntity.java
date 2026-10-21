@@ -1,7 +1,7 @@
 package fr.avenirsesr.portfolio.interoperability.externalskill.infrastructure.adapter.model;
 
 import fr.avenirsesr.portfolio.common.data.infrastructure.adapter.model.AvenirsBaseEntity;
-import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillCategoryType;
+import fr.avenirsesr.portfolio.common.skill.domain.model.enums.ESkillKind;
 import jakarta.persistence.*;
 import jakarta.persistence.Index;
 import java.util.Optional;
@@ -24,7 +24,7 @@ public class ExternalSkillCategoryEntity extends AvenirsBaseEntity {
 
   @Column
   @Enumerated(EnumType.STRING)
-  private EExternalSkillCategoryType type;
+  private ESkillKind type;
 
   @Getter(AccessLevel.NONE)
   @ManyToOne(
@@ -33,10 +33,7 @@ public class ExternalSkillCategoryEntity extends AvenirsBaseEntity {
   private ExternalSkillCategoryEntity parent;
 
   private ExternalSkillCategoryEntity(
-      UUID id,
-      String libelle,
-      EExternalSkillCategoryType type,
-      ExternalSkillCategoryEntity parent) {
+      UUID id, String libelle, ESkillKind type, ExternalSkillCategoryEntity parent) {
     setId(id);
     this.libelle = libelle;
     this.type = type;
@@ -44,15 +41,12 @@ public class ExternalSkillCategoryEntity extends AvenirsBaseEntity {
   }
 
   public static ExternalSkillCategoryEntity of(
-      UUID id,
-      String libelle,
-      EExternalSkillCategoryType type,
-      ExternalSkillCategoryEntity parent) {
+      UUID id, String libelle, ESkillKind type, ExternalSkillCategoryEntity parent) {
     return new ExternalSkillCategoryEntity(id, libelle, type, parent);
   }
 
   public static ExternalSkillCategoryEntity create(
-      String libelle, EExternalSkillCategoryType type, ExternalSkillCategoryEntity parent) {
+      String libelle, ESkillKind type, ExternalSkillCategoryEntity parent) {
     return new ExternalSkillCategoryEntity(UUID.randomUUID(), libelle, type, parent);
   }
 

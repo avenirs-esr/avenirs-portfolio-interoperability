@@ -1,8 +1,8 @@
 package fr.avenirsesr.portfolio.interoperability.externalskill.rome.infrastructure.batch;
 
-import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillType;
 import fr.avenirsesr.portfolio.common.seeder.domain.port.output.SharedDataGenerator;
 import fr.avenirsesr.portfolio.common.seeder.infrastructure.adapter.data.DataGeneratorProvider;
+import fr.avenirsesr.portfolio.common.skill.domain.model.enums.ESkillReferentialType;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkill;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkillCategory;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.port.output.repository.ExternalSkillRepository;
@@ -98,7 +98,7 @@ public class ExternalSkillBatchLoader {
     return new StepBuilder("checkAdditionalSkillCountStep", jobRepository)
         .tasklet(
             (contribution, chunkContext) -> {
-              int count = externalSkillRepository.countAll(EExternalSkillType.ROME4);
+              int count = externalSkillRepository.countAll(ESkillReferentialType.ROME4);
 
               if (count == 0) {
                 log.info(
@@ -191,7 +191,7 @@ public class ExternalSkillBatchLoader {
           competence.getLibelle(),
           competence.getCode(),
           CompetenceMapper.toCategoryDomain(competence, categories),
-          EExternalSkillType.ROME4);
+          ESkillReferentialType.ROME4);
     };
   }
 

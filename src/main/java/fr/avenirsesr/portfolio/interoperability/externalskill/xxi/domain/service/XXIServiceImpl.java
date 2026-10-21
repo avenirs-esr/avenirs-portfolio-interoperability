@@ -1,8 +1,8 @@
 package fr.avenirsesr.portfolio.interoperability.externalskill.xxi.domain.service;
 
-import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillType;
 import fr.avenirsesr.portfolio.common.seeder.domain.port.output.SharedDataGenerator;
 import fr.avenirsesr.portfolio.common.seeder.infrastructure.adapter.data.DataGeneratorProvider;
+import fr.avenirsesr.portfolio.common.skill.domain.model.enums.ESkillReferentialType;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkill;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkillCategory;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.port.output.OpenSearchIndex;
@@ -39,7 +39,7 @@ public class XXIServiceImpl implements XXIService {
                         competence.libelle(),
                         String.valueOf(competence.id()),
                         buildCategory(competence.category(), categories),
-                        EExternalSkillType.XXI))
+                        ESkillReferentialType.XXI))
             .toList();
 
     externalSkillRepository.saveAll(externalSkills);

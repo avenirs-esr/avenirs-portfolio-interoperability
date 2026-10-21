@@ -1,5 +1,6 @@
 package fr.avenirsesr.portfolio.interoperability.externalskill.infrastructure.adapter.repository;
 
+import fr.avenirsesr.portfolio.common.skill.domain.model.enums.ESkillReferentialType;
 import fr.avenirsesr.portfolio.interoperability.externalskill.infrastructure.adapter.model.ExternalSkillEntity;
 import java.util.List;
 import java.util.UUID;
@@ -27,4 +28,16 @@ public interface ExternalSkillJpaRepository
       left join fetch p2.parent p3
       """)
   List<ExternalSkillEntity> findAllWithCategories();
+
+  @Query(
+      """
+      select distinct es
+      from ExternalSkillEntity es
+      left join fetch es.externalSkillCategory c
+      left join fetch c.parent p1
+      left join fetch p1.parent p2
+      left join fetch p2.parent p3
+      where es.type = :type
+      """)
+  List<ExternalSkillEntity> findAllWithCategoriesByType(@Param("type") ESkillReferentialType type);
 }

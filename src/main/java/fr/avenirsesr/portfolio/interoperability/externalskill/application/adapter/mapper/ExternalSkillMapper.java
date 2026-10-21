@@ -1,8 +1,8 @@
 package fr.avenirsesr.portfolio.interoperability.externalskill.application.adapter.mapper;
 
-import fr.avenirsesr.portfolio.common.externalskill.application.adapter.dto.ExternalSkillCategoryDTO;
-import fr.avenirsesr.portfolio.common.externalskill.application.adapter.dto.ExternalSkillDTO;
-import fr.avenirsesr.portfolio.common.externalskill.application.adapter.dto.ExternalSkillDetailsDTO;
+import fr.avenirsesr.portfolio.common.skill.application.adapter.dto.ExternalSkillCategoryDTO;
+import fr.avenirsesr.portfolio.common.skill.application.adapter.dto.ExternalSkillDTO;
+import fr.avenirsesr.portfolio.common.skill.application.adapter.dto.ExternalSkillDetailsDTO;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkill;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkillCategory;
 

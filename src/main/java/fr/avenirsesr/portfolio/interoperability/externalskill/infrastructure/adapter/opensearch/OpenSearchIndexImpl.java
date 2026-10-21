@@ -2,8 +2,8 @@ package fr.avenirsesr.portfolio.interoperability.externalskill.infrastructure.ad
 
 import fr.avenirsesr.portfolio.common.data.domain.model.PageCriteria;
 import fr.avenirsesr.portfolio.common.data.domain.model.PageInfo;
-import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillCategoryType;
-import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillType;
+import fr.avenirsesr.portfolio.common.skill.domain.model.enums.ESkillKind;
+import fr.avenirsesr.portfolio.common.skill.domain.model.enums.ESkillReferentialType;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkill;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkillCategory;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkillPagedResult;
@@ -146,7 +146,7 @@ public class OpenSearchIndexImpl implements OpenSearchIndex {
               (String) src.get(ExternalSkillConstants.FIELD_SKILL_LIBELLE),
               (String) src.get(ExternalSkillConstants.FIELD_SKILL_CODE),
               getCategoryFromSource(src.get(ExternalSkillConstants.FIELD_SKILL_CATEGORIES)),
-              EExternalSkillType.valueOf((String) src.get(ExternalSkillConstants.FIELD_TYPE)),
+              ESkillReferentialType.valueOf((String) src.get(ExternalSkillConstants.FIELD_TYPE)),
               Instant.now(),
               Instant.now()));
     } catch (IOException e) {
@@ -178,7 +178,8 @@ public class OpenSearchIndexImpl implements OpenSearchIndex {
                   (String) src.get(ExternalSkillConstants.FIELD_SKILL_LIBELLE),
                   (String) src.get(ExternalSkillConstants.FIELD_SKILL_CODE),
                   getCategoryFromSource(src.get(ExternalSkillConstants.FIELD_SKILL_CATEGORIES)),
-                  EExternalSkillType.valueOf((String) src.get(ExternalSkillConstants.FIELD_TYPE)),
+                  ESkillReferentialType.valueOf(
+                      (String) src.get(ExternalSkillConstants.FIELD_TYPE)),
                   Instant.now(),
                   Instant.now());
             })
@@ -205,8 +206,7 @@ public class OpenSearchIndexImpl implements OpenSearchIndex {
     Map<String, Object> map = (Map<String, Object>) source;
     UUID id = map.containsKey("id") ? UUID.fromString((String) map.get("id")) : null;
     String libelle = (String) map.get("libelle");
-    EExternalSkillCategoryType type =
-        EExternalSkillCategoryType.valueOf(map.get("type").toString());
+    ESkillKind type = ESkillKind.valueOf(map.get("type").toString());
 
     ExternalSkillCategory parent = null;
     if (map.containsKey("parent")) {

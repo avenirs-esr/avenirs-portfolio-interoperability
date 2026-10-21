@@ -1,6 +1,6 @@
 package fr.avenirsesr.portfolio.interoperability.externalskill.rome.domain.model.mapper;
 
-import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillCategoryType;
+import fr.avenirsesr.portfolio.common.skill.domain.model.enums.ESkillKind;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkillCategory;
 import fr.avenirsesr.portfolio.interoperability.externalskill.rome.domain.model.Competence;
 import java.util.List;
@@ -8,19 +8,16 @@ import java.util.List;
 public class CompetenceMapper {
   public static ExternalSkillCategory toCategoryDomain(
       Competence entity, List<ExternalSkillCategory> categories) {
-    ExternalSkillCategory domain =
-        fetchCategory(entity, EExternalSkillCategoryType.DOMAIN, null, categories);
-    ExternalSkillCategory issue =
-        fetchCategory(entity, EExternalSkillCategoryType.ISSUE, domain, categories);
-    ExternalSkillCategory target =
-        fetchCategory(entity, EExternalSkillCategoryType.TARGET, issue, categories);
+    ExternalSkillCategory domain = fetchCategory(entity, ESkillKind.DOMAIN, null, categories);
+    ExternalSkillCategory issue = fetchCategory(entity, ESkillKind.ISSUE, domain, categories);
+    ExternalSkillCategory target = fetchCategory(entity, ESkillKind.TARGET, issue, categories);
 
-    return fetchCategory(entity, EExternalSkillCategoryType.MACRO_SKILL, target, categories);
+    return fetchCategory(entity, ESkillKind.MACRO_SKILL, target, categories);
   }
 
   private static ExternalSkillCategory fetchCategory(
       Competence entity,
-      EExternalSkillCategoryType type,
+      ESkillKind type,
       ExternalSkillCategory parent,
       List<ExternalSkillCategory> categories) {
 
@@ -36,7 +33,7 @@ public class CompetenceMapper {
     }
   }
 
-  private static String labelOf(Competence entity, EExternalSkillCategoryType type) {
+  private static String labelOf(Competence entity, ESkillKind type) {
     return switch (type) {
       case DOMAIN ->
           entity.getMacroCompetence().getObjectif().getEnjeu().getDomaineCompetence().getLibelle();

@@ -1,9 +1,9 @@
 package fr.avenirsesr.portfolio.interoperability.externalskill.casoc.domain.service;
 
-import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillCategoryType;
-import fr.avenirsesr.portfolio.common.externalskill.domain.model.enums.EExternalSkillType;
 import fr.avenirsesr.portfolio.common.seeder.domain.port.output.SharedDataGenerator;
 import fr.avenirsesr.portfolio.common.seeder.infrastructure.adapter.data.DataGeneratorProvider;
+import fr.avenirsesr.portfolio.common.skill.domain.model.enums.ESkillKind;
+import fr.avenirsesr.portfolio.common.skill.domain.model.enums.ESkillReferentialType;
 import fr.avenirsesr.portfolio.interoperability.externalskill.casoc.domain.model.Competence;
 import fr.avenirsesr.portfolio.interoperability.externalskill.casoc.domain.port.input.CasocService;
 import fr.avenirsesr.portfolio.interoperability.externalskill.domain.model.ExternalSkill;
@@ -39,7 +39,7 @@ public class CasocServiceImpl implements CasocService {
                         competence.libelle(),
                         String.valueOf(competence.id()),
                         buildCategory(competence, categories),
-                        EExternalSkillType.CASOC))
+                        ESkillReferentialType.CASOC))
             .toList();
 
     externalSkillRepository.saveAll(externalSkills);
@@ -51,8 +51,7 @@ public class CasocServiceImpl implements CasocService {
   private ExternalSkillCategory buildCategory(
       Competence competence, ArrayList<ExternalSkillCategory> categories) {
     var externalSkillCategory =
-        ExternalSkillCategory.of(
-            competence.category().libelle(), null, EExternalSkillCategoryType.DOMAIN);
+        ExternalSkillCategory.of(competence.category().libelle(), null, ESkillKind.DOMAIN);
 
     var categoryToSave =
         categories.stream()
