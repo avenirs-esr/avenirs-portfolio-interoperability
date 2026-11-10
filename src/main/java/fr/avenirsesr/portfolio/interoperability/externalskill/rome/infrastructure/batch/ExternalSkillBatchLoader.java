@@ -105,7 +105,7 @@ public class ExternalSkillBatchLoader {
                     "No additional skills found, bootstrapping from SQL dump and skipping the rest"
                         + " of the job.");
                 bootstrapAdditionalSkillsFromSqlDump();
-                romeAdditionalSkillService.cleanAndCreateExternalSkillIndex();
+                reindexQuietly();
               } else {
                 log.info("{} Additional skills found, continuing with sync job.", count);
               }
@@ -252,6 +252,16 @@ public class ExternalSkillBatchLoader {
         }
       }
     };
+  }
+
+  private void reindexQuietly() {
+    try {
+      romeAdditionalSkillService.cleanAndCreateExternalSkillIndex();
+    } catch (Exception e) {
+      log.warn(
+          "Could not index the bootstrapped skills in OpenSearch, it will be retried: {}",
+          e.getMessage());
+    }
   }
 
   public void bootstrapAdditionalSkillsFromSqlDump() {

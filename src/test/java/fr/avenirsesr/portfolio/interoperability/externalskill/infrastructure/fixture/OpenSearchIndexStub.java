@@ -35,4 +35,9 @@ public class OpenSearchIndexStub implements OpenSearchIndex {
   public Optional<ExternalSkill> findById(UUID id) {
     return Optional.empty();
   }
+
+  @Override
+  public long countIndexed() {
+    return 0;
+  }
 }
