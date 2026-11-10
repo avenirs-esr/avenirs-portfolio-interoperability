@@ -105,7 +105,7 @@ public class ExternalSkillBatchLoader {
                     &quot;No additional skills found, bootstrapping from SQL dump and skipping the rest&quot;
                         + &quot; of the job.&quot;);
 <span class="nc" id="L107">                bootstrapAdditionalSkillsFromSqlDump();</span>
-<span class="nc" id="L108">                romeAdditionalSkillService.cleanAndCreateExternalSkillIndex();</span>
+<span class="nc" id="L108">                reindexQuietly();</span>
               } else {
 <span class="nc" id="L110">                log.info(&quot;{} Additional skills found, continuing with sync job.&quot;, count);</span>
               }
@@ -254,34 +254,44 @@ public class ExternalSkillBatchLoader {
     };
   }
 
+  private void reindexQuietly() {
+    try {
+<span class="nc" id="L259">      romeAdditionalSkillService.cleanAndCreateExternalSkillIndex();</span>
+<span class="nc" id="L260">    } catch (Exception e) {</span>
+<span class="nc" id="L261">      log.warn(</span>
+          &quot;Could not index the bootstrapped skills in OpenSearch, it will be retried: {}&quot;,
+<span class="nc" id="L263">          e.getMessage());</span>
+<span class="nc" id="L264">    }</span>
+<span class="nc" id="L265">  }</span>
+
   public void bootstrapAdditionalSkillsFromSqlDump() {
-<span class="nc" id="L258">    Resource additionalSkillsCategoriesResource =</span>
+<span class="nc" id="L268">    Resource additionalSkillsCategoriesResource =</span>
         new ClassPathResource(&quot;/external-skill/rome/rome_4_external_skill_category.sql&quot;);
-<span class="nc" id="L260">    Resource additionalSkillsResource =</span>
+<span class="nc" id="L270">    Resource additionalSkillsResource =</span>
         new ClassPathResource(&quot;/external-skill/rome/rome_4_external_skill.sql&quot;);
-<span class="nc" id="L262">    Resource rome4versionResource =</span>
+<span class="nc" id="L272">    Resource rome4versionResource =</span>
         new ClassPathResource(&quot;/external-skill/rome/rome_4_version.sql&quot;);
 
     try {
-<span class="nc" id="L266">      String additionalSkillsCategoriesSql =</span>
+<span class="nc" id="L276">      String additionalSkillsCategoriesSql =</span>
           new String(
-<span class="nc" id="L268">              additionalSkillsCategoriesResource.getInputStream().readAllBytes(),</span>
+<span class="nc" id="L278">              additionalSkillsCategoriesResource.getInputStream().readAllBytes(),</span>
               StandardCharsets.UTF_8);
-<span class="nc" id="L270">      String additionalSkillsSql =</span>
+<span class="nc" id="L280">      String additionalSkillsSql =</span>
           new String(
-<span class="nc" id="L272">              additionalSkillsResource.getInputStream().readAllBytes(), StandardCharsets.UTF_8);</span>
-<span class="nc" id="L273">      String rome4versionSql =</span>
-<span class="nc" id="L274">          new String(rome4versionResource.getInputStream().readAllBytes(), StandardCharsets.UTF_8);</span>
+<span class="nc" id="L282">              additionalSkillsResource.getInputStream().readAllBytes(), StandardCharsets.UTF_8);</span>
+<span class="nc" id="L283">      String rome4versionSql =</span>
+<span class="nc" id="L284">          new String(rome4versionResource.getInputStream().readAllBytes(), StandardCharsets.UTF_8);</span>
 
-<span class="nc" id="L276">      jdbcTemplate.execute(additionalSkillsCategoriesSql);</span>
-<span class="nc" id="L277">      jdbcTemplate.execute(additionalSkillsSql);</span>
-<span class="nc" id="L278">      jdbcTemplate.execute(rome4versionSql);</span>
+<span class="nc" id="L286">      jdbcTemplate.execute(additionalSkillsCategoriesSql);</span>
+<span class="nc" id="L287">      jdbcTemplate.execute(additionalSkillsSql);</span>
+<span class="nc" id="L288">      jdbcTemplate.execute(rome4versionSql);</span>
 
-<span class="nc" id="L280">      log.info(&quot;additional skills bootstrap successfully executed.&quot;);</span>
-<span class="nc" id="L281">    } catch (IOException e) {</span>
-<span class="nc" id="L282">      log.error(&quot;An error occurred while bootstrapping ROME 4.0 version.&quot;, e);</span>
-<span class="nc" id="L283">      throw new RuntimeException(e);</span>
-<span class="nc" id="L284">    }</span>
-<span class="nc" id="L285">  }</span>
+<span class="nc" id="L290">      log.info(&quot;additional skills bootstrap successfully executed.&quot;);</span>
+<span class="nc" id="L291">    } catch (IOException e) {</span>
+<span class="nc" id="L292">      log.error(&quot;An error occurred while bootstrapping ROME 4.0 version.&quot;, e);</span>
+<span class="nc" id="L293">      throw new RuntimeException(e);</span>
+<span class="nc" id="L294">    }</span>
+<span class="nc" id="L295">  }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.15.202606040825</span></div></body></html>

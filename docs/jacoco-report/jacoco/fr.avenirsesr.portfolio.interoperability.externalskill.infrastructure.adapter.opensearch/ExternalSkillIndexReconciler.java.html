@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>ExternalSkillIndexReconciler.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">avenirs-portfolio-interoperability</a> &gt; <a href="index.source.html" class="el_package">fr.avenirsesr.portfolio.interoperability.externalskill.infrastructure.adapter.opensearch</a> &gt; <span class="el_source">ExternalSkillIndexReconciler.java</span></div><h1>ExternalSkillIndexReconciler.java</h1><pre class="source lang-java linenums">package fr.avenirsesr.portfolio.interoperability.externalskill.infrastructure.adapter.opensearch;
+
+import fr.avenirsesr.portfolio.common.skill.domain.model.enums.ESkillReferentialType;
+import fr.avenirsesr.portfolio.interoperability.externalskill.domain.port.output.OpenSearchIndex;
+import fr.avenirsesr.portfolio.interoperability.externalskill.domain.port.output.repository.ExternalSkillRepository;
+import fr.avenirsesr.portfolio.interoperability.externalskill.rome.domain.port.input.RomeExternalSkillService;
+import java.util.Arrays;
+import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.context.annotation.Profile;
+import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.stereotype.Component;
+
+<span class="fc" id="L14">@Slf4j</span>
+@Component
+@Profile(&quot;!test&quot;)
+@RequiredArgsConstructor
+public class ExternalSkillIndexReconciler {
+  private final ExternalSkillRepository externalSkillRepository;
+  private final OpenSearchIndex openSearchIndex;
+  private final RomeExternalSkillService romeExternalSkillService;
+
+  private boolean reconciled;
+
+  @Scheduled(fixedDelayString = &quot;${external-skill.index.reconcile.delay}&quot;)
+  public void reconcile() {
+<span class="pc bpc" id="L27" title="1 of 2 branches missed.">    if (reconciled) {</span>
+<span class="nc" id="L28">      return;</span>
+    }
+
+    try {
+      long expected =
+<span class="fc" id="L33">          Arrays.stream(ESkillReferentialType.values())</span>
+<span class="fc" id="L34">              .mapToLong(externalSkillRepository::countAll)</span>
+<span class="fc" id="L35">              .sum();</span>
+<span class="fc bfc" id="L36" title="All 2 branches covered.">      if (expected == 0) {</span>
+<span class="fc" id="L37">        log.info(&quot;No external skill in database yet, index reconciliation postponed&quot;);</span>
+<span class="fc" id="L38">        return;</span>
+      }
+
+<span class="fc bfc" id="L41" title="All 2 branches covered.">      if (openSearchIndex.countIndexed() != expected) {</span>
+<span class="fc" id="L42">        log.warn(&quot;External skill index out of sync, rebuilding it from the database&quot;);</span>
+<span class="fc" id="L43">        romeExternalSkillService.cleanAndCreateExternalSkillIndex();</span>
+      }
+<span class="fc" id="L45">      reconciled = true;</span>
+<span class="nc" id="L46">    } catch (Exception e) {</span>
+<span class="nc" id="L47">      log.warn(&quot;External skill index not reconciled, it will be retried: {}&quot;, e.getMessage());</span>
+<span class="fc" id="L48">    }</span>
+<span class="fc" id="L49">  }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.15.202606040825</span></div></body></html>
