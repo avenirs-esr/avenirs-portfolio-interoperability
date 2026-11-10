@@ -16,4 +16,6 @@ public interface OpenSearchIndex {
   ExternalSkillPagedResult search(String keyword, PageCriteria pageCriteria);
 
   Optional<ExternalSkill> findById(UUID id);
+
+  long countIndexed();
 }

@@ -14,6 +14,7 @@ import java.util.*;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.opensearch.action.admin.indices.delete.DeleteIndexRequest;
+import org.opensearch.action.admin.indices.refresh.RefreshRequest;
 import org.opensearch.action.bulk.BulkRequest;
 import org.opensearch.action.bulk.BulkResponse;
 import org.opensearch.action.get.GetRequest;
@@ -23,6 +24,7 @@ import org.opensearch.action.search.SearchRequest;
 import org.opensearch.action.search.SearchResponse;
 import org.opensearch.client.RequestOptions;
 import org.opensearch.client.RestHighLevelClient;
+import org.opensearch.client.core.CountRequest;
 import org.opensearch.client.indices.CreateIndexRequest;
 import org.opensearch.client.indices.GetIndexRequest;
 import org.opensearch.index.query.QueryBuilders;
@@ -58,6 +60,25 @@ public class OpenSearchIndexImpl implements OpenSearchIndex {
       log.info("Index '{}' created.", ExternalSkillConstants.INDEX);
     } catch (IOException e) {
       throw new RuntimeException("Failed to recreate index: " + ExternalSkillConstants.INDEX, e);
+    }
+  }
+
+  @Override
+  public long countIndexed() {
+    try {
+      if (!client
+          .indices()
+          .exists(new GetIndexRequest(ExternalSkillConstants.INDEX), RequestOptions.DEFAULT)) {
+        return 0;
+      }
+      client
+          .indices()
+          .refresh(new RefreshRequest(ExternalSkillConstants.INDEX), RequestOptions.DEFAULT);
+      return client
+          .count(new CountRequest(ExternalSkillConstants.INDEX), RequestOptions.DEFAULT)
+          .getCount();
+    } catch (IOException e) {
+      throw new RuntimeException("Failed to count index: " + ExternalSkillConstants.INDEX, e);
     }
   }
 
